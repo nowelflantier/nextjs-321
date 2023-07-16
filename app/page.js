@@ -61,7 +61,7 @@ export default function Home() {
           <h2>
             Learn <span>-&gt;</span>
           </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
+          <p>C'est le premier changement sur la home</p>
         </a>
 
         <a
@@ -73,7 +73,7 @@ export default function Home() {
           <h2>
             Templates <span>-&gt;</span>
           </h2>
-          <p>Explore the Next.js 13 playground.</p>
+          <p>D'autres suivront</p>
         </a>
 
         <a
