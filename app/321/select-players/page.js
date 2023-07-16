@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image'
 import Link from 'next/link';
 import styles from '../../styles.scss'
-import PlayerSelect from '@/app/components/SelectPlayers';
+import NamePlayers from '@/app/components/NamePlayers';
 
 
 
@@ -34,6 +34,7 @@ const GameStart = () => {
         
         <Link href="/" className="bottom btn"><p>Back home</p></Link>
         <Link href="/321/start-game" className="bottom btn"><p>Back to the game</p></Link>
+        <NamePlayers></NamePlayers>
       </div>
 
     <div className="grid">
