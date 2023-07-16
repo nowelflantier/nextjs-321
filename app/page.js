@@ -61,7 +61,7 @@ export default function Home() {
           <h2>
             Learn <span>-&gt;</span>
           </h2>
-          <p>C'est le premier changement sur la home</p>
+          <p>Cest le premier changement sur la home</p>
         </a>
 
         <a
@@ -73,7 +73,7 @@ export default function Home() {
           <h2>
             Templates <span>-&gt;</span>
           </h2>
-          <p>D'autres suivront</p>
+          <p>Dautres suivront</p>
         </a>
 
         <a
