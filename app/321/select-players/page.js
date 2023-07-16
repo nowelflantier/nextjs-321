@@ -33,7 +33,7 @@ const GameStart = () => {
         
         
         <Link href="/" className="bottom btn"><p>Back home</p></Link>
-        <PlayerSelect></PlayerSelect>
+        <Link href="/321/start-game" className="bottom btn"><p>Back to the game</p></Link>
       </div>
 
     <div className="grid">

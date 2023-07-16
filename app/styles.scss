@@ -146,10 +146,24 @@
     font-weight: 700;
     font-family: var(--font-mono);
   }
+
+  p.code {
+    margin-bottom: 15px;
+  }
   
   .btn {
     position: relative;
     margin: 0;
+    padding: 1rem;
+    background-color: rgba(var(--callout-rgb), 0.5);
+    border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+    border-radius: var(--border-radius);
+  }
+
+  .select {
+    position: relative;
+    margin: 0;
+    width: 80vw;
     padding: 1rem;
     background-color: rgba(var(--callout-rgb), 0.5);
     border: 1px solid rgba(var(--callout-border-rgb), 0.3);
