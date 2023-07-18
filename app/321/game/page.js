@@ -7,12 +7,14 @@ import React, { useState, useEffect } from 'react';
 
 const Game = () => {
   const [players, setPlayers] = useState([]);
-  const [currentPlayer, setCurrentPLayer] = useState(1)
+  const [currentPlayer, setCurrentPlayer] = useState(1)
+
 
   useEffect(() => {
     const storedPlayers = JSON.parse(localStorage.getItem('players')) || [];
     setPlayers(storedPlayers);
-  }, []);
+    
+  }, [currentPlayer]);
 
   return (
     <main className="main">
@@ -28,12 +30,15 @@ const Game = () => {
         height={87}
         priority
       />
-    <div className="center container">
-      
+    <div className="active">
       <h1 className="code">Player {currentPlayer}</h1>
+      <h2 className="code">{players[currentPlayer]?.name}</h2>
+      <h2 className="code">{players[currentPlayer]?.score}</h2>
     </div>
    
-    <div className="grid"> {players.map((player) => (
+    <div className="grid"> {players
+      .filter(player => player.id !== currentPlayer)
+      .map((player) => (
         <div className="card" key={player.id}>
           <h2>{player.id}. {player.name}</h2>
           <p>Score : {player.score}</p>
