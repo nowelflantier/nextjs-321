@@ -100,11 +100,11 @@
     text-decoration: none;
   }
   
-  /* @media (prefers-color-scheme: dark) {
+   @media (prefers-color-scheme: dark) {
     html {
       color-scheme: dark;
     }
-  } */
+  } 
 
   .main {
     display: flex;
@@ -179,6 +179,7 @@
     text-align: center;
     padding: 1.5em 2.5em;
     border-radius: 20px;
+    width: 80vw;
     border: #181614 solid;
   }
 
@@ -405,7 +406,9 @@
     .vercelLogo {
       filter: invert(1);
     }
-  
+    .select {
+      color: white;
+    }
     .logo {
       filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
     }
