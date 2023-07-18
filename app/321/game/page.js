@@ -6,11 +6,11 @@ import styles from "../../styles.scss";
 import React, { useState, useEffect } from "react";
 
 const Game = () => {
-  const darts = [
+  const [darts, setDarts] = useState([
     { id: 0, score: null },
     { id: 1, score: null },
     { id: 2, score: null },
-  ];
+  ]);
   const [newCurrentScore, setNewCurrentScore] = useState("");
   const [players, setPlayers] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
@@ -19,40 +19,48 @@ const Game = () => {
     players[currentPlayer - 1]?.score * 1
   );
   const [currentDart, setCurrentDart] = useState(0);
-  const currentUserScore = players[currentPlayer- 1]?.score;
+
+  const currentUserScore = players[currentPlayer - 1]?.score;
 
   useEffect(() => {
     const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
+    const storedPlayer = storedPlayers.find(
+      (player) => player.id === currentPlayer
+    );
     setPlayers(storedPlayers);
-  }, [currentPlayer]);
+  }, [currentDart]);
 
- 
-  const NextDart = () => {
-    const [newCurrentScore, setNewCurrentScore] = useState("");
-    
-    const handleAddScore = (newCurrentScore, currentDart) => {
-      darts[currentDart] = { id: currentDart, score: newCurrentScore };
-      console.log(darts);
-    };
-    const handleInputChange = (event) => {
-      setNewCurrentScore(event.target.value);
-    };
-    const updateDartScore = () => {
-      darts.score = newCurrentScore
-      console.log(darts)
+  const handleAddScore = (newCurrentScore, currentDart) => {
+    darts[currentDart] = { id: currentDart, score: newCurrentScore };
+    console.log(darts);
+  };
+  const handleInputChange = (event) => {
+    setNewCurrentScore(event.target.value);
+  };
+  const updateDartScore = () => {
+    darts.score = newCurrentScore;
+    console.log(darts);
+  };
+  const handleNewScore = () => {
+    // updateDartScore()
+    handleAddScore(newCurrentScore, currentDart);
+    handleNextDart();
+    setNewCurrentScore("");
+
+    const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
+    const playerIndex = storedPlayers.findIndex(
+      (player) => player.id === currentPlayer
+    );
+    if (playerIndex !== -1) {
+      storedPlayers[playerIndex].score += parseInt(newCurrentScore, 10);
+      localStorage.setItem("players", JSON.stringify(storedPlayers));
     }
-    const handleNewScore = () => {
-      
-      // updateDartScore()
-      handleAddScore(newCurrentScore, currentDart);
-      handleNextDart();
-      setNewCurrentScore("");
-      return newCurrentScore;
-    };
-    const handleNewTurn = () => {
-      handleNextPlayer();
-    };
-
+    return newCurrentScore;
+  };
+  const handleNewTurn = () => {
+    handleNextPlayer();
+  };
+  const NextDart = () => {
     return currentDart < 3 ? (
       // affiche l'input et le bouton pour ajouter une valeur tant que la flèce actuelle est < 3
       <div className="addScore">
@@ -74,7 +82,7 @@ const Game = () => {
     ) : (
       // sinon affiche le bouton pour passer au joueur suivant
       <div className="addScore">
-        <button className="button" onClick={handleNewTurn}>
+        <button className="btn bottom" onClick={handleNewTurn}>
           NextPlayer
         </button>
       </div>
@@ -83,23 +91,26 @@ const Game = () => {
 
   const handleLastPlayer = () => {
     setCurrentDart(0);
-    setCurrentPlayer(0);
+    setCurrentPlayer(1);
   };
   const handleCurrentPlayer = () => {
-    setCurrentUserScore(currentUserScore);
+    setCurrentPlayerScore(currentUserScore);
     setCurrentDart(0);
     setCurrentPlayer(currentPlayer + 1);
+    const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
+    const storedPlayer = storedPlayers.find(
+      (player) => player.id === currentPlayer
+    );
+    
   };
   const handleNextPlayer = () => {
-    currentPlayer === players.length - 1
+    currentPlayer === players.length 
       ? handleLastPlayer()
       : handleCurrentPlayer();
   };
 
   const handleNextDart = () => {
-    currentDart === 3
-      ? handleNextPlayer()
-      : setCurrentDart(currentDart + 1);
+    currentDart === 3 ? handleNextPlayer() : setCurrentDart(currentDart + 1);
   };
 
   return (
@@ -121,16 +132,16 @@ const Game = () => {
         <h2 className="code">{players[currentPlayer - 1]?.name}</h2>
         <h2 className="code">{players[currentPlayer - 1]?.score}</h2>
         <div className="addScore">
-        <NextDart
-      players={players}
-      currentPlayer={currentPlayer}
-      currentDart={currentDart}
-      currentUserScore={currentUserScore}
-      currentNewScore={currentNewScore}
-      handleNextDart={handleNextDart}
-      handleNextPlayer={handleNextPlayer}
-      darts={darts}
-    />
+          <NextDart
+          // players={players}
+          // currentPlayer={currentPlayer}
+          // currentDart={currentDart}
+          // currentUserScore={currentUserScore}
+          // currentNewScore={currentNewScore}
+          // handleNextDart={handleNextDart}
+          // handleNextPlayer={handleNextPlayer}
+          // darts={darts}
+          />
         </div>
       </div>
 
