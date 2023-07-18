@@ -20,7 +20,7 @@ const GameStart = () => {
     </div>
 
     <div className="center container">
-        
+    <PlayerSelect></PlayerSelect>
         <p className='code'>work in progress<br/></p>
         <Image
           className="logo"
@@ -33,7 +33,7 @@ const GameStart = () => {
         
         
         <Link href="/" className="bottom btn"><p>Back home</p></Link>
-        <PlayerSelect></PlayerSelect>
+        
       </div>
 
     <div className="grid">
