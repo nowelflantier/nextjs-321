@@ -32,8 +32,8 @@ const Game = () => {
       />
     <div className="active">
       <h1 className="code">Player {currentPlayer}</h1>
-      <h2 className="code">{players[currentPlayer]?.name}</h2>
-      <h2 className="code">{players[currentPlayer]?.score}</h2>
+      <h2 className="code">{players[currentPlayer-1]?.name}</h2>
+      <h2 className="code">{players[currentPlayer-1]?.score}</h2>
     </div>
    
     <div className="grid"> {players
