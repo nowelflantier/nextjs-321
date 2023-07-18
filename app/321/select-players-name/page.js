@@ -7,6 +7,7 @@ import { useRouter, useParams, useSearchParams } from "next/navigation";
 
 const PlayerEdit = () => {
   const [playerName, setPlayerName] = useState("");
+  const [players, setPlayers] = useState([{}])
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const searchParams = useSearchParams();
   const params = useParams();
@@ -14,19 +15,32 @@ const PlayerEdit = () => {
   const numPlayers = searchParams.get("selected_players");
 
   useEffect(() => {
-    const storedPlayerName = localStorage.getItem(`playerName${numPlayers}`);
-    console.log(storedPlayerName)
-    if (storedPlayerName) {
-      setPlayerName(storedPlayerName);
+    const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
+    const storedPlayer = storedPlayers.find((player) => player.id === currentPlayer);
+    console.log(storedPlayers)
+    if (storedPlayer) {
+      setPlayerName(storedPlayer.name);
     }
-  },);
+  },[currentPlayer]);
 
   const handleNameChange = (e) => {
     setPlayerName(e.target.value);
   };
 
   const handleNext = () => {
-    localStorage.setItem(`playerName${currentPlayer}`, playerName);
+    const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
+    const playerIndex = storedPlayers.findIndex((player) => player.id === currentPlayer);
+    const playerData = { id: currentPlayer, name: playerName, score: 0 };
+    if (playerIndex === -1) {
+      storedPlayers.push(playerData);
+    } else {
+      storedPlayers[playerIndex] = playerData;
+      setPlayerName("");
+  
+    }
+
+    localStorage.setItem("players", JSON.stringify(storedPlayers));
+    setPlayerName("");
 
     if (currentPlayer < numPlayers) {
         setCurrentPlayer(currentPlayer + 1);
