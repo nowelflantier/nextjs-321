@@ -8,7 +8,7 @@ export default function Home() {
     <main className="main">
       <div className="description">
         <p>
-         Darts scorer <code>- beta</code>
+         Darts scorer <code> - beta</code>
         </p>
         <div>
          powered by le S.
@@ -28,7 +28,7 @@ export default function Home() {
         />
         
         
-        <Link href="/321/start-game" className="bottom btn"><p>Commencer</p></Link>
+        <Link href="/321/select-players" className="bottom btn"><p>Commencer</p></Link>
       </div>
 
       <div className="grid">

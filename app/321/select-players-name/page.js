@@ -2,26 +2,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles.scss";
-
 import React, { useState, useEffect } from "react";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 
 const PlayerEdit = () => {
   const [playerName, setPlayerName] = useState("");
+  const [currentPlayer, setCurrentPlayer] = useState(1);
   const searchParams = useSearchParams();
   const params = useParams();
-  let currentPlayer = 1;
   const router = useRouter();
   const numPlayers = searchParams.get("selected_players");
 
-console.log(currentPlayer);
-
   useEffect(() => {
     const storedPlayerName = localStorage.getItem(`playerName${numPlayers}`);
+    console.log(storedPlayerName)
     if (storedPlayerName) {
       setPlayerName(storedPlayerName);
     }
-  }, []);
+  },);
 
   const handleNameChange = (e) => {
     setPlayerName(e.target.value);
@@ -29,16 +27,12 @@ console.log(currentPlayer);
 
   const handleNext = () => {
     localStorage.setItem(`playerName${currentPlayer}`, playerName);
-    currentPlayer++;
-    console.log(currentPlayer);
 
-    // const nextPid = parseInt(currentPlayer, 10) + 1;
-    // console.log(nextPid)
-    // if (nextPid <= numPlayers) {
-    //   router.push(`/321/players_edit/${nextPid}`);
-    // } else {
-    //   router.push(`/321/game`);
-    // }
+    if (currentPlayer < numPlayers) {
+        setCurrentPlayer(currentPlayer + 1);
+      } else {
+        router.push(`/321/game`);
+      }
   };
 
   return (
@@ -47,10 +41,10 @@ console.log(currentPlayer);
         <p>Jeu en cours de développement</p>
         <div>powered by le S.</div>
       </div>
-      <div>
-        <h1>Player {currentPlayer}</h1>
-        <input type="text" value={playerName} onChange={handleNameChange} />
-        <button onClick={handleNext}>Next</button>
+      <div className="center container">
+        <h1 className="code">Player {currentPlayer}</h1>
+        <input type="text" value={playerName} className="select" onChange={handleNameChange} />
+        <button className='btn bottom' onClick={handleNext}>Next</button>
       </div>
       <div className="center container">
         <p className="code">
@@ -69,11 +63,10 @@ console.log(currentPlayer);
         <Link href="/" className="bottom btn">
           <p>Back home</p>
         </Link>
-        <Link href="/321/start-game" className="bottom btn">
-          <p>Back to the game</p>
+        <Link href="/321/select-players" className="bottom btn">
+          <p>Back to the player selection</p>
         </Link>
       </div>
-
       <div className="grid"></div>
     </main>
   );

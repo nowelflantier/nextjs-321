@@ -22,7 +22,7 @@ const PlayerSelect = () => {
     const handleStart = () => {
     localStorage.setItem('numPlayers', numPlayers);
 
-    router.push(`/321/players_edit?selected_players=${numPlayers}`);
+    router.push(`/321/select-players-name?selected_players=${numPlayers}`);
   };
   
   return (

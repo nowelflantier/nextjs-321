@@ -147,7 +147,7 @@
     font-family: var(--font-mono);
   }
 
-  p.code {
+  p.code, h1.code {
     margin-bottom: 15px;
   }
   
@@ -227,6 +227,7 @@
     align-items: center;
     position: relative;
     padding: 2rem 0;
+    text-align: center;
   }
   
   .center::before {
@@ -296,14 +297,14 @@
       margin-bottom: 0.5rem;
     }
   
-    .center {
-      padding: 8rem 0 6rem;
-    }
+    // .center {
+    //   padding: 8rem 0 6rem;
+    // }
   
-    .center::before {
-      transform: none;
-      height: 300px;
-    }
+    // .center::before {
+    //   transform: none;
+    //   height: 300px;
+    // }
   
     .description {
       font-size: 0.8rem;
