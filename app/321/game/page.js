@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles.scss";
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 const Game = () => {
   const [darts, setDarts] = useState([
@@ -19,10 +19,16 @@ const Game = () => {
     players[currentPlayer - 1]?.score * 1
   );
   const [currentDart, setCurrentDart] = useState(0);
+  const inputRef = useRef();
 
   const currentUserScore = players[currentPlayer - 1]?.score;
-
   useEffect(() => {
+    if(localStorage.getItem("currentDart") !== null) {setCurrentDart(parseInt(localStorage.getItem("currentDart"),10))};
+    if(localStorage.getItem("currentPlayer") !== null) {setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer", 10)))};
+  },[]);
+  useEffect(() => {
+    console.log(currentDart)
+    
     const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
     const storedPlayer = storedPlayers.find(
       (player) => player.id === currentPlayer
@@ -36,6 +42,8 @@ const Game = () => {
   };
   const handleInputChange = (event) => {
     setNewCurrentScore(event.target.value);
+    inputRef.current.focus();
+
   };
   const updateDartScore = () => {
     darts.score = newCurrentScore;
@@ -65,8 +73,9 @@ const Game = () => {
       // affiche l'input et le bouton pour ajouter une valeur tant que la flèce actuelle est < 3
       <div className="addScore">
         <input
+         ref={inputRef}
           type="number"
-          placeholder="score"
+          placeholder="0"
           onChange={handleInputChange}
           value={newCurrentScore}
           className="select"
@@ -95,12 +104,13 @@ const Game = () => {
   };
   const handleCurrentPlayer = () => {
     setCurrentPlayerScore(currentUserScore);
-    setCurrentDart(0);
+    
     setCurrentPlayer(currentPlayer + 1);
     const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
     const storedPlayer = storedPlayers.find(
       (player) => player.id === currentPlayer
     );
+    setCurrentDart(0);
     
   };
   const handleNextPlayer = () => {
@@ -110,7 +120,17 @@ const Game = () => {
   };
 
   const handleNextDart = () => {
-    currentDart === 3 ? handleNextPlayer() : setCurrentDart(currentDart + 1);
+    if (currentDart < 3) {
+      
+  
+      // Store the current player and dart in localStorage
+      localStorage.setItem('currentPlayer', currentPlayer);
+      localStorage.setItem('currentDart', currentDart + 1);
+      setCurrentDart(currentDart + 1);
+    } else {
+      handleNextPlayer();
+    }
+  
   };
 
   return (
@@ -130,7 +150,7 @@ const Game = () => {
       <div className="active">
         <h1 className="code">Player {currentPlayer}</h1>
         <h2 className="code">{players[currentPlayer - 1]?.name}</h2>
-        <h2 className="code">{players[currentPlayer - 1]?.score}</h2>
+        <h2 className="code">{players[currentPlayer - 1]?(players[currentPlayer - 1].score):(0)}</h2>
         <div className="addScore">
           <NextDart
           // players={players}
