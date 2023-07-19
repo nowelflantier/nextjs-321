@@ -14,6 +14,7 @@ const PlayerSelect = () => {
       localStorage.removeItem('numPlayers')
       localStorage.removeItem('currentDart')
       localStorage.removeItem('players')
+      localStorage.removeItem('winner')
     }
     // Read from local storage on initial render
     const storedNumPlayers = localStorage.getItem("numPlayers");

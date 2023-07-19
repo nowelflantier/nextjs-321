@@ -1,20 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import styles from "../../styles.scss";
 import React, { useRef, useState, useEffect } from "react";
 import PlayerStats from "@/app/components/PlayerStats";
 import PlayerList from "@/app/components/PlayerList";
 
-const Game = () => {
+const EndGame = () => {
   const [darts, setDarts] = useState([
     { id: 0, score: null },
     { id: 1, score: null },
     { id: 2, score: null },
   ]);
-  const router = useRouter();
   const [newCurrentScore, setNewCurrentScore] = useState("");
   const [players, setPlayers] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
@@ -24,21 +22,20 @@ const Game = () => {
   const [currentPlayerScore, setCurrentPlayerScore] = useState(
     players[currentPlayer - 1]?.score * 1
   );
+  const [winner, setWinner]=useState({});
   const [currentDart, setCurrentDart] = useState(0);
   const inputRef = useRef();
   const playerIndex = currentPlayer - 1;
   const currentUserScore = players[playerIndex]?.score;
 
   useEffect(() => {
-    if (localStorage.getItem("winner") !== null) {
-      router.push(`/321/end-game`);
-
-    }
     if (localStorage.getItem("currentDart") !== null) {
       setCurrentDart(parseInt(localStorage.getItem("currentDart"), 10));
     }
     if (localStorage.getItem("currentPlayer") !== null) {
       setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer", 10)));
+      setWinner(JSON.parse(localStorage.getItem("winner")));
+
     }
   }, []);
   useEffect(() => {
@@ -57,9 +54,9 @@ const Game = () => {
       const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
       const playerJSON = JSON.stringify(storedPlayers[playerIndex]); 
       localStorage.setItem("winner", playerJSON);
+      // router.push(`/321/end-game`);
       console.log(`Player ${isWinner.player} is the winner!`);
       console.log(isWinner);
-      router.push(`/321/end-game`);
     }
   }, [isWinner]);
 
@@ -159,7 +156,8 @@ const Game = () => {
         height={87}
         priority
       />
-      <PlayerStats
+      <p className="code">page de fin de partie. bravo cependant {winner.name}</p>
+      {/* <PlayerStats
         newCurrentScore={newCurrentScore}
         currentPlayer={currentPlayer}
         currentDart={currentDart}
@@ -171,7 +169,7 @@ const Game = () => {
         isDisabled={isDisabled}
       />
 
-      <PlayerList players={players} currentPlayer={currentPlayer} />
+      <PlayerList players={players} currentPlayer={currentPlayer} /> */}
 
       <div className="center container">
         <p className="code">
@@ -181,9 +179,10 @@ const Game = () => {
         <Link href="/" className="bottom btn">
           <p>Back home</p>
         </Link>
+        <Link href="/321/select-players?new_game=true" className="bottom btn"><p>Nouvelle partie</p></Link>
       </div>
     </main>
   );
 };
 
-export default Game;
+export default EndGame;
