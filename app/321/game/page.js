@@ -45,6 +45,7 @@ const Game = () => {
     inputRef.current.focus();
 
   };
+
   const updateDartScore = () => {
     darts.score = newCurrentScore;
     console.log(darts);
@@ -61,6 +62,7 @@ const Game = () => {
     );
     if (playerIndex !== -1) {
       storedPlayers[playerIndex].score += parseInt(newCurrentScore, 10);
+      storedPlayers[playerIndex].darts.push(parseInt(newCurrentScore, 10));  // add the new dart score
       localStorage.setItem("players", JSON.stringify(storedPlayers));
     }
     return newCurrentScore;
@@ -151,6 +153,9 @@ const Game = () => {
         <h1 className="code">Player {currentPlayer}</h1>
         <h2 className="code">{players[currentPlayer - 1]?.name}</h2>
         <h2 className="code">{players[currentPlayer - 1]?(players[currentPlayer - 1].score):(0)}</h2>
+        <h2 className="code">Darts: {players[currentPlayer -1]?.darts?(players[currentPlayer -1].darts.length):0}</h2>
+        <h3 className="code">Average: {players[currentPlayer -1]?.darts?(players[currentPlayer - 1].score/players[currentPlayer -1].darts.length):0}</h3>
+
         <div className="addScore">
           <NextDart
           // players={players}

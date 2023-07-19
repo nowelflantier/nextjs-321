@@ -30,7 +30,7 @@ const PlayerEdit = () => {
   const handleNext = () => {
     const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
     const playerIndex = storedPlayers.findIndex((player) => player.id === currentPlayer);
-    const playerData = { id: currentPlayer, name: playerName, score: 0 };
+    const playerData = { id: currentPlayer, name: playerName, score: 0, darts: [] };
     if (playerIndex === -1) {
       storedPlayers.push(playerData);
     } else {
