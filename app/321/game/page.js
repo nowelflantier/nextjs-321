@@ -14,6 +14,7 @@ const Game = () => {
   const [newCurrentScore, setNewCurrentScore] = useState("");
   const [players, setPlayers] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
+  const [isNotValidScore, SetIsNotValidScore] = useState(false);
   const [currentNewScore, setCurrentNewScore] = useState(0);
   const [currentPlayerScore, setCurrentPlayerScore] = useState(
     players[currentPlayer - 1]?.score * 1
@@ -23,31 +24,37 @@ const Game = () => {
 
   const currentUserScore = players[currentPlayer - 1]?.score;
   useEffect(() => {
-    if(localStorage.getItem("currentDart") !== null) {setCurrentDart(parseInt(localStorage.getItem("currentDart"),10))};
-    if(localStorage.getItem("currentPlayer") !== null) {setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer", 10)))};
-  },[]);
+    if (localStorage.getItem("currentDart") !== null) {
+      setCurrentDart(parseInt(localStorage.getItem("currentDart"), 10));
+    }
+    if (localStorage.getItem("currentPlayer") !== null) {
+      setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer", 10)));
+    }
+  }, []);
   useEffect(() => {
-    inputRef.current.focus();
-  },[newCurrentScore]);
+    inputRef.current?.focus();
+  }, [newCurrentScore]);
 
   useEffect(() => {
-    console.log(currentDart)
+    console.log(currentDart);
     const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
     const storedPlayer = storedPlayers.find(
       (player) => player.id === currentPlayer
     );
     setPlayers(storedPlayers);
-    
   }, [currentDart]);
 
   const handleAddScore = (newCurrentScore, currentDart) => {
     darts[currentDart] = { id: currentDart, score: newCurrentScore };
     console.log(darts);
-    
-
   };
   const handleInputChange = (event) => {
     setNewCurrentScore(event.target.value);
+    if (newCurrentScore < 0 || newCurrentScore > 60) {
+      SetIsNotValidScore(true);
+    } else {
+      SetIsNotValidScore(false);
+    }
   };
 
   // const updateDartScore = () => {
@@ -66,7 +73,7 @@ const Game = () => {
     );
     if (playerIndex !== -1) {
       storedPlayers[playerIndex].score += parseInt(newCurrentScore, 10);
-      storedPlayers[playerIndex].darts.push(parseInt(newCurrentScore, 10));  // add the new dart score
+      storedPlayers[playerIndex].darts.push(parseInt(newCurrentScore, 10)); // add the new dart score
       localStorage.setItem("players", JSON.stringify(storedPlayers));
     }
     return newCurrentScore;
@@ -90,6 +97,7 @@ const Game = () => {
           className="btn bottom"
           value={newCurrentScore}
           onClick={handleNewScore}
+          display={!isNotValidScore}
         >
           AddScore - {newCurrentScore}
         </button>
@@ -110,33 +118,29 @@ const Game = () => {
   };
   const handleCurrentPlayer = () => {
     setCurrentPlayerScore(currentUserScore);
-    
+
     setCurrentPlayer(currentPlayer + 1);
     const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
     const storedPlayer = storedPlayers.find(
       (player) => player.id === currentPlayer
     );
     setCurrentDart(0);
-    
   };
   const handleNextPlayer = () => {
-    currentPlayer === players.length 
+    currentPlayer === players.length
       ? handleLastPlayer()
       : handleCurrentPlayer();
   };
 
   const handleNextDart = () => {
     if (currentDart < 3) {
-      
-  
       // Store the current player and dart in localStorage
-      localStorage.setItem('currentPlayer', currentPlayer);
-      localStorage.setItem('currentDart', currentDart + 1);
+      localStorage.setItem("currentPlayer", currentPlayer);
+      localStorage.setItem("currentDart", currentDart + 1);
       setCurrentDart(currentDart + 1);
     } else {
       handleNextPlayer();
     }
-  
   };
 
   return (
@@ -156,9 +160,22 @@ const Game = () => {
       <div className="active">
         <h1 className="code">Player {currentPlayer}</h1>
         <h2 className="code">{players[currentPlayer - 1]?.name}</h2>
-        <h2 className="code">{players[currentPlayer - 1]?(players[currentPlayer - 1].score):(0)}</h2>
-        <h2 className="code">Darts: {players[currentPlayer -1]?.darts?(players[currentPlayer -1].darts.length):0}</h2>
-        <h3 className="code">Average: {players[currentPlayer -1]?.darts?(players[currentPlayer - 1].score/players[currentPlayer -1].darts.length):0}</h3>
+        <h2 className="code">
+          {players[currentPlayer - 1] ? players[currentPlayer - 1].score : 0}
+        </h2>
+        <h2 className="code">
+          Darts:{" "}
+          {players[currentPlayer - 1]?.darts
+            ? players[currentPlayer - 1].darts.length
+            : 0}
+        </h2>
+        <h3 className="code">
+          Average:{" "}
+          {players[currentPlayer - 1]?.darts
+            ? players[currentPlayer - 1].score /
+              players[currentPlayer - 1].darts.length
+            : 0}
+        </h3>
 
         <div className="addScore">
           <NextDart
@@ -187,7 +204,6 @@ const Game = () => {
             </div>
           ))}
       </div>
-      {/* La logique du jeu va ici */}
       <div className="center container">
         <p className="code">
           work in progress
