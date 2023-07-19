@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles.scss";
 import React, { useRef, useState, useEffect } from "react";
+import PlayerStats from "@/app/components/PlayerStats";
+import PlayerList from "@/app/components/PlayerList";
 
 const Game = () => {
   const [darts, setDarts] = useState([
@@ -35,7 +37,6 @@ const Game = () => {
   }, [newCurrentScore]);
 
   useEffect(() => {
-    
     const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
     const storedPlayer = storedPlayers.find(
       (player) => player.id === currentPlayer
@@ -157,46 +158,19 @@ const Game = () => {
         height={87}
         priority
       />
-      <div className="active">
-        <p className="code">
-          Player {currentPlayer} - tour {currentDart + 1}
-        </p>
-        <h1>{players[currentPlayer - 1]?.name}</h1>
-        <h2 className="score">
-          {players[currentPlayer - 1] ? players[currentPlayer - 1].score : 0}
-        </h2>
-        <h3 className="code">
-          Darts:{" "}
-          {players[currentPlayer - 1]?.darts
-            ? players[currentPlayer - 1].darts.length
-            : 0}
-        </h3>
-        <p className="code">
-          Average:{" "}
-          {players[currentPlayer - 1]?.score
-            ? players[currentPlayer - 1].score /
-              players[currentPlayer - 1].darts.length
-            : 0}
-        </p>
+      <PlayerStats
+        newCurrentScore={newCurrentScore}
+        currentPlayer={currentPlayer}
+        currentDart={currentDart}
+        players={players}
+        handleInputChange={handleInputChange}
+        handleNewScore={handleNewScore}
+        isNotValidScore={isNotValidScore}
+        handleNewTurn={handleNewTurn}
+      />
 
-        <div className="addScore">
-          <NextDart />
-        </div>
-      </div>
-
-      <div className="grid">
-        {" "}
-        {players
-          .filter((player) => player.id !== currentPlayer)
-          .map((player) => (
-            <div className="card" key={player.id}>
-              <h2>
-                {player.id}. {player.name}
-              </h2>
-              <p>Score : {player.score}</p>
-            </div>
-          ))}
-      </div>
+      <PlayerList players={players} currentPlayer={currentPlayer} />
+     
       <div className="center container">
         <p className="code">
           work in progress
