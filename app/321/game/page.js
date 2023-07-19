@@ -27,29 +27,33 @@ const Game = () => {
     if(localStorage.getItem("currentPlayer") !== null) {setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer", 10)))};
   },[]);
   useEffect(() => {
+    inputRef.current.focus();
+  },[newCurrentScore]);
+
+  useEffect(() => {
     console.log(currentDart)
-    
     const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
     const storedPlayer = storedPlayers.find(
       (player) => player.id === currentPlayer
     );
     setPlayers(storedPlayers);
+    
   }, [currentDart]);
 
   const handleAddScore = (newCurrentScore, currentDart) => {
     darts[currentDart] = { id: currentDart, score: newCurrentScore };
     console.log(darts);
+    
+
   };
   const handleInputChange = (event) => {
     setNewCurrentScore(event.target.value);
-    inputRef.current.focus();
-
   };
 
-  const updateDartScore = () => {
-    darts.score = newCurrentScore;
-    console.log(darts);
-  };
+  // const updateDartScore = () => {
+  //   darts.score = newCurrentScore;
+  //   console.log(darts);
+  // };
   const handleNewScore = () => {
     // updateDartScore()
     handleAddScore(newCurrentScore, currentDart);
@@ -75,7 +79,7 @@ const Game = () => {
       // affiche l'input et le bouton pour ajouter une valeur tant que la flèce actuelle est < 3
       <div className="addScore">
         <input
-         ref={inputRef}
+          ref={inputRef}
           type="number"
           placeholder="0"
           onChange={handleInputChange}
