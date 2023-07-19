@@ -30,7 +30,7 @@ const PlayerEdit = () => {
   const handleNext = () => {
     const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
     const playerIndex = storedPlayers.findIndex((player) => player.id === currentPlayer);
-    const playerData = { id: currentPlayer, name: playerName, score: 0, darts: [] };
+    const playerData = { id: currentPlayer, name: playerName, score: 0, currentPlayerScore: 0, darts: [] };
     if (playerIndex === -1) {
       storedPlayers.push(playerData);
     } else {
@@ -38,13 +38,14 @@ const PlayerEdit = () => {
       setPlayerName("");
   
     }
-
     localStorage.setItem("players", JSON.stringify(storedPlayers));
     setPlayerName("");
 
     if (currentPlayer < numPlayers) {
         setCurrentPlayer(currentPlayer + 1);
       } else {
+        localStorage.setItem("currentDart",0);
+        localStorage.setItem("currentPlayer",1);
         router.push(`/321/game`);
       }
   };
@@ -78,9 +79,7 @@ const PlayerEdit = () => {
         <Link href="/" className="bottom btn">
           <p>Back home</p>
         </Link>
-        <Link href="/321/select-players" className="bottom btn">
-          <p>Back to the player selection</p>
-        </Link>
+      
       </div>
       <div className="grid"></div>
     </main>

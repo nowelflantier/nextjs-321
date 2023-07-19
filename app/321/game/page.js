@@ -15,7 +15,6 @@ const Game = () => {
   const [players, setPlayers] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [isNotValidScore, SetIsNotValidScore] = useState(false);
-  // const [currentNewScore, setCurrentNewScore] = useState(0);
   const [currentPlayerScore, setCurrentPlayerScore] = useState(
     players[currentPlayer - 1]?.score * 1
   );
@@ -36,7 +35,7 @@ const Game = () => {
   }, [newCurrentScore]);
 
   useEffect(() => {
-    console.log(currentDart);
+    
     const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
     const storedPlayer = storedPlayers.find(
       (player) => player.id === currentPlayer
@@ -47,16 +46,16 @@ const Game = () => {
   const handleAddScore = (newCurrentScore, currentDart) => {
     // ajouter la logique de remise à 0, dépassement de 321 et victoire ici, sinon ajouter la fleche
     darts[currentDart] = { id: currentDart, score: newCurrentScore };
-    console.log(darts);
+    players[currentPlayer - 1] = {
+      currentPlayerScore: parseInt(currentPlayerScore, 10) + newCurrentScore,
+    };
   };
   const handleInputChange = (event) => {
     if (event.target.value < 0 || event.target.value > 60) {
       SetIsNotValidScore(true);
-      console.log(isNotValidScore);
     } else {
       setNewCurrentScore(event.target.value);
       SetIsNotValidScore(false);
-      console.log(isNotValidScore);
     }
   };
 
@@ -80,36 +79,37 @@ const Game = () => {
     handleNextPlayer();
   };
   const NextDart = () => {
-      return currentDart < 3 ? (
-        // affiche l'input et le bouton pour ajouter une valeur tant que la flèce actuelle est < 3
-        <div className="addScore">
-          <input
-            ref={inputRef}
-            type="number"
-            placeholder="0"
-            onChange={handleInputChange}
-            value={newCurrentScore}
-            className="select"
-          />
-         {isNotValidScore && <p className="error">Entrez un nombre entre 0 et 60</p> }
-          <button
-            className="btn bottom"
-            value={newCurrentScore}
-            onClick={handleNewScore}
-            display={!isNotValidScore}
-          >
-            AddScore - {newCurrentScore}
-          </button>
-        </div>
-      ) : (
-        // sinon affiche le bouton pour passer au joueur suivant
-        <div className="addScore">
-          <button className="btn bottom" onClick={handleNewTurn}>
-            NextPlayer
-          </button>
-        </div>
-      );
-    
+    return currentDart < 3 ? (
+      // affiche l'input et le bouton pour ajouter une valeur tant que la flèce actuelle est < 3
+      <div className="addScore">
+        <input
+          ref={inputRef}
+          type="number"
+          placeholder="0"
+          onChange={handleInputChange}
+          value={newCurrentScore}
+          className="select"
+        />
+        {isNotValidScore && (
+          <p className="error">Entrez un nombre entre 0 et 60</p>
+        )}
+        <button
+          className="btn bottom"
+          value={newCurrentScore}
+          onClick={handleNewScore}
+          display={!isNotValidScore}
+        >
+          AddScore - {newCurrentScore}
+        </button>
+      </div>
+    ) : (
+      // sinon affiche le bouton pour passer au joueur suivant
+      <div className="addScore">
+        <button className="btn bottom" onClick={handleNewTurn}>
+          NextPlayer
+        </button>
+      </div>
+    );
   };
 
   const handleLastPlayer = () => {
@@ -158,36 +158,29 @@ const Game = () => {
         priority
       />
       <div className="active">
-        <h1 className="code">Player {currentPlayer}</h1>
-        <h2 className="code">{players[currentPlayer - 1]?.name}</h2>
-        <h2 className="code">
+        <p className="code">
+          Player {currentPlayer} - tour {currentDart + 1}
+        </p>
+        <h1>{players[currentPlayer - 1]?.name}</h1>
+        <h2 className="score">
           {players[currentPlayer - 1] ? players[currentPlayer - 1].score : 0}
         </h2>
-        <h2 className="code">
+        <h3 className="code">
           Darts:{" "}
           {players[currentPlayer - 1]?.darts
             ? players[currentPlayer - 1].darts.length
             : 0}
-        </h2>
-        <h3 className="code">
+        </h3>
+        <p className="code">
           Average:{" "}
-          {players[currentPlayer - 1]?.darts
+          {players[currentPlayer - 1]?.score
             ? players[currentPlayer - 1].score /
               players[currentPlayer - 1].darts.length
             : 0}
-        </h3>
+        </p>
 
         <div className="addScore">
-          <NextDart
-          // players={players}
-          // currentPlayer={currentPlayer}
-          // currentDart={currentDart}
-          // currentUserScore={currentUserScore}
-          // currentNewScore={currentNewScore}
-          // handleNextDart={handleNextDart}
-          // handleNextPlayer={handleNextPlayer}
-          // darts={darts}
-          />
+          <NextDart />
         </div>
       </div>
 
@@ -211,9 +204,6 @@ const Game = () => {
         </p>
         <Link href="/" className="bottom btn">
           <p>Back home</p>
-        </Link>
-        <Link href="/321/select-players" className="bottom btn">
-          <p>Back to the player selection</p>
         </Link>
       </div>
     </main>
