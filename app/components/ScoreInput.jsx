@@ -13,7 +13,7 @@ const ScoreInput = ({
   return currentDart < 3 ? (
     <div className="addScore">
       <input
-        type="text"
+        type="number"
         placeholder="0"
         onChange={handleInputChange}
         onKeyDown={handleInputChange}
