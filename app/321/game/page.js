@@ -17,6 +17,7 @@ const Game = () => {
   const [players, setPlayers] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [isNotValidScore, SetIsNotValidScore] = useState(false);
+  const [isDisabled, setIsDisbled] = useState(true)
   const [currentPlayerScore, setCurrentPlayerScore] = useState(
     players[currentPlayer - 1]?.score * 1
   );
@@ -45,6 +46,7 @@ const Game = () => {
   }, [currentDart]);
 
   const handleAddScore = (newCurrentScore, currentDart) => {
+  
     // ajouter la logique de remise à 0, dépassement de 321 et victoire ici, sinon ajouter la fleche
     darts[currentDart] = { id: currentDart, score: newCurrentScore };
     players[currentPlayer - 1] = {
@@ -52,6 +54,7 @@ const Game = () => {
     };
   };
   const handleInputChange = (event) => {
+    setIsDisbled(false)
     if (event.target.value < 0 || event.target.value > 60) {
       SetIsNotValidScore(true);
     } else {
@@ -74,44 +77,13 @@ const Game = () => {
       storedPlayers[playerIndex].darts.push(parseInt(newCurrentScore, 10)); // add the new dart score
       localStorage.setItem("players", JSON.stringify(storedPlayers));
     }
+    setIsDisbled(true)
     return newCurrentScore;
   };
   const handleNewTurn = () => {
     handleNextPlayer();
   };
-  const NextDart = () => {
-    return currentDart < 3 ? (
-      // affiche l'input et le bouton pour ajouter une valeur tant que la flèce actuelle est < 3
-      <div className="addScore">
-        <input
-          ref={inputRef}
-          type="number"
-          placeholder="0"
-          onChange={handleInputChange}
-          value={newCurrentScore}
-          className="select"
-        />
-        {isNotValidScore && (
-          <p className="error">Entrez un nombre entre 0 et 60</p>
-        )}
-        <button
-          className="btn bottom"
-          value={newCurrentScore}
-          onClick={handleNewScore}
-          display={!isNotValidScore}
-        >
-          AddScore - {newCurrentScore}
-        </button>
-      </div>
-    ) : (
-      // sinon affiche le bouton pour passer au joueur suivant
-      <div className="addScore">
-        <button className="btn bottom" onClick={handleNewTurn}>
-          NextPlayer
-        </button>
-      </div>
-    );
-  };
+ 
 
   const handleLastPlayer = () => {
     setCurrentDart(0);
@@ -167,6 +139,7 @@ const Game = () => {
         handleNewScore={handleNewScore}
         isNotValidScore={isNotValidScore}
         handleNewTurn={handleNewTurn}
+        isDisabled={isDisabled}
       />
 
       <PlayerList players={players} currentPlayer={currentPlayer} />
