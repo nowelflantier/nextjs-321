@@ -85,7 +85,7 @@ const Game = () => {
   const handleInputChange = (event) => {
     setIsDisbled(false);
     // valeur à modifier hors tests
-    if (event.target.value < 0 || event.target.value > 600) {
+    if (event.target.value < 0 || event.target.value > 60) {
       SetIsNotValidScore(true);
     } else {
       setNewCurrentScore(event.target.value);

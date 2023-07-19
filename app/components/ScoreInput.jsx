@@ -17,6 +17,7 @@ const ScoreInput = ({
         onChange={handleInputChange}
         value={newCurrentScore}
         className="select"
+        inputmode="numeric"
       />
       {isNotValidScore && (
         <p className="error">Entrez un nombre entre 0 et 60</p>
