@@ -15,7 +15,7 @@ const Game = () => {
   const [players, setPlayers] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [isNotValidScore, SetIsNotValidScore] = useState(false);
-  const [currentNewScore, setCurrentNewScore] = useState(0);
+  // const [currentNewScore, setCurrentNewScore] = useState(0);
   const [currentPlayerScore, setCurrentPlayerScore] = useState(
     players[currentPlayer - 1]?.score * 1
   );
@@ -45,24 +45,22 @@ const Game = () => {
   }, [currentDart]);
 
   const handleAddScore = (newCurrentScore, currentDart) => {
+    // ajouter la logique de remise à 0, dépassement de 321 et victoire ici, sinon ajouter la fleche
     darts[currentDart] = { id: currentDart, score: newCurrentScore };
     console.log(darts);
   };
   const handleInputChange = (event) => {
-    setNewCurrentScore(event.target.value);
-    if (newCurrentScore < 0 || newCurrentScore > 60) {
+    if (event.target.value < 0 || event.target.value > 60) {
       SetIsNotValidScore(true);
+      console.log(isNotValidScore);
     } else {
+      setNewCurrentScore(event.target.value);
       SetIsNotValidScore(false);
+      console.log(isNotValidScore);
     }
   };
 
-  // const updateDartScore = () => {
-  //   darts.score = newCurrentScore;
-  //   console.log(darts);
-  // };
   const handleNewScore = () => {
-    // updateDartScore()
     handleAddScore(newCurrentScore, currentDart);
     handleNextDart();
     setNewCurrentScore("");
@@ -82,34 +80,36 @@ const Game = () => {
     handleNextPlayer();
   };
   const NextDart = () => {
-    return currentDart < 3 ? (
-      // affiche l'input et le bouton pour ajouter une valeur tant que la flèce actuelle est < 3
-      <div className="addScore">
-        <input
-          ref={inputRef}
-          type="number"
-          placeholder="0"
-          onChange={handleInputChange}
-          value={newCurrentScore}
-          className="select"
-        />
-        <button
-          className="btn bottom"
-          value={newCurrentScore}
-          onClick={handleNewScore}
-          display={!isNotValidScore}
-        >
-          AddScore - {newCurrentScore}
-        </button>
-      </div>
-    ) : (
-      // sinon affiche le bouton pour passer au joueur suivant
-      <div className="addScore">
-        <button className="btn bottom" onClick={handleNewTurn}>
-          NextPlayer
-        </button>
-      </div>
-    );
+      return currentDart < 3 ? (
+        // affiche l'input et le bouton pour ajouter une valeur tant que la flèce actuelle est < 3
+        <div className="addScore">
+          <input
+            ref={inputRef}
+            type="number"
+            placeholder="0"
+            onChange={handleInputChange}
+            value={newCurrentScore}
+            className="select"
+          />
+         {isNotValidScore && <p className="error">Entrez un nombre entre 0 et 60</p> }
+          <button
+            className="btn bottom"
+            value={newCurrentScore}
+            onClick={handleNewScore}
+            display={!isNotValidScore}
+          >
+            AddScore - {newCurrentScore}
+          </button>
+        </div>
+      ) : (
+        // sinon affiche le bouton pour passer au joueur suivant
+        <div className="addScore">
+          <button className="btn bottom" onClick={handleNewTurn}>
+            NextPlayer
+          </button>
+        </div>
+      );
+    
   };
 
   const handleLastPlayer = () => {

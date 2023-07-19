@@ -147,6 +147,7 @@
     font-family: var(--font-mono);
   }
 
+
   p.code, h1.code {
     margin-bottom: 15px;
   }
@@ -223,6 +224,14 @@
     transition: background 200ms, border 200ms;
     text-align: center;
     
+  }
+  .error {
+    border: 1px solid red;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    margin: 1rem auto;
+    border-radius: var(--border-radius);
+    background-color: rgb(212, 149, 149);
   }
   
   // .grid {
