@@ -9,15 +9,17 @@ const ScoreInput = ({
   handleNewTurn,
   isDisabled,
 }) => {
+
   return currentDart < 3 ? (
     <div className="addScore">
       <input
         type="number"
         placeholder="0"
         onChange={handleInputChange}
+        onKeyDown={handleInputChange}
         value={newCurrentScore}
         className="select"
-        inputmode="numeric"
+        inputMode="numeric"
       />
       {isNotValidScore && (
         <p className="error">Entrez un nombre entre 0 et 60</p>

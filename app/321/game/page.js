@@ -43,6 +43,8 @@ const Game = () => {
   }, []);
   useEffect(() => {
     inputRef.current?.focus();
+    SetIsNotValidScore(false);
+
   }, [newCurrentScore]);
   useEffect(() => {
     const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
@@ -81,18 +83,6 @@ const Game = () => {
    
     };
   
-
-  const handleInputChange = (event) => {
-    setIsDisbled(false);
-    // valeur à modifier hors tests
-    if (event.target.value < 0 || event.target.value > 60) {
-      SetIsNotValidScore(true);
-    } else {
-      setNewCurrentScore(event.target.value);
-      SetIsNotValidScore(false);
-    }
-  };
-
   const handleNewScore = () => {
     handleAddScore(newCurrentScore, currentDart);
     handleNextDart();
@@ -112,6 +102,21 @@ const Game = () => {
   };
   const handleNewTurn = () => {
     handleNextPlayer();
+  };
+
+  const handleInputChange = (event) => {
+    setIsDisbled(false);
+ 
+    // valeur à modifier hors tests
+    if (event.target.value < 0 || event.target.value > 60) {
+      SetIsNotValidScore(true);
+    } else {
+      setNewCurrentScore(event.target.value);
+      SetIsNotValidScore(false);
+    }
+    if(event.keyCode === 13) {
+      handleNewScore(); 
+    }
   };
 
   const handleLastPlayer = () => {
