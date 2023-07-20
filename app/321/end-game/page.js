@@ -8,76 +8,45 @@ import PlayerStats from "@/app/components/PlayerStats";
 import PlayerList from "@/app/components/PlayerList";
 
 const EndGame = () => {
-  const [darts, setDarts] = useState([
-    { id: 0, score: null },
-    { id: 1, score: null },
-    { id: 2, score: null },
-  ]);
-  const [newCurrentScore, setNewCurrentScore] = useState("");
+  const [darts, setDarts] = useState([]);
+  // const [newCurrentScore, setNewCurrentScore] = useState("");
   const [players, setPlayers] = useState([]);
-  const [currentPlayer, setCurrentPlayer] = useState(1);
-  const [isNotValidScore, SetIsNotValidScore] = useState(false);
-  const [isDisabled, setIsDisbled] = useState(true);
+  // const [currentPlayer, setCurrentPlayer] = useState(1);
+  // const [isNotValidScore, SetIsNotValidScore] = useState(false);
+  // const [isDisabled, setIsDisbled] = useState(true);
   const [isWinner, setIsWinner] = useState({});
-  const [currentPlayerScore, setCurrentPlayerScore] = useState(
-    players[currentPlayer - 1]?.score * 1
-  );
-  const [winner, setWinner]=useState({});
-  const [currentDart, setCurrentDart] = useState(0);
+  // const [currentPlayerScore, setCurrentPlayerScore] = useState(
+  //   players[currentPlayer - 1]?.score * 1
+  // );
+  const [winner, setWinner] = useState({});
+  // const [currentDart, setCurrentDart] = useState(0);
   const inputRef = useRef();
-  const playerIndex = currentPlayer - 1;
+  const playerIndex = parseInt(winner.id, 10);
   const currentUserScore = players[playerIndex]?.score;
 
   useEffect(() => {
-    if (localStorage.getItem("currentDart") !== null) {
-      setCurrentDart(parseInt(localStorage.getItem("currentDart"), 10));
-    }
+    // if (localStorage.getItem("currentDart") !== null) {
+    //   setCurrentDart(parseInt(localStorage.getItem("currentDart"), 10));
+    // }
     if (localStorage.getItem("currentPlayer") !== null) {
-      setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer", 10)));
+      // setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer", 10)));
       setWinner(JSON.parse(localStorage.getItem("winner")));
-
+      setDarts(JSON.parse(localStorage.getItem("dart")));
+      setPlayers(JSON.parse(localStorage.getItem("players")));
     }
   }, []);
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, [newCurrentScore]);
-  useEffect(() => {
-    const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
-    const storedPlayer = storedPlayers.find(
-      (player) => player.id === currentPlayer
-    );
-    setPlayers(storedPlayers);
-  }, [currentDart]);
+
   useEffect(() => {
     if (isWinner.defined) {
       // Logic for when a player wins
       const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
-      const playerJSON = JSON.stringify(storedPlayers[playerIndex]); 
+      const playerJSON = JSON.stringify(storedPlayers[playerIndex]);
       localStorage.setItem("winner", playerJSON);
       // router.push(`/321/end-game`);
       console.log(`Player ${isWinner.player} is the winner!`);
       console.log(isWinner);
     }
   }, [isWinner]);
-
-  const handleAddScore = (newCurrentScore, currentDart) => {
-    const potentialScore =
-      parseInt(newCurrentScore, 10) + parseInt(currentUserScore, 10);
-      console.log(potentialScore)
-    // logique de victoire
-    if (potentialScore === 321) {
-      setIsWinner({ player: players[currentPlayer - 1].id, defined: true });
-    }
-
-    // ajouter la logique de remise à 0, dépassement de 321 et victoire ici, sinon ajouter la fleche
-    darts[currentDart] = { id: currentDart, score: newCurrentScore };
-    const updatedPlayer = {
-      ...players[playerIndex], 
-      score: players[playerIndex].score + parseInt(newCurrentScore, 10) 
-    };
-   
-    };
-  
 
   const handleInputChange = (event) => {
     setIsDisbled(false);
@@ -87,58 +56,6 @@ const EndGame = () => {
     } else {
       setNewCurrentScore(event.target.value);
       SetIsNotValidScore(false);
-    }
-  };
-
-  const handleNewScore = () => {
-    handleAddScore(newCurrentScore, currentDart);
-    handleNextDart();
-    setNewCurrentScore("");
-
-    const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
-    const playerIndex = storedPlayers.findIndex(
-      (player) => player.id === currentPlayer
-    );
-    if (playerIndex !== -1) {
-      storedPlayers[playerIndex].score += parseInt(newCurrentScore, 10);
-      storedPlayers[playerIndex].darts.push(parseInt(newCurrentScore, 10)); // add the new dart score
-      localStorage.setItem("players", JSON.stringify(storedPlayers));
-    }
-    setIsDisbled(true);
-    return newCurrentScore;
-  };
-  const handleNewTurn = () => {
-    handleNextPlayer();
-  };
-
-  const handleLastPlayer = () => {
-    setCurrentDart(0);
-    setCurrentPlayer(1);
-  };
-  const handleCurrentPlayer = () => {
-    setCurrentPlayerScore(currentUserScore);
-
-    setCurrentPlayer(currentPlayer + 1);
-    const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
-    const storedPlayer = storedPlayers.find(
-      (player) => player.id === currentPlayer
-    );
-    setCurrentDart(0);
-  };
-  const handleNextPlayer = () => {
-    currentPlayer === players.length
-      ? handleLastPlayer()
-      : handleCurrentPlayer();
-  };
-
-  const handleNextDart = () => {
-    if (currentDart < 3) {
-      // Store the current player and dart in localStorage
-      localStorage.setItem("currentPlayer", currentPlayer);
-      localStorage.setItem("currentDart", currentDart + 1);
-      setCurrentDart(currentDart + 1);
-    } else {
-      handleNextPlayer();
     }
   };
 
@@ -156,7 +73,11 @@ const EndGame = () => {
         height={87}
         priority
       />
-      <p className="code">page de fin de partie. bravo cependant {winner.name}</p>
+      <div className="center container">
+      <p className="code">
+        page de fin de partie. bravo cependant {winner.name}
+      </p>
+      </div>
       {/* <PlayerStats
         newCurrentScore={newCurrentScore}
         currentPlayer={currentPlayer}
@@ -179,7 +100,9 @@ const EndGame = () => {
         <Link href="/" className="bottom btn">
           <p>Back home</p>
         </Link>
-        <Link href="/321/select-players?new_game=true" className="bottom btn"><p>Nouvelle partie</p></Link>
+        <Link href="/321/select-players?new_game=true" className="bottom btn">
+          <p>Nouvelle partie</p>
+        </Link>
       </div>
     </main>
   );
