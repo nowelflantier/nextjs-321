@@ -6,7 +6,7 @@ const ScoreInput = ({
   handleNewScore,
   isNotValidScore,
   currentDart,
-  handleNewTurn,
+  handleNextPlayer,
   isDisabled,
 }) => {
 
@@ -31,7 +31,6 @@ const ScoreInput = ({
           className="btn bottom"
           value={newCurrentScore}
           onClick={handleNewScore}
-          //   display={!isNotValidScore}
           display={!isNotValidScore ? "true" : undefined}
         >
           AddScore - {newCurrentScore}
@@ -40,7 +39,7 @@ const ScoreInput = ({
     </div>
   ) : (
     <div className="addScore">
-      <button className="btn bottom" onClick={handleNewTurn}>
+      <button className="btn bottom" onClick={handleNextPlayer}>
         NextPlayer
       </button>
     </div>

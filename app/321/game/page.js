@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -28,24 +27,23 @@ const Game = () => {
   const inputRef = useRef();
   const playerIndex = currentPlayer - 1;
   const currentUserScore = players[playerIndex]?.score;
-
   useEffect(() => {
     if (localStorage.getItem("winner") !== null) {
       router.push(`/321/end-game`);
-
     }
     if (localStorage.getItem("currentDart") !== null) {
       setCurrentDart(parseInt(localStorage.getItem("currentDart"), 10));
     }
     if (localStorage.getItem("currentPlayer") !== null) {
-      setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer", 10)));
+      setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer"), 10));
     }
   }, []);
+
   useEffect(() => {
     inputRef.current?.focus();
     SetIsNotValidScore(false);
-
   }, [newCurrentScore]);
+
   useEffect(() => {
     const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
     const storedPlayer = storedPlayers.find(
@@ -53,36 +51,56 @@ const Game = () => {
     );
     setPlayers(storedPlayers);
   }, [currentDart]);
+
   useEffect(() => {
     if (isWinner.defined) {
       // Logic for when a player wins
       const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
-      const playerJSON = JSON.stringify(storedPlayers[playerIndex]); 
+      const playerJSON = JSON.stringify(storedPlayers[playerIndex]);
       localStorage.setItem("winner", playerJSON);
       console.log(`Player ${isWinner.player} is the winner!`);
       console.log(isWinner);
       router.push(`/321/end-game`);
     }
   }, [isWinner]);
-
   const handleAddScore = (newCurrentScore, currentDart) => {
-    const potentialScore =
+    let potentialScore =
       parseInt(newCurrentScore, 10) + parseInt(currentUserScore, 10);
-      console.log(potentialScore)
+    console.log(potentialScore);
     // logique de victoire
     if (potentialScore === 321) {
       setIsWinner({ player: players[currentPlayer - 1].id, defined: true });
+    } else if (potentialScore > 321) {
+      
+      potentialScore = 321 - (potentialScore - 321);
+      // darts[currentDart] = { id: currentDart, score: newCurrentScore };
+      // const updatedPlayer = {
+      //   ...players[playerIndex],
+      //   score: potentialScore,
+      // };
+      console.log(`${potentialScore} too high`)
     }
+    // Check if potential score matches that of another player
+    players.forEach((player, index) => {
+      if (index !== playerIndex && player.score === potentialScore) {
+        // Reset the score of the other player to 0
+        players[index].score = 0;
+      }
+    });
+    console.log(`${potentialScore} before update local data`)
+
+    // Store the updated players in local storage
+    localStorage.setItem("players", JSON.stringify(players));
 
     // ajouter la logique de remise à 0, dépassement de 321 et victoire ici, sinon ajouter la fleche
     darts[currentDart] = { id: currentDart, score: newCurrentScore };
     const updatedPlayer = {
-      ...players[playerIndex], 
-      score: players[playerIndex].score + parseInt(newCurrentScore, 10) 
+      ...players[playerIndex],
+      score: potentialScore,
     };
-   
-    };
-  
+    console.log(`${updatedPlayer.score} after update`)
+  };
+
   const handleNewScore = () => {
     handleAddScore(newCurrentScore, currentDart);
     handleNextDart();
@@ -93,6 +111,7 @@ const Game = () => {
       (player) => player.id === currentPlayer
     );
     if (playerIndex !== -1) {
+      console.log('execute after handle add score > local storage')
       storedPlayers[playerIndex].score += parseInt(newCurrentScore, 10);
       storedPlayers[playerIndex].darts.push(parseInt(newCurrentScore, 10)); // add the new dart score
       localStorage.setItem("players", JSON.stringify(storedPlayers));
@@ -100,22 +119,23 @@ const Game = () => {
     setIsDisbled(true);
     return newCurrentScore;
   };
-  const handleNewTurn = () => {
-    handleNextPlayer();
-  };
 
   const handleInputChange = (event) => {
     setIsDisbled(false);
- 
+
     // valeur à modifier hors tests
-    if (event.target.value < 0 || event.target.value > 60) {
+    if (
+      isNaN(event.target.value) ||
+      event.target.value < 0 ||
+      event.target.value > 60
+    ) {
       SetIsNotValidScore(true);
     } else {
       setNewCurrentScore(event.target.value);
       SetIsNotValidScore(false);
     }
-    if(event.keyCode === 13) {
-      handleNewScore(); 
+    if (event.keyCode === 13) {
+      handleNewScore();
     }
   };
 
@@ -138,7 +158,6 @@ const Game = () => {
       ? handleLastPlayer()
       : handleCurrentPlayer();
   };
-
   const handleNextDart = () => {
     if (currentDart < 3) {
       // Store the current player and dart in localStorage
@@ -172,7 +191,7 @@ const Game = () => {
         handleInputChange={handleInputChange}
         handleNewScore={handleNewScore}
         isNotValidScore={isNotValidScore}
-        handleNewTurn={handleNewTurn}
+        handleNextPlayer={handleNextPlayer}
         isDisabled={isDisabled}
       />
 

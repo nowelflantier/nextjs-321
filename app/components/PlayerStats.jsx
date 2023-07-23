@@ -9,7 +9,7 @@ const PlayerStats = ({
   handleInputChange,
   handleNewScore,
   isNotValidScore,
-  handleNewTurn,
+  handleNextPlayer,
   isDisabled,
 }) => {
   const player = players[currentPlayer - 1] || {};
@@ -31,7 +31,7 @@ const PlayerStats = ({
         handleNewScore={handleNewScore}
         isNotValidScore={isNotValidScore}
         currentDart={currentDart}
-        handleNewTurn={handleNewTurn}
+        handleNextPlayer={handleNextPlayer}
         isDisabled={isDisabled}
       />
     </div>

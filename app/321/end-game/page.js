@@ -7,6 +7,7 @@ import React, { useRef, useState, useEffect } from "react";
 import PlayerStats from "@/app/components/PlayerStats";
 import PlayerList from "@/app/components/PlayerList";
 
+
 const EndGame = () => {
   const [darts, setDarts] = useState([]);
   // const [newCurrentScore, setNewCurrentScore] = useState("");
@@ -75,7 +76,8 @@ const EndGame = () => {
       />
       <div className="center container">
       <p className="code">
-        page de fin de partie. bravo cependant {winner.name}
+        page de fin de partie - wip
+        <em><br/>bravo cependant {winner.name}</em>
       </p>
       </div>
       {/* <PlayerStats
