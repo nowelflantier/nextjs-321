@@ -46,7 +46,7 @@ const PlayerEdit = () => {
       } else {
         localStorage.setItem("currentDart",0);
         localStorage.setItem("currentPlayer",1);
-        router.push(`/321/game-2`);
+        router.push(`/321/game`);
       }
   };
 
@@ -71,17 +71,17 @@ const PlayerEdit = () => {
         <button className='btn bottom' onClick={handleNext}><p>Suivant</p></button>
       </div>
       <div className="center container">
-        <p className="code">
+        {/* <p className="code">
           work in progress
           <br />
-        </p>
+        </p> */}
 
         <Link href="/" className="bottom btn">
-          <p>Back home</p>
+          <p>Retour à l'accueil</p>
         </Link>
       
       </div>
-      <div className="grid"></div>
+      
     </main>
   );
 };

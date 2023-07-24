@@ -49,16 +49,7 @@ const EndGame = () => {
     }
   }, [isWinner]);
 
-  const handleInputChange = (event) => {
-    setIsDisbled(false);
-    // valeur à modifier hors tests
-    if (event.target.value < 0 || event.target.value > 600) {
-      SetIsNotValidScore(true);
-    } else {
-      setNewCurrentScore(event.target.value);
-      SetIsNotValidScore(false);
-    }
-  };
+  
 
   return (
     <main className="main">
@@ -80,27 +71,15 @@ const EndGame = () => {
         <em><br/>bravo cependant {winner.name}</em>
       </p>
       </div>
-      {/* <PlayerStats
-        newCurrentScore={newCurrentScore}
-        currentPlayer={currentPlayer}
-        currentDart={currentDart}
-        players={players}
-        handleInputChange={handleInputChange}
-        handleNewScore={handleNewScore}
-        isNotValidScore={isNotValidScore}
-        handleNewTurn={handleNewTurn}
-        isDisabled={isDisabled}
-      />
-
-      <PlayerList players={players} currentPlayer={currentPlayer} /> */}
+     
 
       <div className="center container">
-        <p className="code">
+        {/* <p className="code">
           work in progress
           <br />
-        </p>
+        </p> */}
         <Link href="/" className="bottom btn">
-          <p>Back home</p>
+          <p>Retour à l'accueil</p>
         </Link>
         <Link href="/321/select-players?new_game=true" className="bottom btn">
           <p>Nouvelle partie</p>

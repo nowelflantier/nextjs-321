@@ -394,7 +394,7 @@
     .description p {
       align-items: center;
       inset: 0 0 auto;
-      padding: 2rem 1rem 1.4rem;
+      // padding: 2rem 1rem 1.4rem;
       border-radius: 0;
       border: none;
       border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
@@ -411,12 +411,12 @@
       align-items: flex-end;
       pointer-events: none;
       inset: auto 0 0;
-      padding: 2rem;
-      height: 200px;
+      padding: 10px;
+      height: 100px;
       background: linear-gradient(
         to bottom,
         transparent 0%,
-        rgb(var(--background-end-rgb)) 40%
+        rgb(var(--background-end-rgb)) 80%
       );
       z-index: 1;
     }
