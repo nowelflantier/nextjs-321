@@ -65,6 +65,7 @@ const Game = () => {
       router.push(`/321/end-game`);
     }
   }, [isWinner]);
+  
   const handleAddScore = (newCurrentScore, currentDart) => {
     const playerIndex = currentPlayer - 1; // Define playerIndex here
 
