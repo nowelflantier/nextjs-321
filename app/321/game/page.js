@@ -79,10 +79,8 @@ const Game = () => {
       }
     }
   };
-
   const handleNewScore = async () => {
     // if (isNotValidScore) return;
-
     const updatedPlayers = [...players];
     const player = updatedPlayers[playerIndex];
     // Check that player is defined
@@ -96,10 +94,8 @@ const Game = () => {
         updatedPlayers[i].score = 0;
       }
     }
-
     player.darts.push(newCurrentScore);
     player.score = potentialNewScore;
-
     if (player.score === 321) {
       setIsWinner({ player: players[currentPlayer - 1].id, defined: true });
       // Réinitialiser le jeu ou faire autre chose ici
@@ -111,7 +107,6 @@ const Game = () => {
       handleNextDart(currentDart);
       //   setCurrentDart(currentDart + 1);
     }
-
     setPlayers(updatedPlayers);
     setNewCurrentScore("");
     setIsDisabled(true);
@@ -135,7 +130,6 @@ const Game = () => {
       setNewCurrentScore("");
     }
   };
-
   return (
     <main className="main">
       <div className="description">
@@ -168,7 +162,7 @@ const Game = () => {
         {/* <p className="code">
           work in progress
           <br />
-        </p> */}
+          </p> */}
         <Link href="/" className="bottom btn">
           <p>Back home</p>
         </Link>
@@ -176,5 +170,4 @@ const Game = () => {
     </main>
   );
 };
-
 export default Game;

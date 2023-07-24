@@ -65,7 +65,7 @@ const PlayerStats = ({
                 
                 style={{
                   backgroundColor: getBackgroundColor(p.score - player.score),
-                  // '--player-length': `{100 / (${players.length} - 1)}%` 
+                  
                 }}
               >
                 <h2>
