@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import PlayerStats from "@/app/components/PlayerStats";
 import PlayerList from "@/app/components/PlayerList";
 import Image from "next/image";
@@ -10,13 +10,12 @@ import styles from "../../styles.scss";
 
 const Game = () => {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
   const [players, setPlayers] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [currentDart, setCurrentDart] = useState(0);
   const [newCurrentScore, setNewCurrentScore] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
-  
+  const inputRef = useRef();
   const [isWinner, setIsWinner] = useState({});
   const [isNotValidScore, SetIsNotValidScore] = useState(false);
   const playerIndex = currentPlayer - 1;
@@ -35,33 +34,9 @@ const Game = () => {
     if (localStorage.getItem("currentPlayer") !== null) {
       setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer"), 10));
     }
-    setIsLoading(false);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("currentDart", currentDart.toString());
-    localStorage.setItem("currentPlayer", currentPlayer.toString());
-  }, [currentDart]);
-
-  useEffect(() => {
-    if (isWinner.defined) {
-      // Logic for when a player wins
-      const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
-      const playerJSON = JSON.stringify(storedPlayers[playerIndex]);
-      localStorage.setItem("winner", playerJSON);
-      console.log(`Player ${isWinner.player} is the winner!`);
-      console.log(isWinner);
-      router.push(`/321/end-game`);
-    }
-  }, [isWinner]);
-
-
-
-  useEffect(() => {
-    localStorage.setItem("players", JSON.stringify(players));
-  }, [players]);
-
-  const handleInputChange = async (e) => {
+  const handleInputChange = useCallback((e) => {
     if (e.target.value === "") {
       setNewCurrentScore("");
       setIsDisabled(true);
@@ -78,8 +53,9 @@ const Game = () => {
         SetIsNotValidScore(false);
       }
     }
-  };
-  const handleNewScore = async () => {
+  }, []);
+
+  const handleNewScore = useCallback(() => {
     // if (isNotValidScore) return;
     const updatedPlayers = [...players];
     const player = updatedPlayers[playerIndex];
@@ -110,15 +86,17 @@ const Game = () => {
     setPlayers(updatedPlayers);
     setNewCurrentScore("");
     setIsDisabled(true);
-  };
-  const handleNextDart = (currentDart) => {
+  }, [players, newCurrentScore, currentPlayer, currentDart]);
+
+  const handleNextDart = useCallback((currentDart) => {
     if (currentDart >= 3) {
       setCurrentDart(0);
     } else {
       setCurrentDart(currentDart + 1);
     }
-  };
-  const handleNextPlayer = async () => {
+  }, []);
+
+  const handleNextPlayer = useCallback(() => {
     if (currentPlayer === players.length) {
       setCurrentDart(0);
       setCurrentPlayer(1);
@@ -129,9 +107,31 @@ const Game = () => {
       setCurrentDart(0);
       setNewCurrentScore("");
     }
-  };
+  }, [currentPlayer, players]);
+
+  useEffect(() => {
+    localStorage.setItem("currentDart", currentDart.toString());
+    localStorage.setItem("currentPlayer", currentPlayer.toString());
+  }, [currentDart, currentPlayer]);
+
+  useEffect(() => {
+    if (isWinner.defined) {
+      // Logic for when a player wins
+      const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
+      const playerJSON = JSON.stringify(storedPlayers[playerIndex]);
+      localStorage.setItem("winner", playerJSON);
+      console.log(`Player ${isWinner.player} is the winner!`);
+      console.log(isWinner);
+      router.push(`/321/end-game`);
+    }
+  }, [isWinner]);
+
+  useEffect(() => {
+    localStorage.setItem("players", JSON.stringify(players));
+  }, [players]);
+
   return (
-    <main className="main">     
+    <main className="main">
       <div className="description">
         <p>Jeu en cours de développement</p>
         <div>powered by le S.</div>
@@ -144,7 +144,6 @@ const Game = () => {
         height={87}
         priority
       />
-      
       <PlayerStats
         currentPlayer={currentPlayer}
         players={players}
@@ -158,7 +157,7 @@ const Game = () => {
         // isTurnOver={isTurnOver}
       />
       <PlayerList players={players} currentPlayer={currentPlayer} />
-      
+
       <div className="center container">
         {/* <p className="code">
           work in progress
