@@ -1,7 +1,6 @@
 import React from "react";
 import ScoreInput from "./ScoreInput";
 import styles from "../styles.scss";
-
 const PlayerStats = ({
   currentPlayer,
   players,
@@ -40,7 +39,7 @@ const PlayerStats = ({
       <h2 className="score">{player.score || 0}</h2>
       <h3 className="code">Fléchettes lancées : {player.darts ? player.darts.length : 0}</h3>
       <p className="code">
-        Moyenne / fléchette :{" "}
+      Moyenne / fléchette :{" "}
   {player.darts && player.darts.length > 0
     ? (player.score / player.darts.length).toFixed(2)
     : 0}
@@ -52,6 +51,7 @@ const PlayerStats = ({
             <p>{321 - player.score || 0}</p>
           </div>
         </div>
+      
       <div className="player-list ">
         {/* <h4>Écarts avec les autres joueurs</h4> */}
         <div className="grid">
@@ -62,10 +62,8 @@ const PlayerStats = ({
               <div
                 key={p.id}
                 className="card dashboard"
-                
                 style={{
                   backgroundColor: getBackgroundColor(p.score - player.score),
-                  
                 }}
               >
                 <h2>
@@ -95,9 +93,8 @@ const PlayerStats = ({
                   <p>-</p>
                 )}
               </div>
-            ))}
-        </div> */}
-       
+            ))} </div> */}
+
       </div>
       <ScoreInput
         isTurnOver={isTurnOver}
@@ -112,5 +109,4 @@ const PlayerStats = ({
     </div>
   );
 };
-
 export default PlayerStats;

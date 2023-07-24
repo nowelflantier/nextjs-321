@@ -1,5 +1,4 @@
 import React from "react";
-
 const ScoreInput = ({
   newCurrentScore,
   handleInputChange,
@@ -10,7 +9,6 @@ const ScoreInput = ({
   isDisabled,
   isTurnOver,
 }) => {
-
   return (!isTurnOver && currentDart < 3) ? (
     <div className="addScore">
       <input
@@ -34,17 +32,16 @@ const ScoreInput = ({
           onClick={handleNewScore}
           display={!isNotValidScore ? "true" : undefined}
         >
-          Ajouter le score - {newCurrentScore}
+           Ajouter le score - {newCurrentScore}
         </button>
       )}
     </div>
   ) : (
     <div className="addScore">
       <button className="btn bottom" onClick={handleNextPlayer}>
-        Joueur suivant
+      Joueur suivant
       </button>
     </div>
   );
 };
-
 export default ScoreInput;

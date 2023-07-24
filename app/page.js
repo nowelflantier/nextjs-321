@@ -41,6 +41,7 @@ export default function Home() {
         <Link href="/321/select-players?new_game=true" className="bottom btn"><p>Nouvelle partie</p></Link>
         {isCookiesStored && <Link href="/321/game" className="bottom btn"><p>Reprendre ma partie</p></Link>}
       </div>
+      <div className='grid'></div>
     </main>
   )
 }
