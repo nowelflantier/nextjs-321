@@ -24,7 +24,7 @@ const GameStart = () => {
         {/* <p className='code'>work in progress<br/></p> */}
 
         <Link href="/" className="bottom btn">
-          <p>Retour à l'accueil</p>
+          <p>Retour à l&#39;accueil</p>
         </Link>
       </div>
 

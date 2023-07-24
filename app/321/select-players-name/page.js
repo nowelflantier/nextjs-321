@@ -77,7 +77,7 @@ const PlayerEdit = () => {
         </p> */}
 
         <Link href="/" className="bottom btn">
-          <p>Retour à l'accueil</p>
+          <p>Retour à l&#39;accueil</p>
         </Link>
       
       </div>
