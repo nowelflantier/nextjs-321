@@ -81,7 +81,7 @@ const PlayerEdit = () => {
         </Link>
       
       </div>
-      
+      <div className='grid'></div>
     </main>
   );
 };

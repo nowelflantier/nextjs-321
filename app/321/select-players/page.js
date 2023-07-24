@@ -26,6 +26,7 @@ const GameStart = () => {
         <Link href="/" className="bottom btn">
           <p>Retour à l&#39;accueil</p>
         </Link>
+        <div className='grid'></div>
       </div>
 
       
