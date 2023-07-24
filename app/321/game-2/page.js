@@ -11,14 +11,12 @@ import styles from "../../styles.scss";
 const Game = () => {
   const router = useRouter();
   const [players, setPlayers] = useState([]);
-  const [currentPlayer, setCurrentPlayer] = useState(0);
+  const [currentPlayer, setCurrentPlayer] = useState(1);
   const [currentDart, setCurrentDart] = useState(0);
-  const [newCurrentScore, setNewCurrentScore] = useState('');
+  const [newCurrentScore, setNewCurrentScore] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const inputRef = useRef();
-
   const [isWinner, setIsWinner] = useState({});
-
   const [isNotValidScore, SetIsNotValidScore] = useState(false);
   const playerIndex = currentPlayer - 1;
 
@@ -39,6 +37,11 @@ const Game = () => {
   }, []);
 
   useEffect(() => {
+    localStorage.setItem("currentDart", currentDart.toString());
+    localStorage.setItem("currentPlayer", currentPlayer.toString());
+  }, [currentDart]);
+
+  useEffect(() => {
     if (isWinner.defined) {
       // Logic for when a player wins
       const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
@@ -50,10 +53,9 @@ const Game = () => {
     }
   }, [isWinner]);
 
-  useEffect(() => {
-    inputRef.current?.focus();
-    SetIsNotValidScore(false);
-  }, [newCurrentScore]);
+  // useEffect(()=>{
+  //     inputRef.current?.focus();
+  // }, [newCurrentScore])
 
   useEffect(() => {
     localStorage.setItem("players", JSON.stringify(players));
@@ -61,13 +63,12 @@ const Game = () => {
 
   const handleInputChange = async (e) => {
     if (e.target.value === "") {
-        setNewCurrentScore('');
-        setIsDisabled(true);
-        SetIsNotValidScore(false);
-      } else {
-   
-    const score = parseInt(e.target.value, 10);
-    if (isNaN(score) || score < 0 || score > 60) {
+      setNewCurrentScore("");
+      setIsDisabled(true);
+      SetIsNotValidScore(false);
+    } else {
+      const score = parseInt(e.target.value, 10);
+      if (isNaN(score) || score < 0 || score > 60) {
         setNewCurrentScore(e.target.value);
         setIsDisabled(true);
         SetIsNotValidScore(true);
@@ -84,7 +85,11 @@ const Game = () => {
 
     const updatedPlayers = [...players];
     const player = updatedPlayers[playerIndex];
-
+    // Check that player is defined
+    if (!player) {
+      console.error("Player is undefined");
+      return;
+    }
     const potentialNewScore = player.score + newCurrentScore;
     for (let i = 0; i < updatedPlayers.length; i++) {
       if (i !== playerIndex && updatedPlayers[i].score === potentialNewScore) {
@@ -96,22 +101,28 @@ const Game = () => {
     player.score = potentialNewScore;
 
     if (player.score === 321) {
-        setIsWinner({ player: players[currentPlayer - 1].id, defined: true });
+      setIsWinner({ player: players[currentPlayer - 1].id, defined: true });
       // Réinitialiser le jeu ou faire autre chose ici
     } else if (player.score > 321) {
       const newScore = 321 - (potentialNewScore - 321);
       player.score = newScore;
       setCurrentDart(3);
     } else {
-      setCurrentDart(currentDart + 1);
+      handleNextDart(currentDart);
+      //   setCurrentDart(currentDart + 1);
     }
 
     setPlayers(updatedPlayers);
-    setNewCurrentScore('')
+    setNewCurrentScore("");
     setIsDisabled(true);
-
   };
-
+  const handleNextDart = (currentDart) => {
+    if (currentDart >= 3) {
+      setCurrentDart(0);
+    } else {
+      setCurrentDart(currentDart + 1);
+    }
+  };
   const handleNextPlayer = async () => {
     if (currentPlayer === players.length) {
       setCurrentDart(0);

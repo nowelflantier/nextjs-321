@@ -25,8 +25,12 @@ const PlayerStats = ({
       <h2 className="score">{player.score || 0}</h2>
       <h3 className="code">Darts: {player.darts ? player.darts.length : 0}</h3>
       <p className="code">
-        Average: {player.score ? player.score / player.darts.length : 0}
+        Average:{" "}
+        {player.darts && player.darts.length > 0
+          ? player.score / player.darts.length
+          : 0}
       </p>
+
       <div className="player-list ">
         <h4>Écarts avec les autres joueurs</h4>
 
@@ -38,8 +42,8 @@ const PlayerStats = ({
                 <h2>
                   {p.id}. {p.name}
                 </h2>
-                {p.score - player.score > 0 ? (
-                  <p>{p.score - player.score}</p>
+                {parseInt(p.score, 10) - (player.score || 0) >= 0 ? (
+                  <p>{parseInt(p.score, 10) - (player.score || 0)}</p>
                 ) : (
                   <p>-</p>
                 )}
@@ -47,16 +51,11 @@ const PlayerStats = ({
             ))}
         </div>
         <div className="grid">
-          
-              <div className="card">
-                <h2>
-                  Reste pour gagner :
-                </h2>
-                
-                  <p>{321 - player.score}</p>
-                
-              </div>
-            
+          <div className="card">
+            <h2>Reste pour gagner :</h2>
+
+            <p>{321 - player.score || 0}</p>
+          </div>
         </div>
       </div>
       <ScoreInput
