@@ -8,9 +8,10 @@ const ScoreInput = ({
   currentDart,
   handleNextPlayer,
   isDisabled,
+  isTurnOver,
 }) => {
 
-  return currentDart < 3 ? (
+  return (!isTurnOver && currentDart < 3) ? (
     <div className="addScore">
       <input
         type="number"

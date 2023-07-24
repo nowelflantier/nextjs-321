@@ -46,7 +46,7 @@ const PlayerEdit = () => {
       } else {
         localStorage.setItem("currentDart",0);
         localStorage.setItem("currentPlayer",1);
-        router.push(`/321/game`);
+        router.push(`/321/game-2`);
       }
   };
 

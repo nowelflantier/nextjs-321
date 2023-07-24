@@ -11,6 +11,7 @@ const PlayerStats = ({
   isNotValidScore,
   handleNextPlayer,
   isDisabled,
+  isTurnOver,
 }) => {
   const player = players[currentPlayer - 1] || {};
   return (
@@ -26,6 +27,7 @@ const PlayerStats = ({
         Average: {player.score ? player.score / player.darts.length : 0}
       </p>
       <ScoreInput
+        isTurnOver={isTurnOver}
         newCurrentScore={newCurrentScore}
         handleInputChange={handleInputChange}
         handleNewScore={handleNewScore}

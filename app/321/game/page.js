@@ -25,6 +25,8 @@ const Game = () => {
   // const [currentPlayerScore, setCurrentPlayerScore] = useState(
   //   players[currentPlayer - 1]?.score * 1
   // );
+  const [isTurnOver, setIsTurnOver] = useState(false);
+  const [isScoreTooHigh, setIsScoreTooHigh] = useState(false);
   const [currentDart, setCurrentDart] = useState(0);
   const inputRef = useRef();
   const playerIndex = currentPlayer - 1;
@@ -48,10 +50,8 @@ const Game = () => {
 
   useEffect(() => {
     const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
-    const storedPlayer = storedPlayers.find(
-      (player) => player.id === currentPlayer
-    );
     setPlayers(storedPlayers);
+    console.log(currentDart);
   }, [currentDart]);
 
   useEffect(() => {
@@ -83,11 +83,12 @@ const Game = () => {
         score: potentialScore,
       };
       console.log(`${potentialScore} too high`);
-      setCurrentDart(3); // Set currentDart to 3
+      setIsScoreTooHigh(true);
+      // setCurrentDart(3); // Set currentDart to 3
       localStorage.setItem("currentDart", 3); // Update currentDart in localStorage
-          // handleNextPlayer(); // Pass to the next player
-          handleNextDart();
-
+      // handleNextPlayer(); // Pass to the next player
+      // handleNextDart();
+      setIsTurnOver(true);
     } else {
       darts[currentDart] = { id: currentDart, score: newCurrentScore };
       const updatedPlayer = {
@@ -95,8 +96,11 @@ const Game = () => {
         score: potentialScore,
       };
       console.log(`${potentialScore} is good`);
+      setIsTurnOver(false);
+      setIsScoreTooHigh(false);
     }
-// Check if potential score matches that of another player
+
+    // Check if potential score matches that of another player
     players.forEach((player, index) => {
       if (index !== playerIndex && player.score === potentialScore) {
         // Reset the score of the other player to 0
@@ -123,7 +127,7 @@ const Game = () => {
     handleNextDart();
     setNewCurrentScore("");
 
-    return newCurrentScore;
+    // return newCurrentScore;
   };
   const handleInputChange = (event) => {
     setIsDisbled(false);
@@ -163,13 +167,25 @@ const Game = () => {
       : handleCurrentPlayer();
   };
   const handleNextDart = () => {
-    if (currentDart < 3) {
-      // Store the current player and dart in localStorage
+    if (isScoreTooHigh) {
       localStorage.setItem("currentPlayer", currentPlayer);
       localStorage.setItem("currentDart", currentDart + 1);
       setCurrentDart(currentDart + 1);
+      setIsTurnOver(false);
     } else {
-      handleNextPlayer();
+      if (currentDart === 3) {
+        localStorage.setItem("currentPlayer", currentPlayer);
+        localStorage.setItem("currentDart", 0);
+        setCurrentDart(0);
+      } else if (currentDart < 3) {
+        // Store the current player and dart in localStorage
+        localStorage.setItem("currentPlayer", currentPlayer);
+        localStorage.setItem("currentDart", currentDart + 1);
+        setCurrentDart(currentDart + 1);
+        setIsTurnOver(false);
+      } else {
+        setIsTurnOver(true);
+      }
     }
   };
 
@@ -194,6 +210,7 @@ const Game = () => {
         players={players}
         handleInputChange={handleInputChange}
         handleNewScore={handleNewScore}
+        isTurnOver={isTurnOver}
         isNotValidScore={isNotValidScore}
         handleNextPlayer={handleNextPlayer}
         isDisabled={isDisabled}
