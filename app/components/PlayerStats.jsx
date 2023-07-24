@@ -62,8 +62,10 @@ const PlayerStats = ({
               <div
                 key={p.id}
                 className="card dashboard"
+                
                 style={{
                   backgroundColor: getBackgroundColor(p.score - player.score),
+                  // '--player-length': `{100 / (${players.length} - 1)}%` 
                 }}
               >
                 <h2>
