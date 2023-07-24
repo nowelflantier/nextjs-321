@@ -1,5 +1,6 @@
 import React from "react";
 import ScoreInput from "./ScoreInput";
+import styles from "../styles.scss";
 
 const PlayerStats = ({
   currentPlayer,
@@ -26,6 +27,38 @@ const PlayerStats = ({
       <p className="code">
         Average: {player.score ? player.score / player.darts.length : 0}
       </p>
+      <div className="player-list ">
+        <h4>Écarts avec les autres joueurs</h4>
+
+        <div className="grid">
+          {players
+            .filter((p) => p.id !== player.id)
+            .map((p) => (
+              <div key={p.id} className="card">
+                <h2>
+                  {p.id}. {p.name}
+                </h2>
+                {p.score - player.score > 0 ? (
+                  <p>{p.score - player.score}</p>
+                ) : (
+                  <p>-</p>
+                )}
+              </div>
+            ))}
+        </div>
+        <div className="grid">
+          
+              <div className="card">
+                <h2>
+                  Reste pour gagner :
+                </h2>
+                
+                  <p>{321 - player.score}</p>
+                
+              </div>
+            
+        </div>
+      </div>
       <ScoreInput
         isTurnOver={isTurnOver}
         newCurrentScore={newCurrentScore}

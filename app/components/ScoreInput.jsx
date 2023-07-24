@@ -22,7 +22,7 @@ const ScoreInput = ({
         className="select"
         inputMode="numeric"
       />
-      {isNotValidScore && (
+      {isNotValidScore && isDisabled && (
         <p className="error">Entrez un nombre entre 0 et 60</p>
       )}
       {isDisabled ? (

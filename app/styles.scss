@@ -209,7 +209,10 @@
     justify-content: space-around;
     width: 80vw;
   }
-  
+  .active .grid {
+    
+    width: 100%;
+  }
   .card {
     display: flex;
     flex-direction: column;
@@ -255,7 +258,12 @@
   //   margin: 1rem;
   // }
   
-  
+  .player-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin:auto;
+  }
   .card span {
     display: inline-block;
     transition: transform 200ms;
@@ -352,7 +360,7 @@
     .card h2 {
       margin-bottom: 0.5rem;
     }
-  
+ 
     // .center {
     //   padding: 8rem 0 6rem;
     // }

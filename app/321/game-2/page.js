@@ -60,17 +60,22 @@ const Game = () => {
   }, [players]);
 
   const handleInputChange = async (e) => {
-    setIsDisabled(false);
-    SetIsNotValidScore(true);
-    const score = parseInt(e.target.value, 10);
-    if (score === null ){
+    if (e.target.value === "") {
+        setNewCurrentScore('');
+        setIsDisabled(true);
         SetIsNotValidScore(false);
-    }else if (isNaN(score) || score < 0 || score > 60) {
-    SetIsNotValidScore(true);
-    } else {
-    setNewCurrentScore(score);
-    SetIsNotValidScore(false);
-
+      } else {
+   
+    const score = parseInt(e.target.value, 10);
+    if (isNaN(score) || score < 0 || score > 60) {
+        setNewCurrentScore(e.target.value);
+        setIsDisabled(true);
+        SetIsNotValidScore(true);
+      } else {
+        setNewCurrentScore(score);
+        setIsDisabled(false);
+        SetIsNotValidScore(false);
+      }
     }
   };
 
