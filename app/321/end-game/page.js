@@ -79,7 +79,7 @@ const EndGame = () => {
           <br />
         </p> */}
         <Link href="/" className="bottom btn">
-          <p>Retour à l'accueil</p>
+          <p>Retour à l&#39;accueil</p>
         </Link>
         <Link href="/321/select-players?new_game=true" className="bottom btn">
           <p>Nouvelle partie</p>
