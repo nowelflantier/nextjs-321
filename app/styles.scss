@@ -216,7 +216,7 @@
   .card {
     display: flex;
     flex-direction: column;
-    flex: 0 0 calc(33% - 2em);
+    flex: 0 0 calc(33% - 10vw);
 
     margin: 1rem auto;
     // min-width: rem;
@@ -227,6 +227,11 @@
     transition: background 200ms, border 200ms;
     text-align: center;
     
+  }
+  .dashboard {
+    // border: 1px solid rgba(var(--card-border-rgb), 100%);
+    flex: 0 0 calc(60% - 10vw);
+
   }
   .error {
     border: 1px solid red;
@@ -346,7 +351,7 @@
     .grid {
       flex-direction: column;
       // margin-bottom: 120px;
-      max-width: 320px;
+      // max-width: 320px;
       text-align: center;
     }
   

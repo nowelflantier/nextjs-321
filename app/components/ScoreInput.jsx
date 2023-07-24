@@ -34,14 +34,14 @@ const ScoreInput = ({
           onClick={handleNewScore}
           display={!isNotValidScore ? "true" : undefined}
         >
-          AddScore - {newCurrentScore}
+          Ajouter le score - {newCurrentScore}
         </button>
       )}
     </div>
   ) : (
     <div className="addScore">
       <button className="btn bottom" onClick={handleNextPlayer}>
-        NextPlayer
+        Joueur suivant
       </button>
     </div>
   );
