@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import styles from "../../styles.scss";
-
+console.log('test')
 const Game = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
@@ -37,12 +37,14 @@ const Game = () => {
     if (localStorage.getItem("currentPlayer") !== null) {
       setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer"), 10));
     }
+    console.log('test')
     setIsLoading(false);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("currentDart", currentDart.toString());
     localStorage.setItem("currentPlayer", currentPlayer.toString());
+    console.log('test')
   }, [currentDart]);
 
   useEffect(() => {
@@ -55,12 +57,14 @@ const Game = () => {
       console.log(isWinner);
       router.push(`/321/end-game`);
     }
+    console.log('test')
   }, [isWinner]);
 
 
 
   useEffect(() => {
     localStorage.setItem("players", JSON.stringify(players));
+    console.log('test')
   }, [players]);
 
   const handleInputChange = async (e) => {

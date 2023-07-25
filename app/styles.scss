@@ -113,6 +113,7 @@
     align-items: center;
     padding: 6rem;
     min-height: 100vh;
+    overflow:hidden
   }
   
   .description {
@@ -224,7 +225,7 @@
     border-radius: var(--border-radius);
     background: rgba(var(--card-rgb), 10);
     border: 1px solid rgba(var(--card-border-rgb), 0);
-    transition: background 200ms, border 200ms;
+    // transition: background 200ms, border 200ms;
     text-align: center;
 
   }
@@ -270,7 +271,7 @@
   }
   .card span {
     display: inline-block;
-    transition: transform 200ms;
+    // transition: transform 200ms;
   }
   
   .card h2 {

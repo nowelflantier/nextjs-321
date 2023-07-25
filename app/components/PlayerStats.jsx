@@ -13,6 +13,10 @@ const PlayerStats = ({
   isDisabled,
   isTurnOver,
 }) => {
+  if (!players || players.length === 0) {
+    // Change this to your desired loading state
+    return <div>Chargement...</div>;
+  }
   const player = players[currentPlayer - 1] || {};
   function getBackgroundColor(diff) {
     // Si la différence est nulle, la couleur sera rouge.
