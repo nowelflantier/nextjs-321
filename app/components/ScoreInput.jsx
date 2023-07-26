@@ -12,20 +12,22 @@ const ScoreInput = ({
   const handleSubmit = (e) => {
     e.preventDefault(); // This is important to prevent form's default submission behaviour
     if (!isDisabled) {
+      if (e.key === 'Enter') {
       handleNewScore();
+      }
     }
   };
   return (!isTurnOver && currentDart < 3) ? (
     <form onSubmit={handleSubmit} className="addScore">
      
       <input
-        type="numeric"
+        type="text"
         placeholder="0"
         onChange={handleInputChange}
         onKeyDown={handleInputChange}
         value={newCurrentScore}
         className="select"
-        // inputMode="numeric"
+        inputMode="numeric"
       />
       {isNotValidScore && isDisabled && (
         <p className="error">Entrez un nombre entre 0 et 60</p>
