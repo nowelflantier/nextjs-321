@@ -19,13 +19,13 @@ const ScoreInput = ({
     <form onSubmit={handleSubmit} className="addScore">
      
       <input
-        type="text"
+        type="numeric"
         placeholder="0"
         onChange={handleInputChange}
         onKeyDown={handleInputChange}
         value={newCurrentScore}
         className="select"
-        inputMode="numeric"
+        // inputMode="numeric"
       />
       {isNotValidScore && isDisabled && (
         <p className="error">Entrez un nombre entre 0 et 60</p>
