@@ -68,9 +68,10 @@ const PlayerStats = ({
       </div>
 
       <div className="player-list ">
-        {/* <h4>Écarts avec les autres joueurs</h4> */}
+        
+        
         <div className="grid">
-          <h3>Joueur(s) à portée :</h3>
+          
           {players
             .filter((p) => p.id !== player.id && p.score > player.score)
             .map((p) => {

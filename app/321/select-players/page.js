@@ -8,7 +8,9 @@ const GameStart = () => {
   return (
     <main className="main">
       <div className="description">
-        <p>Jeu en cours de développement</p>
+        <p>
+        321 Zap - Darts scorer - v1.0
+        </p>
         <div>powered by le S.</div>
       </div>
       <Image

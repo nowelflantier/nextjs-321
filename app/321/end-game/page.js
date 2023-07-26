@@ -52,7 +52,7 @@ const EndGame = () => {
   return (
     <main className="main">
       <div className="description">
-        <p>321 Shangai - Darts scorer - v1.0</p>
+        <p>321 Zap - Darts scorer - v1.0</p>
         <div>powered by le S.</div>
       </div>
       <Image
@@ -66,7 +66,9 @@ const EndGame = () => {
       <div className="center container">
         <div className="active">
           <p className="code">fin de partie</p>
-          <h1>bravo cependant : {winner.name}</h1>
+          <h2>🎯</h2>
+          <h1>bravo {winner.name}</h1>
+          <h2>🥇</h2>
           <div className="grid">
             <div className="card dashboard">
               <h2>Fléchettes lancées</h2>
@@ -79,7 +81,7 @@ const EndGame = () => {
           </div>
         </div>
       </div>
-
+      <PlayerList players={players} currentPlayer={winner.id} />
       <div className="center container">
         {/* <p className="code">
           work in progress

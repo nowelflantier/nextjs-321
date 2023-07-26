@@ -7,6 +7,8 @@ const PlayerList = ({ players, currentPlayer }) => {
         <div className="card" key={`${player.id}${player.name}`}>
           <h2>{player.id}. {player.name}</h2>
           <p>Score : {player.score}</p>
+          <p>Darts : {player.darts.length}</p>
+          <p>Score : {(player.score/player.darts.length).toFixed(2)}</p>
         </div>
       ))}
     </div>

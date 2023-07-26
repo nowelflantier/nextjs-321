@@ -18,7 +18,7 @@ export default function Home() {
     <main className="main">
       <div className="description">
         <p>
-        321 Shangai - Darts scorer - v1.0
+        321 Zap - Darts scorer - v1.0
         </p>
         <div>
          powered by le S.

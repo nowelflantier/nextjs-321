@@ -9,8 +9,14 @@ const ScoreInput = ({
   isDisabled,
   isTurnOver,
 }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault(); // This is important to prevent form's default submission behaviour
+    if (!isDisabled) {
+      handleNewScore();
+    }
+  };
   return (!isTurnOver && currentDart < 3) ? (
-    <div className="addScore">
+    <form onSubmit={handleSubmit} className="addScore">
      
       <input
         type="number"
@@ -30,6 +36,7 @@ const ScoreInput = ({
         <button
           className="btn bottom"
           value={newCurrentScore}
+          type="submit" // This is important for the enter key to trigger this button's action
           onClick={handleNewScore}
           display={!isNotValidScore ? "true" : undefined}
         >
@@ -37,7 +44,7 @@ const ScoreInput = ({
         </button>
       )}
       
-    </div>
+      </form>
   ) : (
     <div className="addScore">
       <button className="btn bottom" onClick={handleNextPlayer}>
