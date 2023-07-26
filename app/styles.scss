@@ -234,6 +234,13 @@
     flex: 0 0 calc(60% - 10vw);
 
   }
+
+  .loading {
+    margin: 20px;
+    padding: 10px;
+    width: 150px;
+
+  }
   .error {
     border: 1px solid red;
     padding: 1rem 1.2rem;

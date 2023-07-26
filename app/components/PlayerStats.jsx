@@ -15,7 +15,16 @@ const PlayerStats = ({
 }) => {
   if (!players || players.length === 0) {
     // Change this to your desired loading state
-    return <div>Chargement...</div>;
+    return (
+      <div className="active">
+        <h1 className="code">Chargement...</h1>
+        <img
+          className="loading"
+          src="https://i.gifer.com/bfR.gif"
+          alt=""
+        />
+      </div>
+    );
   }
   const player = players[currentPlayer - 1] || {};
   function getBackgroundColor(diff) {
@@ -24,10 +33,10 @@ const PlayerStats = ({
     // Pour toutes les autres valeurs, la couleur sera un mélange de rouge et de vert.
     if (diff > 0) {
       const greenAmount = Math.round((diff / 500) * 255);
-      console.log(greenAmount)
+      console.log(greenAmount);
       const redAmount = 255 - greenAmount;
-      console.log(redAmount)
-      const transparency = 100
+      console.log(redAmount);
+      const transparency = 100;
       // return `rgb(0, ${greenAmount}, 0, 30%)`;
       // return `rgb(${redAmount}, ${greenAmount}, 0, 30%)`;
       return `rgb(${redAmount}, 0, 0, ${100 - greenAmount}%)`;
@@ -41,47 +50,52 @@ const PlayerStats = ({
       </p>
       <h1>{player.name}</h1>
       <h2 className="score">{player.score || 0}</h2>
-      <h3 className="code">Fléchettes lancées : {player.darts ? player.darts.length : 0}</h3>
+      <h3 className="code">
+        Fléchettes lancées : {player.darts ? player.darts.length : 0}
+      </h3>
       <p className="code">
-      Moyenne / fléchette :{" "}
-  {player.darts && player.darts.length > 0
-    ? (player.score / player.darts.length).toFixed(2)
-    : 0}
+        Moyenne / fléchette :{" "}
+        {player.darts && player.darts.length > 0
+          ? (player.score / player.darts.length).toFixed(2)
+          : 0}
       </p>
       <div className="grid">
-          <div className="card dashboard">
-            <h2>Reste pour gagner :</h2>
+        <div className="card dashboard">
+          <h2>Reste pour gagner :</h2>
 
-            <p>{321 - player.score || 0}</p>
-          </div>
+          <p>{321 - player.score || 0}</p>
         </div>
-      
+      </div>
+
       <div className="player-list ">
         {/* <h4>Écarts avec les autres joueurs</h4> */}
         <div className="grid">
-        {players
-          .filter((p) => p.id !== player.id && p.score > player.score)
-          .map((p) => {
-            return (
-              <div
-                key={p.id}
-                className="card dashboard"
-                style={{
-                  backgroundColor: getBackgroundColor(p.score - player.score),
-                }}
-              >
-                <h2>
-                  {p.id}. {p.name}
-                </h2>
-                {parseInt(p.score, 10) - (player.score || 0) >= 0 ? (
-                  <p>{parseInt(p.score, 10) - (player.score || 0)} pour reset {p.name}</p>
-                ) : (
-                  <p>-</p>
-                )}
-              </div>
-            );
-          })}
-          </div>
+          {players
+            .filter((p) => p.id !== player.id && p.score > player.score)
+            .map((p) => {
+              return (
+                <div
+                  key={p.id}
+                  className="card dashboard"
+                  style={{
+                    backgroundColor: getBackgroundColor(p.score - player.score),
+                  }}
+                >
+                  <h2>
+                    {p.id}. {p.name}
+                  </h2>
+                  {parseInt(p.score, 10) - (player.score || 0) >= 0 ? (
+                    <p>
+                      {parseInt(p.score, 10) - (player.score || 0)} pour reset{" "}
+                      {p.name}
+                    </p>
+                  ) : (
+                    <p>-</p>
+                  )}
+                </div>
+              );
+            })}
+        </div>
 
         {/* <div className="grid">
           {players
@@ -98,7 +112,6 @@ const PlayerStats = ({
                 )}
               </div>
             ))} </div> */}
-
       </div>
       <ScoreInput
         isTurnOver={isTurnOver}
