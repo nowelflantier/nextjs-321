@@ -11,7 +11,7 @@ const ScoreInput = ({
 }) => {
   return (!isTurnOver && currentDart < 3) ? (
     <div className="addScore">
-      <form>
+     
       <input
         type="number"
         placeholder="0"
@@ -36,7 +36,7 @@ const ScoreInput = ({
            Ajouter le score - {newCurrentScore}
         </button>
       )}
-      </form>
+      
     </div>
   ) : (
     <div className="addScore">

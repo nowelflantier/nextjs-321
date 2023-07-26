@@ -27,7 +27,9 @@ const PlayerEdit = () => {
     setPlayerName(e.target.value);
   };
 
-  const handleNext = () => {
+  const handleNext = (event) => {
+    event.preventDefault();
+
     const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
     const playerIndex = storedPlayers.findIndex((player) => player.id === currentPlayer);
     const playerData = { id: currentPlayer, name: playerName, score: 0, currentPlayerScore: 0, darts: [] };
@@ -67,8 +69,10 @@ const PlayerEdit = () => {
       <div className="center container">
         
         <h1 className="code">Player {currentPlayer}</h1>
+        <form onSubmit={handleNext}>
         <input type="text" value={playerName} className="select" onChange={handleNameChange} />
         <button className='btn bottom' onClick={handleNext}><p>Suivant</p></button>
+        </form>
       </div>
       <div className="center container">
         {/* <p className="code">

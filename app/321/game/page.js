@@ -117,8 +117,10 @@ const Game = () => {
   useEffect(() => {
     if (isWinner.defined) {
       // Logic for when a player wins
-      const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
-      const playerJSON = JSON.stringify(storedPlayers[playerIndex]);
+      // const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
+      const player = players[playerIndex];  // player is a JS object now
+      player.dartsLength = player.darts.length;   // Add darts.length to player
+      const playerJSON = JSON.stringify(player);
       localStorage.setItem("winner", playerJSON);
       console.log(`Player ${isWinner.player} is the winner!`);
       console.log(isWinner);
@@ -133,7 +135,9 @@ const Game = () => {
   return (
     <main className="main">
       <div className="description">
-        <p>Jeu en cours de développement</p>
+        <p>
+        321 Shangai - Darts scorer - v1.0
+        </p>
         <div>powered by le S.</div>
       </div>
       <Image

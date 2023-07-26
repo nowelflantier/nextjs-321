@@ -7,7 +7,6 @@ import React, { useRef, useState, useEffect } from "react";
 import PlayerStats from "@/app/components/PlayerStats";
 import PlayerList from "@/app/components/PlayerList";
 
-
 const EndGame = () => {
   const [darts, setDarts] = useState([]);
   // const [newCurrentScore, setNewCurrentScore] = useState("");
@@ -48,30 +47,38 @@ const EndGame = () => {
       console.log(isWinner);
     }
   }, [isWinner]);
-
   
 
   return (
     <main className="main">
       <div className="description">
-        <p>Jeu en cours de développement</p>
+        <p>321 Shangai - Darts scorer - v1.0</p>
         <div>powered by le S.</div>
       </div>
       <Image
         className="logo"
-        src="/dart-aim.svg"
+        src="/trophy.png"
         alt="Next.js Logo"
         width={180}
-        height={87}
+        height={180}
         priority
       />
       <div className="center container">
-      <p className="code">
-        page de fin de partie - wip
-        <em><br/>bravo cependant {winner.name}</em>
-      </p>
+        <div className="active">
+          <p className="code">fin de partie</p>
+          <h1>bravo cependant : {winner.name}</h1>
+          <div className="grid">
+            <div className="card dashboard">
+              <h2>Fléchettes lancées</h2>
+              <p>{winner.dartsLength}</p>
+            </div>
+            <div className="card dashboard">
+              <h2>Moyenne globale</h2>
+              <p>{(321 / winner.dartsLength).toFixed(2)}</p>
+            </div>
+          </div>
+        </div>
       </div>
-     
 
       <div className="center container">
         {/* <p className="code">
@@ -90,3 +97,57 @@ const EndGame = () => {
 };
 
 export default EndGame;
+
+// "use client";
+
+// import React, { useEffect, useState } from "react";
+// import Image from "next/image";
+// import { useRouter } from "next/navigation";
+// import Link from "next/link";
+// import styles from "../../styles.scss";
+
+// const EndGame = () => {
+//   const router = useRouter();
+//   const [winner, setWinner] = useState(null);
+
+//   useEffect(() => {
+//     const winnerData = localStorage.getItem("winner");
+//     if (winnerData) {
+//       setWinner(JSON.parse(winnerData));
+//     } else {
+//       // Rediriger vers la page d'accueil si aucun gagnant n'est trouvé
+//       router.push(`/`);
+//     }
+//   }, []);
+
+//   if (!winner) {
+//     return null;  // Ou un écran de chargement
+//   }
+
+//   return (
+//     <main className="main">
+//       <div className="description">
+//         <p>Félicitations {winner.name} !</p>
+//         <p>Score final : {winner.score}</p>
+//         <p>Nombre de fléchettes : {winner.darts.length}</p>
+//       </div>
+
+//       <Image
+//         className="logo"
+//         src="/trophy.png"  // Mettez ici l'URL de votre image de trophée
+//         alt="Trophée du gagnant"
+//         width={180}
+//         height={180}
+//         priority
+//       />
+
+//       <div className="center container">
+//         <Link href="/" className="bottom btn">
+//           <p>Jouer à nouveau</p>
+//         </Link>
+//       </div>
+//     </main>
+//   );
+// };
+
+// export default EndGame;
