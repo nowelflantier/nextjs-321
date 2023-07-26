@@ -19,7 +19,7 @@ const ScoreInput = ({
     <form onSubmit={handleSubmit} className="addScore">
      
       <input
-        type="number"
+        type="text"
         placeholder="0"
         onChange={handleInputChange}
         onKeyDown={handleInputChange}
