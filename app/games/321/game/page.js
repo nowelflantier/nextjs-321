@@ -5,6 +5,7 @@ import CurrentPlayerDashboard from "@/app/components/CurrentPlayerDashboard";
 import PlayerList from "@/app/components/PlayerList";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
+import PlayerContext from "@/app/components/PlayerContext";
 import { useRouter } from "next/navigation";
 
 const Game = () => {
@@ -21,7 +22,8 @@ const Game = () => {
 
   useEffect(() => {
     const localData = localStorage.getItem("players");
-    if (localData) {
+    console.log(localData);
+    if (localData !== null) {
       setPlayers(JSON.parse(localData));
     }
     if (localStorage.getItem("winner") !== null) {
@@ -128,33 +130,36 @@ const Game = () => {
   }, [isWinner]);
 
   useEffect(() => {
-    localStorage.setItem("players", JSON.stringify(players));
+    if (players.length > 0) {
+      localStorage.setItem("players", JSON.stringify(players));
+    }
   }, [players]);
 
   return (
-    <main className="main">
-      <Header
-        title="let's play darts !"
-        description="321 Zap - Darts scorer - v1.0"
-        src="/dart-aim.svg"
-        alt="Next.js Logo"
-        width={180}
-        height={87}
-      />
-      <CurrentPlayerDashboard
-        currentPlayer={currentPlayer}
-        players={players}
-        currentDart={currentDart}
-        newCurrentScore={newCurrentScore}
-        handleInputChange={handleInputChange}
-        handleNewScore={handleNewScore}
-        isNotValidScore={isNotValidScore}
-        handleNextPlayer={handleNextPlayer}
-        isDisabled={isDisabled}
-      />
-      <PlayerList players={players} currentPlayer={currentPlayer} />
+    <PlayerContext.Provider value={{ players, setPlayers }}>
+      <main className="main">
+        <Header
+          title="let's play darts !"
+          description="321 Zap - Darts scorer - v1.0"
+          src="/dart-aim.svg"
+          alt="Next.js Logo"
+          width={180}
+          height={87}
+        />
+        <CurrentPlayerDashboard
+          currentPlayer={currentPlayer}
+          players={players}
+          currentDart={currentDart}
+          newCurrentScore={newCurrentScore}
+          handleInputChange={handleInputChange}
+          handleNewScore={handleNewScore}
+          isNotValidScore={isNotValidScore}
+          handleNextPlayer={handleNextPlayer}
+          isDisabled={isDisabled}
+        />
+        <PlayerList players={players} currentPlayer={currentPlayer} />
 
-      <Footer
+        <Footer
           buttons={[
             {
               text: "Retour à l'accueil",
@@ -162,7 +167,8 @@ const Game = () => {
             },
           ]}
         />
-    </main>
+      </main>
+    </PlayerContext.Provider>
   );
 };
 export default Game;

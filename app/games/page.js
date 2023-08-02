@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "../styles.scss";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
+import CardDisplay from "@/app/components/CardDisplay";
 import React, { useState, useEffect } from "react";
 
 export default function Home() {
@@ -17,10 +18,17 @@ export default function Home() {
     <main className="main">
       <Header
         title="let's play !"
-        src="/dart-aim.svg"
-        alt="Next.js Logo"
+        src="/score-board.png"
+        alt="Home Logo"
         width={180}
         height={87}
+      />
+      <CardDisplay 
+       title="let's play !"
+       src="/score-board.png"
+       alt="Home Logo"
+       width={180}
+       height={87}
       />
       {!isCookiesStored ? (
         <Footer

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const Header = ({ src, title, width, height, description }) => {
+const Header = ({ src, title, width, height, description, alt }) => {
     // const title = title;
 
   return (
@@ -19,7 +19,7 @@ const Header = ({ src, title, width, height, description }) => {
         <Image
           className="logo"
           src={src}
-          alt="Next.js Logo"
+          alt={alt}
           width={width}
           height={height}
           priority

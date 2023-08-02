@@ -229,6 +229,9 @@
     text-align: center;
 
   }
+  .card.games {
+    flex-basis: calc(53% - 10vw);
+  }
   .dashboard {
     // border: 1px solid rgba(var(--card-border-rgb), 100%);
     flex: 0 0 calc(60% - 10vw);

@@ -13,10 +13,14 @@ const NamePlayers = () => {
   const numPlayers = searchParams.get("selected_players");
 
   useEffect(() => {
-    const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
-    const storedPlayer = storedPlayers.find(
-      (player) => player.id === currentPlayer
-    );
+    // const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
+
+    const storedPlayers = JSON.parse(localStorage.getItem("players"));
+    
+      const storedPlayer = storedPlayers?.find(
+        (player) => player.id === currentPlayer
+      );
+    
     console.log(storedPlayers);
     if (storedPlayer) {
       setPlayerName(storedPlayer.name);

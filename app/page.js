@@ -4,42 +4,52 @@ import Link from "next/link";
 import styles from "./styles.scss";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import DisplayGames from "./components/DisplayGames";
+
+
 import React, { useState, useEffect } from "react";
 
 export default function Home() {
+  const games = [{
+    id: 1,
+    name: "321",
+    path: "/games/321/select-players?new_game=true",
+    category: "darts",
+    icon: "/dart-aim.svg",
+  },
+  {
+    id: 2,
+    name: "Killer",
+    path: "/",
+    category: "dice",
+    icon: "/dice.png",
+  }]
   const [isCookiesStored, setIsCookieesStored] = useState(false);
+  const [selectedGame, setSelectedGame] = useState(null);
   useEffect(() => {
     if (localStorage.getItem("numPlayers") !== null) {
       setIsCookieesStored(true);
+    }
+    if (localStorage.getItem("selectedGame") !== null) {
+      setSelectedGame(localStorage.getItem('selectedGame'));
     }
   }, []);
   return (
     <main className="main">
       <Header
         title="let's play !"
-        description="321 Zap - Darts scorer - v1.0"
-        src="/dart-aim.svg"
-        alt="Next.js Logo"
-        width={180}
+        description="app.sergei.pl - Games scorer - v1.0"
+        src="/score-board.png"
+        alt="Home Logo"
+        width={87}
         height={87}
       />
-      {!isCookiesStored ? (
+      <DisplayGames games={games} />
+      
+      {isCookiesStored &&(
         <Footer
           buttons={[
-            {
-              text: "Nouvelle partie",
-              path: "/games/321/select-players?new_game=true",
-            },
-          ]}
-        />
-      ) : (
-        <Footer
-          buttons={[
-            {
-              text: "Nouvelle partie de 321",
-              path: "/games/321/select-players?new_game=true&game=321",
-            },
-            { text: "Reprendre ma partie", path: "/games/321/game" },
+            { text: `Reprendre ma partie de ${selectedGame}`, path: "/games/321/game" },
           ]}
         />
       )}

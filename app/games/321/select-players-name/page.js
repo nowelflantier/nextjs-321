@@ -15,7 +15,7 @@ const SelectPlayersName = () => {
         title="let's play darts !"
         description="321 Zap - Darts scorer - v1.0"
         src="/dart-aim.svg"
-        alt="Next.js Logo"
+        alt="Darts Logo"
         width={180}
         height={87}
       />
