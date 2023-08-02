@@ -6,7 +6,7 @@ import PlayerList from "@/app/components/PlayerList";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Header from "@/app/components/Header";
+import Header from "../../../components/Header";
 import Footer from "@/app/components/Footer";
 import styles from "../../../styles.scss";
 
