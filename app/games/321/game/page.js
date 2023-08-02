@@ -6,9 +6,8 @@ import PlayerList from "@/app/components/PlayerList";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Header from "../../../components/Header";
-import Footer from "../../../components/Footer";
-// import styles from "../../../styles.scss";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
 
 const Game = () => {
   const router = useRouter();

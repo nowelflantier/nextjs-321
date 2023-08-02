@@ -9,17 +9,10 @@ import PlayerList from "@/app/components/PlayerList";
 
 const EndGame = () => {
   const [darts, setDarts] = useState([]);
-  // const [newCurrentScore, setNewCurrentScore] = useState("");
   const [players, setPlayers] = useState([]);
-  // const [currentPlayer, setCurrentPlayer] = useState(1);
-  // const [isNotValidScore, SetIsNotValidScore] = useState(false);
-  // const [isDisabled, setIsDisbled] = useState(true);
   const [isWinner, setIsWinner] = useState({});
-  // const [currentPlayerScore, setCurrentPlayerScore] = useState(
-  //   players[currentPlayer - 1]?.score * 1
-  // );
+
   const [winner, setWinner] = useState({});
-  // const [currentDart, setCurrentDart] = useState(0);
   const inputRef = useRef();
   const playerIndex = parseInt(winner.id, 10);
   const currentUserScore = players[playerIndex]?.score;
