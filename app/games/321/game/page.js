@@ -5,7 +5,7 @@ import CurrentPlayerDashboard from "@/app/components/CurrentPlayerDashboard";
 import PlayerList from "@/app/components/PlayerList";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
-import PlayerContext from "@/app/components/PlayerContext";
+// import PlayerContext from "@/app/components/PlayerContext";
 import { useRouter } from "next/navigation";
 
 const Game = () => {
@@ -136,7 +136,7 @@ const Game = () => {
   }, [players]);
 
   return (
-    <PlayerContext.Provider value={{ players, setPlayers }}>
+    
       <main className="main">
         <Header
           title="let's play darts !"
@@ -168,7 +168,6 @@ const Game = () => {
           ]}
         />
       </main>
-    </PlayerContext.Provider>
   );
 };
 export default Game;

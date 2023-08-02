@@ -1,10 +1,10 @@
 "use client";
 
-import React, {useContext, useEffect, useState} from 'react';
-import PlayerContext from './PlayerContext';
+import React from 'react';
+
 
 const PlayerList = ({ players, currentPlayer }) => {
-  // const { players, setPlayers } = useContext(PlayerContext);
+  
 
   return (
     <div className="grid">
