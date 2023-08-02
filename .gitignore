@@ -8,6 +8,7 @@ firebaseConfig.js
 
 # testing
 /coverage
+/app/games/321/game-old
 
 # next.js
 /.next/

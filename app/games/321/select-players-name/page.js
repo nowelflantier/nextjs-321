@@ -8,7 +8,7 @@ import Footer from "@/app/components/Footer";
 import NamePlayers from "@/app/components/NamePlayers";
 // import { useRouter, useParams, useSearchParams } from "next/navigation";
 
-const PlayerEdit = () => {
+const SelectPlayersName = () => {
   return (
     <main className="main">
        <Header
@@ -32,4 +32,4 @@ const PlayerEdit = () => {
   );
 };
 
-export default PlayerEdit;
+export default SelectPlayersName;

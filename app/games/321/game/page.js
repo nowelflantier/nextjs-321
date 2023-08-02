@@ -126,7 +126,7 @@ const Game = () => {
       localStorage.setItem("winner", playerJSON);
       console.log(`Player ${isWinner.player} is the winner!`);
       console.log(isWinner);
-      router.push(`/321/end-game`);
+      router.push(`/games/321/end-game`);
     }
   }, [isWinner]);
 

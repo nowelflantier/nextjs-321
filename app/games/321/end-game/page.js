@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../../styles.scss";
+// import styles from "../../styles.scss";
 import React, { useRef, useState, useEffect } from "react";
 import PlayerStats from "@/app/components/CurrentPlayerDashboard";
 import PlayerList from "@/app/components/PlayerList";
