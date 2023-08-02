@@ -23,7 +23,7 @@ const SelectPlayersName = () => {
       <Footer
           buttons={[
             {
-              text: "Retour à laccueil",
+              text: "Retour à l'accueil",
               path: "/",
             },
           ]}

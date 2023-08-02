@@ -3,11 +3,9 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import CurrentPlayerDashboard from "@/app/components/CurrentPlayerDashboard";
 import PlayerList from "@/app/components/PlayerList";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
+import { useRouter } from "next/navigation";
 
 const Game = () => {
   const router = useRouter();
@@ -153,14 +151,13 @@ const Game = () => {
         isNotValidScore={isNotValidScore}
         handleNextPlayer={handleNextPlayer}
         isDisabled={isDisabled}
-        // isTurnOver={isTurnOver}
       />
       <PlayerList players={players} currentPlayer={currentPlayer} />
 
       <Footer
           buttons={[
             {
-              text: "Retour à laccueil",
+              text: "Retour à l'accueil",
               path: "/",
             },
           ]}

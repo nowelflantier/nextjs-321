@@ -5,89 +5,36 @@ import Link from "next/link";
 // import styles from "../../styles.scss";
 import React, { useRef, useState, useEffect } from "react";
 import PlayerStats from "@/app/components/CurrentPlayerDashboard";
-import PlayerList from "@/app/components/PlayerList";
+// import PlayerList from "@/app/components/PlayerList";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
+import EndGameWinner from "@/app/components/EndGameWinner";
 
 const EndGame = () => {
-  const [darts, setDarts] = useState([]);
-  const [players, setPlayers] = useState([]);
-  const [isWinner, setIsWinner] = useState({});
-
-  const [winner, setWinner] = useState({});
-  const inputRef = useRef();
-  const playerIndex = parseInt(winner.id, 10);
-  const currentUserScore = players[playerIndex]?.score;
-
-  useEffect(() => {
-    if (localStorage.getItem("gameId") === null) {
-      const gameId = 'game-' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
-      localStorage.setItem('gameId', gameId);
-    }
-    if (localStorage.getItem("currentPlayer") !== null) {
-      // setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer", 10)));
-      setWinner(JSON.parse(localStorage.getItem("winner")));
-      setDarts(JSON.parse(localStorage.getItem("dart")));
-      setPlayers(JSON.parse(localStorage.getItem("players")));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isWinner.defined) {
-      // Logic for when a player wins
-      const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
-      const playerJSON = JSON.stringify(storedPlayers[playerIndex]);
-      localStorage.setItem("winner", playerJSON);
-      // router.push(`/321/end-game`);
-      console.log(`Player ${isWinner.player} is the winner!`);
-      console.log(isWinner);
-    }
-  }, [isWinner]);
-  
-
   return (
     <main className="main">
-      <div className="description">
-        <p>321 Zap - Darts scorer - v1.0</p>
-        <div>powered by le S.</div>
-      </div>
-      <Image
-        className="logo"
+    <Header
+        title="let's play darts !"
+        description="321 Zap - Darts scorer - v1.0"
         src="/trophy.png"
-        alt="Next.js Logo"
+        alt="Victory Logo"
         width={180}
         height={180}
-        priority
       />
-      <div className="center container">
-        <div className="active">
-          <p className="code">fin de partie</p>
-          <h2>🎯</h2>
-          <h1>bravo {winner.name}</h1>
-          <h2>🥇</h2>
-          <div className="grid">
-            <div className="card dashboard">
-              <h2>Fléchettes lancées</h2>
-              <p>{winner.dartsLength}</p>
-            </div>
-            <div className="card dashboard">
-              <h2>Moyenne globale</h2>
-              <p>{(321 / winner.dartsLength).toFixed(2)}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <PlayerList players={players} currentPlayer={winner.id} />
-      <div className="center container">
-        {/* <p className="code">
-          work in progress
-          <br />
-        </p> */}
-        <Link href="/" className="bottom btn">
-          <p>Retour à l&#39;accueil</p>
-        </Link>
-        <Link href="/321/select-players?new_game=true" className="bottom btn">
-          <p>Nouvelle partie</p>
-        </Link>
-      </div>
+      <EndGameWinner />
+      <Footer
+          buttons={[
+            {
+              text: "Retour à l'accueil",
+              path: "/",
+            },
+            {
+              text: "Nouvelle partie de 321",
+              path: "/games/321/select-players?new_game=true"
+            }
+          ]}
+        />
+
     </main>
   );
 };

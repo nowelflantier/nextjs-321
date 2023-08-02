@@ -1,6 +1,7 @@
 import React from "react";
 import ScoreInput from "./ScoreInput";
 import styles from "../styles.scss";
+
 const CurrentPlayerDashboard = ({
   currentPlayer,
   players,
@@ -18,11 +19,7 @@ const CurrentPlayerDashboard = ({
     return (
       <div className="active">
         <h1 className="code">Chargement...</h1>
-        <img
-          className="loading"
-          src="https://i.gifer.com/bfR.gif"
-          alt=""
-        />
+        <img className="loading" src="https://i.gifer.com/bfR.gif" alt="" />
       </div>
     );
   }
@@ -68,10 +65,7 @@ const CurrentPlayerDashboard = ({
       </div>
 
       <div className="player-list ">
-        
-        
         <div className="grid">
-          
           {players
             .filter((p) => p.id !== player.id && p.score > player.score)
             .map((p) => {
