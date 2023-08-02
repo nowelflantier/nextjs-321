@@ -23,7 +23,7 @@ const PlayerEdit = () => {
       <Footer
           buttons={[
             {
-              text: "Retour à l'accueil",
+              text: "Retour à laccueil",
               path: "/",
             },
           ]}

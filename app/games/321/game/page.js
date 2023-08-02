@@ -7,8 +7,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Header from "../../../components/Header";
-import Footer from "@/app/components/Footer";
-import styles from "../../../styles.scss";
+import Footer from "../../../components/Footer";
+// import styles from "../../../styles.scss";
 
 const Game = () => {
   const router = useRouter();
@@ -161,7 +161,7 @@ const Game = () => {
       <Footer
           buttons={[
             {
-              text: "Retour à l'accueil",
+              text: "Retour à laccueil",
               path: "/",
             },
           ]}
