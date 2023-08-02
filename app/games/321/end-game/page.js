@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles.scss";
 import React, { useRef, useState, useEffect } from "react";
-import PlayerStats from "@/app/components/PlayerStats";
+import PlayerStats from "@/app/components/CurrentPlayerDashboard";
 import PlayerList from "@/app/components/PlayerList";
 
 const EndGame = () => {
@@ -25,9 +25,10 @@ const EndGame = () => {
   const currentUserScore = players[playerIndex]?.score;
 
   useEffect(() => {
-    // if (localStorage.getItem("currentDart") !== null) {
-    //   setCurrentDart(parseInt(localStorage.getItem("currentDart"), 10));
-    // }
+    if (localStorage.getItem("gameId") === null) {
+      const gameId = 'game-' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+      localStorage.setItem('gameId', gameId);
+    }
     if (localStorage.getItem("currentPlayer") !== null) {
       // setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer", 10)));
       setWinner(JSON.parse(localStorage.getItem("winner")));

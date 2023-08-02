@@ -1,7 +1,7 @@
 import React from "react";
 import ScoreInput from "./ScoreInput";
 import styles from "../styles.scss";
-const PlayerStats = ({
+const CurrentPlayerDashboard = ({
   currentPlayer,
   players,
   currentDart,
@@ -128,4 +128,4 @@ const PlayerStats = ({
     </div>
   );
 };
-export default PlayerStats;
+export default CurrentPlayerDashboard;

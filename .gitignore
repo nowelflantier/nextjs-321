@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+firebaseConfig.js
 
 # testing
 /coverage
@@ -29,6 +30,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+
 
 # typescript
 *.tsbuildinfo

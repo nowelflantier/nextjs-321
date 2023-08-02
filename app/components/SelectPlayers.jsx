@@ -7,6 +7,7 @@ const PlayerSelect = () => {
   const searchParams = useSearchParams();
   const [numPlayers, setNumPlayers] = useState(1);
   const router = useRouter();
+  const [selectedGame, setSelectedGame] = useState(null)
 
   useEffect(() => {
     // reset les données locales si le paramètre d'url est respecté
@@ -15,12 +16,19 @@ const PlayerSelect = () => {
       localStorage.removeItem('currentDart')
       localStorage.removeItem('players')
       localStorage.removeItem('winner')
+      localStorage.removeItem('selectedGame')
     }
     // Read from local storage on initial render
     const storedNumPlayers = localStorage.getItem("numPlayers");
     if (storedNumPlayers) {
       setNumPlayers(storedNumPlayers);
     } 
+    const storedSelectedGame = localStorage.getItem('selectedGame')
+    if (storedSelectedGame) {
+      setSelectedGame(storedSelectedGame) 
+    } else {
+      localStorage.setItem("selectedGame", '321')
+    }
   }, []);
 
   const handlePlayerSelect = (e) => {
@@ -30,7 +38,7 @@ const PlayerSelect = () => {
   const handleStart = () => {
     localStorage.setItem("numPlayers", numPlayers);
 
-    router.push(`/321/select-players-name?selected_players=${numPlayers}`);
+    router.push(`/games/321/select-players-name?selected_players=${numPlayers}`);
   };
 
   return (

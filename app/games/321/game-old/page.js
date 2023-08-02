@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import styles from "../../styles.scss";
 import React, { useRef, useState, useEffect } from "react";
-import PlayerStats from "@/app/components/PlayerStats";
+import PlayerStats from "@/app/components/CurrentPlayerDashboard";
 import PlayerList from "@/app/components/PlayerList";
 
 const Game = () => {

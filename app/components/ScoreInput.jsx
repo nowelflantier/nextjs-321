@@ -12,16 +12,16 @@ const ScoreInput = ({
   const handleSubmit = (e) => {
     e.preventDefault(); // This is important to prevent form's default submission behaviour
     if (!isDisabled) {
-      if (e.key === 'Enter') {
+      
       handleNewScore();
-      }
+    
     }
   };
   return (!isTurnOver && currentDart < 3) ? (
     <form onSubmit={handleSubmit} className="addScore">
      
       <input
-        type="text"
+        type="number"
         placeholder="0"
         onChange={handleInputChange}
         onKeyDown={handleInputChange}

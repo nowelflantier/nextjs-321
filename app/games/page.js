@@ -17,7 +17,6 @@ export default function Home() {
     <main className="main">
       <Header
         title="let's play !"
-        description="321 Zap - Darts scorer - v1.0"
         src="/dart-aim.svg"
         alt="Next.js Logo"
         width={180}
@@ -36,8 +35,8 @@ export default function Home() {
         <Footer
           buttons={[
             {
-              text: "Nouvelle partie de 321",
-              path: "/games/321/select-players?new_game=true&game=321",
+              text: "Nouvelle partie",
+              path: "/games/321/select-players?new_game=true",
             },
             { text: "Reprendre ma partie", path: "/games/321/game" },
           ]}
