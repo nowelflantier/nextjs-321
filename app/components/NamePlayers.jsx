@@ -8,15 +8,13 @@ const NamePlayers = () => {
   const [playerName, setPlayerName] = useState("");
   const [players, setPlayers] = useState([{}]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
-  const { selectedGame, setSelectedGame } = useGames();
+  const { selectedGame } = useGames();
 
   const searchParams = useSearchParams();
   const params = useParams();
   const router = useRouter();
   const numPlayers = searchParams.get("selected_players");
-  // useEffect(() => {
-  //   setSelectedGame(localStorage.getItem("selectedGame"));
-  // }, []);
+
   useEffect(() => {
     const storedPlayers = JSON.parse(localStorage.getItem("players"));
     const storedPlayer = storedPlayers?.find(

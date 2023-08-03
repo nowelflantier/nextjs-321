@@ -141,12 +141,12 @@ const Game = () => {
   return (
     <main className="main">
       { selectedGame && (<Header
-        title={selectedGameDetails?.title}
-        description={selectedGameDetails?.description}
-        src={selectedGameDetails?.icon}
-        alt={selectedGameDetails?.title}
-        width={selectedGameDetails?.width}
-        height={selectedGameDetails?.width}
+      title={selectedGameDetails?.title ?? 'Chargement..'}
+      description={selectedGameDetails?.description ?? 'Chargement..'}
+      src={selectedGameDetails?.icon ?? '/score-board.png'}
+      alt={selectedGameDetails?.title ?? 'Chargement..'}
+      width={selectedGameDetails?.width ?? 80}
+      height={selectedGameDetails?.height ?? 80}
       />)}
       <CurrentPlayerDashboard
         currentPlayer={currentPlayer}

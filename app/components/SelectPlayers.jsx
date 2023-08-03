@@ -28,10 +28,7 @@ const PlayerSelect = () => {
     }
     if (searchParams.get("name")) {
       setSelectedGame(searchParams.get("name"));
-      // console.log(searchParams.get('name'))
       localStorage.setItem("selectedGame", searchParams.get("name"));
-    } else {
-      // localStorage.setItem("selectedGame", '321')
     }
   }, []);
 

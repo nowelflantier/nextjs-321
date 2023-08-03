@@ -14,8 +14,8 @@ const EndGame = () => {
   return (
     <main className="main">
       <Header
-        title={selectedGameDetails?.title}
-        description={selectedGameDetails?.description}
+        title={selectedGameDetails?.title ?? "Chargement.."}
+        description={selectedGameDetails?.description ?? "Chargement.."}
         src="/trophy.png"
         alt="Victory Logo"
         width={180}
