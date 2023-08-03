@@ -10,9 +10,9 @@ const Footer = ({ buttons }) => {
       <Link
         key={index}
         href={button.path}
-        className="bottom btn"
+        
       >
-        <p>{button.text}</p>
+        <p className="bottom btn">{button.text}</p>
       </Link>
     ))}
   </div>

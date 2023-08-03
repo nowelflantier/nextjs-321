@@ -1,6 +1,7 @@
 import React from "react";
 import ScoreInput from "./ScoreInput";
 import styles from "../styles.scss";
+import Image from "next/image";
 
 const CurrentPlayerDashboard = ({
   currentPlayer,
@@ -19,7 +20,13 @@ const CurrentPlayerDashboard = ({
     return (
       <div className="active">
         <h1 className="code">Chargement...</h1>
-        <img className="loading" src="https://i.gifer.com/bfR.gif" alt="" />
+        <Image
+          className="loading"
+          src="/loading.gif"
+          alt="Loading"
+          width={100}
+          height={100}
+        />
       </div>
     );
   }
@@ -92,22 +99,6 @@ const CurrentPlayerDashboard = ({
               );
             })}
         </div>
-
-        {/* <div className="grid">
-          {players
-            .filter((p) => p.id !== player.id)
-            .map((p) => (
-              <div key={p.id} className="card">
-                <h2>
-                  {p.id}. {p.name}
-                </h2>
-                {parseInt(p.score, 10) - (player.score || 0) >= 0 ? (
-                  <p>{parseInt(p.score, 10) - (player.score || 0)}</p>
-                ) : (
-                  <p>-</p>
-                )}
-              </div>
-            ))} </div> */}
       </div>
       <ScoreInput
         isTurnOver={isTurnOver}
