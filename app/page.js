@@ -7,6 +7,8 @@ import Footer from "./components/Footer";
 import DisplayGames from "./components/DisplayGames";
 
 
+
+
 import React, { useState, useEffect } from "react";
 
 export default function Home() {
@@ -22,6 +24,7 @@ export default function Home() {
     }
   }, []);
   return (
+    
     <main className="main">
       <Header
         title="let's play !"
@@ -40,7 +43,8 @@ export default function Home() {
           ]}
         />
       )}
-      {/* <div className="grid"></div> */}
+      
     </main>
+    
   );
 }

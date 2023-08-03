@@ -7,11 +7,15 @@ const NamePlayers = () => {
   const [playerName, setPlayerName] = useState("");
   const [players, setPlayers] = useState([{}]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
+  const [selectedGame, setSelectedGame] = useState(null)
+
   const searchParams = useSearchParams();
   const params = useParams();
   const router = useRouter();
   const numPlayers = searchParams.get("selected_players");
-
+  useEffect(()=>{
+    setSelectedGame(localStorage.getItem("selectedGame"))
+  },[])
   useEffect(() => {
     // const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
 
@@ -59,7 +63,7 @@ const NamePlayers = () => {
     } else {
       localStorage.setItem("currentDart", 0);
       localStorage.setItem("currentPlayer", 1);
-      router.push(`/games/321/game`);
+      router.push(`/games/${selectedGame}/game`);
     }
   };
   return (

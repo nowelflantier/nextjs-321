@@ -14,10 +14,7 @@ const CardDisplay = ({
   path,
   style,
 }) => {
-  useEffect(()=>{
-    console.log(path)
-  },[])
-  const url = path;
+
   return (
     <div className={style} id={id}>
       <a

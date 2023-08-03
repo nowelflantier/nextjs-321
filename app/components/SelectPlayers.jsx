@@ -2,32 +2,37 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useGames } from "./GameContext";
+
+
 
 const PlayerSelect = () => {
   const searchParams = useSearchParams();
   const [numPlayers, setNumPlayers] = useState(1);
   const router = useRouter();
-  const [selectedGame, setSelectedGame] = useState(null)
+  // const [selectedGame, setSelectedGame] = useState(null);
+  const {selectedGame, setSelectedGame} = useGames();
 
   useEffect(() => {
     // reset les données locales si le paramètre d'url est respecté
-    if (searchParams.get('new_game')){
-      localStorage.removeItem('numPlayers')
-      localStorage.removeItem('currentDart')
-      localStorage.removeItem('players')
-      localStorage.removeItem('winner')
-      localStorage.removeItem('selectedGame')
+    if (searchParams.get("new_game")) {
+      localStorage.removeItem("numPlayers");
+      localStorage.removeItem("currentDart");
+      localStorage.removeItem("players");
+      localStorage.removeItem("winner");
+      localStorage.removeItem("selectedGame");
     }
     // Read from local storage on initial render
     const storedNumPlayers = localStorage.getItem("numPlayers");
     if (storedNumPlayers) {
       setNumPlayers(storedNumPlayers);
-    } 
-    const storedSelectedGame = localStorage.getItem('selectedGame')
-    if (storedSelectedGame) {
-      setSelectedGame(storedSelectedGame) 
+    }
+    if (searchParams.get("name")) {
+      setSelectedGame(searchParams.get("name"));
+      // console.log(searchParams.get('name'))
+      localStorage.setItem("selectedGame", searchParams.get("name"));
     } else {
-      localStorage.setItem("selectedGame", '321')
+      // localStorage.setItem("selectedGame", '321')
     }
   }, []);
 
@@ -38,7 +43,9 @@ const PlayerSelect = () => {
   const handleStart = () => {
     localStorage.setItem("numPlayers", numPlayers);
 
-    router.push(`/games/321/select-players-name?selected_players=${numPlayers}`);
+    router.push(
+      `/games/${selectedGame}/select-players-name?selected_players=${numPlayers}`
+    );
   };
 
   return (

@@ -9,7 +9,6 @@ import Footer from "@/app/components/Footer";
 import { useRouter } from "next/navigation";
 import { useGames } from "@/app/components/GameContext";
 
-
 const Game = () => {
   const router = useRouter();
   const [players, setPlayers] = useState([]);
@@ -21,7 +20,7 @@ const Game = () => {
   const [isWinner, setIsWinner] = useState({});
   const [isNotValidScore, SetIsNotValidScore] = useState(false);
   const playerIndex = currentPlayer - 1;
-  const {selectedGame} = useGames()
+  const {selectedGame} = useGames();
 
   useEffect(() => {
     const localData = localStorage.getItem("players");
@@ -141,14 +140,15 @@ const Game = () => {
   return (
     
       <main className="main">
-        <Header
-          title="let's play darts !"
-          description="321 Zap - Darts scorer - v1.0"
-          src="/dart-aim.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={87}
-        />
+           <Header
+        title="let's play dice !"
+        description="Killer - Dice scorer - W.I.P."
+        src="/dice.png"
+        alt="Dice Logo"
+        width={180}
+        height={180}
+      />
+      
         <CurrentPlayerDashboard
           currentPlayer={currentPlayer}
           players={players}
