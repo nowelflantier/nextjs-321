@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Footer = ({ buttons }) => {
-
+console.log(buttons)
   return (
     <div className="center container">
     {buttons.map((button, index) => (

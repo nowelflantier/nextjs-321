@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import CardDisplay from "./CardDisplay";
 
 const DisplayGames = ({ games }) => {
+  console.log(games)
   return (
     <>
     <h2 className="code">Sélectionnez un jeu : </h2>
@@ -14,6 +15,7 @@ const DisplayGames = ({ games }) => {
       
         <CardDisplay
           key={game.id}
+          id={game.id}
           title={game.name}
           src={game.icon}
           alt="Dart Logo"
