@@ -3,8 +3,8 @@
 // import Link from "next/link";
 import styles from "../styles.scss";
 import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import CardDisplay from "@/app/components/CardDisplay";
+import Footer from "@/components/Footer";
+import CardDisplay from "@/components/CardDisplay";
 import React, { useState, useEffect } from "react";
 
 export default function Home() {

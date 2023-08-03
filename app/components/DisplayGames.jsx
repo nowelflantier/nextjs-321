@@ -1,10 +1,9 @@
 import React from "react";
 import Image from "next/image";
 // import Link from "next/link";
-import CardDisplay from "./CardDisplay";
+import CardDisplay from "../../components/CardDisplay";
 
 const DisplayGames = ({ games }) => {
-  console.log(games)
   return (
     <>
     <h2 className="code">Sélectionnez un jeu : </h2>

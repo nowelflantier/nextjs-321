@@ -13,10 +13,11 @@ const CardDisplay = ({
   path,
   style,
 }) => {
+  
   return (
     <div className={style} id={id}>
       <Link
-        href={`${path}`}
+        href={path}
         
       >
         <div className="center container">
