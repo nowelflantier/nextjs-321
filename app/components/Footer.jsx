@@ -9,7 +9,7 @@ console.log(buttons)
     {buttons.map((button, index) => (
       <Link
         key={index}
-        href="{button.path}"
+        href={button.path}
         
       >
         <p className="bottom btn">{button.text}</p>

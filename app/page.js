@@ -13,14 +13,20 @@ export default function Home() {
   const games = [{
     id: 1,
     name: "321",
-    path: "/games/321/select-players?new_game=true",
+    path: {
+      pathname: "/games/321/select-players",
+      query: { new_game: true }
+    },
     category: "darts",
     icon: "/dart-aim.svg",
   },
   {
     id: 2,
     name: "Killer",
-    path: "/",
+    path: {
+      pathname: "/",
+      query: { new_game: true }
+    },
     category: "dice",
     icon: "/dice.png",
   }]
