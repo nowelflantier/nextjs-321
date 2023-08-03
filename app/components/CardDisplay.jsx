@@ -1,4 +1,5 @@
-import React from "react";
+'use client'
+import React, {useEffect} from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,10 +14,13 @@ const CardDisplay = ({
   path,
   style,
 }) => {
-  
+  useEffect(()=>{
+    console.log(path)
+  },[])
+  const url = path;
   return (
     <div className={style} id={id}>
-      <Link
+      <a
         href={path}
         
       >
@@ -39,7 +43,7 @@ const CardDisplay = ({
 
         <p>Nouvelle partie de {title}</p>
 
-      </Link>
+      </a>
     </div>
   );
 };

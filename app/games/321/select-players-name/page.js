@@ -4,7 +4,7 @@
 import styles from "../../../styles.scss";
 // import React, { useState, useEffect } from "react";
 import Header from "@/app/components/Header";
-import Footer from "@/components/Footer";
+import Footer from "@/app/components/Footer";
 import NamePlayers from "@/app/components/NamePlayers";
 // import { useRouter, useParams, useSearchParams } from "next/navigation";
 

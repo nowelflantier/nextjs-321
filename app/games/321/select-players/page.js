@@ -3,7 +3,7 @@ import React from "react";
 // import Link from "next/link";
 import styles from "@/app/styles.scss";
 import Header from "@/app/components/Header";
-import Footer from "@/components/Footer";
+import Footer from "@/app/components/Footer";
 import PlayerSelect from "@/app/components/SelectPlayers";
 
 const GameStart = () => {

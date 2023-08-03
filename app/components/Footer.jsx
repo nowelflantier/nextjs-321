@@ -8,13 +8,13 @@ console.log(buttons)
   return (
     <div className="center container">
     {buttons.map((button, index) => (
-      <Link
+      <a
         key={index}
-        href={button.path}
+        href={`${button.path}`}
         
       >
         <p className="bottom btn">{button.text}</p>
-      </Link>
+      </a>
     ))}
   </div>
   );
