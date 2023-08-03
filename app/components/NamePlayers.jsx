@@ -2,29 +2,27 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
+import { useGames } from "./GameContext";
 
 const NamePlayers = () => {
   const [playerName, setPlayerName] = useState("");
   const [players, setPlayers] = useState([{}]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
-  const [selectedGame, setSelectedGame] = useState(null)
+  const { selectedGame, setSelectedGame } = useGames();
 
   const searchParams = useSearchParams();
   const params = useParams();
   const router = useRouter();
   const numPlayers = searchParams.get("selected_players");
-  useEffect(()=>{
-    setSelectedGame(localStorage.getItem("selectedGame"))
-  },[])
+  // useEffect(() => {
+  //   setSelectedGame(localStorage.getItem("selectedGame"));
+  // }, []);
   useEffect(() => {
-    // const storedPlayers = JSON.parse(localStorage.getItem("players") || "[]");
-
     const storedPlayers = JSON.parse(localStorage.getItem("players"));
-    
-      const storedPlayer = storedPlayers?.find(
-        (player) => player.id === currentPlayer
-      );
-    
+    const storedPlayer = storedPlayers?.find(
+      (player) => player.id === currentPlayer
+    );
+
     console.log(storedPlayers);
     if (storedPlayer) {
       setPlayerName(storedPlayer.name);

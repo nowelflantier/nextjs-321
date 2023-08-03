@@ -10,7 +10,6 @@ const PlayerSelect = () => {
   const searchParams = useSearchParams();
   const [numPlayers, setNumPlayers] = useState(1);
   const router = useRouter();
-  // const [selectedGame, setSelectedGame] = useState(null);
   const {selectedGame, setSelectedGame} = useGames();
 
   useEffect(() => {

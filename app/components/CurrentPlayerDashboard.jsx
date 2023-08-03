@@ -37,9 +37,9 @@ const CurrentPlayerDashboard = ({
     // Pour toutes les autres valeurs, la couleur sera un mélange de rouge et de vert.
     if (diff > 0) {
       const greenAmount = Math.round((diff / 500) * 255);
-      console.log(greenAmount);
+      // console.log(greenAmount);
       const redAmount = 255 - greenAmount;
-      console.log(redAmount);
+      // console.log(redAmount);
       const transparency = 100;
       // return `rgb(0, ${greenAmount}, 0, 30%)`;
       // return `rgb(${redAmount}, ${greenAmount}, 0, 30%)`;

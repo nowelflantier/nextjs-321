@@ -33,7 +33,7 @@ const EndGameWinner = () => {
       const storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
       const playerJSON = JSON.stringify(storedPlayers[playerIndex]);
       localStorage.setItem("winner", playerJSON);
-      // router.push(`/321/end-game`);
+      
       console.log(`Player ${isWinner.player} is the winner!`);
       console.log(isWinner);
     }

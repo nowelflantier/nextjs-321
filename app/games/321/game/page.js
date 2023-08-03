@@ -9,7 +9,6 @@ import Footer from "@/app/components/Footer";
 import { useRouter } from "next/navigation";
 import { useGames } from "@/app/components/GameContext";
 
-
 const Game = () => {
   const router = useRouter();
   const [players, setPlayers] = useState([]);
@@ -21,7 +20,8 @@ const Game = () => {
   const [isWinner, setIsWinner] = useState({});
   const [isNotValidScore, SetIsNotValidScore] = useState(false);
   const playerIndex = currentPlayer - 1;
-  const {selectedGame} = useGames()
+  const { getSelectedGameDetails, selectedGame } = useGames();
+  const selectedGameDetails = getSelectedGameDetails();
 
   useEffect(() => {
     const localData = localStorage.getItem("players");
@@ -30,7 +30,7 @@ const Game = () => {
       setPlayers(JSON.parse(localData));
     }
     if (localStorage.getItem("winner") !== null) {
-      router.push(`/${selectedGame}/end-game`);
+      router.push(`/games/${selectedGame}/end-game`);
     }
     if (localStorage.getItem("currentDart") !== null) {
       setCurrentDart(parseInt(localStorage.getItem("currentDart"), 10));
@@ -128,7 +128,7 @@ const Game = () => {
       localStorage.setItem("winner", playerJSON);
       console.log(`Player ${isWinner.player} is the winner!`);
       console.log(isWinner);
-      router.push(`/games/321/end-game`);
+      router.push(`/games/${selectedGame}/end-game`);
     }
   }, [isWinner]);
 
@@ -139,38 +139,37 @@ const Game = () => {
   }, [players]);
 
   return (
-    
-      <main className="main">
-        <Header
-          title="let's play darts !"
-          description="321 Zap - Darts scorer - v1.0"
-          src="/dart-aim.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={87}
-        />
-        <CurrentPlayerDashboard
-          currentPlayer={currentPlayer}
-          players={players}
-          currentDart={currentDart}
-          newCurrentScore={newCurrentScore}
-          handleInputChange={handleInputChange}
-          handleNewScore={handleNewScore}
-          isNotValidScore={isNotValidScore}
-          handleNextPlayer={handleNextPlayer}
-          isDisabled={isDisabled}
-        />
-        <PlayerList players={players} currentPlayer={currentPlayer} />
+    <main className="main">
+      { selectedGame && (<Header
+        title={selectedGameDetails?.title}
+        description={selectedGameDetails?.description}
+        src={selectedGameDetails?.icon}
+        alt={selectedGameDetails?.title}
+        width={selectedGameDetails?.width}
+        height={selectedGameDetails?.width}
+      />)}
+      <CurrentPlayerDashboard
+        currentPlayer={currentPlayer}
+        players={players}
+        currentDart={currentDart}
+        newCurrentScore={newCurrentScore}
+        handleInputChange={handleInputChange}
+        handleNewScore={handleNewScore}
+        isNotValidScore={isNotValidScore}
+        handleNextPlayer={handleNextPlayer}
+        isDisabled={isDisabled}
+      />
+      <PlayerList players={players} currentPlayer={currentPlayer} />
 
-        <Footer
-          buttons={[
-            {
-              text: "Retour à l'accueil",
-              path: "/",
-            },
-          ]}
-        />
-      </main>
+      <Footer
+        buttons={[
+          {
+            text: "Retour à l'accueil",
+            path: "/",
+          },
+        ]}
+      />
+    </main>
   );
 };
 export default Game;

@@ -1,10 +1,17 @@
+'use client'
 import React from "react";
 import Image from "next/image";
 // import Link from "next/link";
+import { useGames } from "@/app/components/GameContext";
 
 const Header = ({ src, title, width, height, description, alt }) => {
-    // const title = title;
-
+  // const title = title;
+  const { getSelectedGameDetails, selectedGame } = useGames();
+  const selectedGameDetails = getSelectedGameDetails();
+  // If selectedGame is undefined, render null
+  if (typeof selectedGame === "undefined") {
+    return null;
+  }
   return (
     <>
       <div className="description">
@@ -14,7 +21,8 @@ const Header = ({ src, title, width, height, description, alt }) => {
 
       <div className="center container">
         <p className="code">
-          {title}<br />
+          {title}
+          <br />
         </p>
         <Image
           className="logo"

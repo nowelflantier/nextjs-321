@@ -5,6 +5,7 @@ import styles from "./styles.scss";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import DisplayGames from "./components/DisplayGames";
+import { useGames } from "./components/GameContext";
 
 
 
@@ -14,7 +15,7 @@ import React, { useState, useEffect } from "react";
 export default function Home() {
 
   const [isCookiesStored, setIsCookieesStored] = useState(false);
-  const [selectedGame, setSelectedGame] = useState(null);
+  const {selectedGame, setSelectedGame} = useGames()
   useEffect(() => {
     if (localStorage.getItem("numPlayers") !== null) {
       setIsCookieesStored(true);
@@ -39,7 +40,7 @@ export default function Home() {
       {isCookiesStored &&(
         <Footer
           buttons={[
-            { text: `Reprendre ma partie de ${selectedGame}`, path: "/games/321/game" },
+            { text: `Reprendre ma partie de ${selectedGame}`, path: `/games/${selectedGame}/game` },
           ]}
         />
       )}

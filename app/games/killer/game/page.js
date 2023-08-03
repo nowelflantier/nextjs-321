@@ -22,6 +22,7 @@ const Game = () => {
   const playerIndex = currentPlayer - 1;
   const {selectedGame} = useGames();
 
+  
   useEffect(() => {
     const localData = localStorage.getItem("players");
     console.log(localData);
@@ -29,7 +30,7 @@ const Game = () => {
       setPlayers(JSON.parse(localData));
     }
     if (localStorage.getItem("winner") !== null) {
-      router.push(`/${selectedGame}/end-game`);
+      router.push(`/games/${selectedGame}/end-game`);
     }
     if (localStorage.getItem("currentDart") !== null) {
       setCurrentDart(parseInt(localStorage.getItem("currentDart"), 10));
@@ -127,7 +128,13 @@ const Game = () => {
       localStorage.setItem("winner", playerJSON);
       console.log(`Player ${isWinner.player} is the winner!`);
       console.log(isWinner);
-      router.push(`/games/321/end-game`);
+      if (selectedGame !== null) {
+        console.log(selectedGame);
+        router.push(`/games/${selectedGame}/end-game`);
+      } else {
+        console.log(selectedGame);
+        console.error('selectedGame is null');
+      }
     }
   }, [isWinner]);
 
