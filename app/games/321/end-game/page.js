@@ -7,7 +7,7 @@ import React, { useRef, useState, useEffect } from "react";
 // import PlayerStats from "@/app/components/CurrentPlayerDashboard";
 // import PlayerList from "@/app/components/PlayerList";
 import Header from "@/app/components/Header";
-import Footer from "@/components/Footer";
+import Footer from "@/app/components/Footer";
 import EndGameWinner from "@/app/components/EndGameWinner";
 
 const EndGame = () => {
