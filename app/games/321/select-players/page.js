@@ -23,6 +23,9 @@ const GameStart = () => {
         alt={selectedGameDetails?.title ?? 'Chargement..'}
         width={selectedGameDetails?.width ?? 80}
         height={selectedGameDetails?.height ?? 80}
+        selectedGameDetails={selectedGameDetails}
+        selectedGame={selectedGame}
+
       />}
       
         <PlayerSelect></PlayerSelect>

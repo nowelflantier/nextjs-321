@@ -8,18 +8,39 @@ import Footer from "@/app/components/Footer";
 // import PlayerContext from "@/app/components/PlayerContext";
 import { useRouter } from "next/navigation";
 import { useGames } from "@/app/components/GameContext";
+import useGameLogic from "@/app/components/useGameLogic";
 
 const Game = () => {
+  const {
+    players, setPlayers,
+    currentPlayer, setCurrentPlayer,
+    currentDart, setCurrentDart,
+    newCurrentScore, setNewCurrentScore,
+    isDisabled, setIsDisabled,
+    isWinner, setIsWinner,
+    isNotValidScore, SetIsNotValidScore,
+    playerIndex,
+    // other functions as needed
+  } = useGameLogic({
+    players: [],
+    currentPlayer: 1,
+    currentDart: 0,
+    newCurrentScore: "",
+    isDisabled: false,
+    isWinner: {},
+    isNotValidScore: false
+  });
+
   const router = useRouter();
-  const [players, setPlayers] = useState([]);
-  const [currentPlayer, setCurrentPlayer] = useState(1);
-  const [currentDart, setCurrentDart] = useState(0);
-  const [newCurrentScore, setNewCurrentScore] = useState("");
-  const [isDisabled, setIsDisabled] = useState(false);
+  // const [players, setPlayers] = useState([]);
+  // const [currentPlayer, setCurrentPlayer] = useState(1);
+  // const [currentDart, setCurrentDart] = useState(0);
+  // const [newCurrentScore, setNewCurrentScore] = useState("");
+  // const [isDisabled, setIsDisabled] = useState(false);
   const inputRef = useRef();
-  const [isWinner, setIsWinner] = useState({});
-  const [isNotValidScore, SetIsNotValidScore] = useState(false);
-  const playerIndex = currentPlayer - 1;
+  // const [isWinner, setIsWinner] = useState({});
+  // const [isNotValidScore, SetIsNotValidScore] = useState(false);
+  // const playerIndex = currentPlayer - 1;
   const { getSelectedGameDetails, selectedGame } = useGames();
   const selectedGameDetails = getSelectedGameDetails();
 
