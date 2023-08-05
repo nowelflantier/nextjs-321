@@ -34,9 +34,9 @@ const keys2 = [
 ];
 
 const VirtualKeyboard = ({ handleHideKeyboard, handleInputChange }) => {
-  const { setIsDisabled, SetIsNotValidScore } = useGameLogic({
-    isDisabled: true,
-    isNotValidScore: false,
+  const { setIsDisabled, isDisabled,SetIsNotValidScore } = useGameLogic({
+    // isDisabled: true,
+    // isNotValidScore: false,
   });
   const [step, setStep] = useState(1);
   const [firstValue, setFirstValue] = useState(null);
@@ -46,8 +46,9 @@ const VirtualKeyboard = ({ handleHideKeyboard, handleInputChange }) => {
 
   const handleKeyClick = (value) => {
     // value.preventDefault();
+
     setDisplayedScore(value);
-    if (step === 1) {
+    if (step === 1 && value !== 0) {
       setFirstValue(parseInt(value));
       setStep(2);
     } else {
@@ -57,9 +58,13 @@ const VirtualKeyboard = ({ handleHideKeyboard, handleInputChange }) => {
       setFirstValue(null);
       handleHideKeyboard();
       setIsDisabled(false);
-      SetIsNotValidScore(false);
+      console.log(isDisabled)
+    //   SetIsNotValidScore(false);
     }
   };
+  const handleReturn = () => {
+    setStep(1)
+  }
 
   const handleValidationClick = () => {
     if (step === 1 && firstValue !== null) {
@@ -74,9 +79,12 @@ const VirtualKeyboard = ({ handleHideKeyboard, handleInputChange }) => {
     <>
       <div className="keyboard">
         {displayedScore && (
+            <div>
+                <p className="code" >Score actuel : </p>
           <div className="score center">
+            
             <h3>{displayedScore}</h3>
-          </div>
+          </div></div>
         )}
         <div className="keys">
           {keys.map((k) => (
@@ -88,12 +96,18 @@ const VirtualKeyboard = ({ handleHideKeyboard, handleInputChange }) => {
               {k.label.toUpperCase()}
             </button>
           ))}
-          {/* <button className="key" onClick={handleValidationClick}>
-            Suivant
-          </button> */}
+          <div className="keyboard-buttons">
+          { step === 1 && <button className="key" onClick={() => handleKeyClick(0)}>
+            Manqué
+          </button>}
+         { step === 2 && <button className="key" onClick={handleReturn}>
+            Retour
+          </button>}
+          
           <button className="key" onClick={handleHideKeyboard}>
-            X
+            Fermer
           </button>
+          </div>
         </div>
       </div>
     </>

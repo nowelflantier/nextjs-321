@@ -351,6 +351,17 @@
     align-items: center;
     justify-content: center;
     z-index: 9999; // ajouté pour rendre le clavier au-dessus de tous les autres éléments
+    .code {
+      color: white;
+    }
+  }
+  .keyboard-buttons {
+    margin:15px auto;
+    .key {
+      width:33vw;
+      background-color: rgb(186, 51, 51);
+      color: white;
+    }
   }
   .keys {
     text-align: center;

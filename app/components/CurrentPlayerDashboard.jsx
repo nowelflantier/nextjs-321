@@ -2,6 +2,7 @@ import React from "react";
 import ScoreInput from "./ScoreInput";
 import styles from "../styles.scss";
 import Image from "next/image";
+// import useGameLogic from "./useGameLogic";
 
 const CurrentPlayerDashboard = ({
   currentPlayer,

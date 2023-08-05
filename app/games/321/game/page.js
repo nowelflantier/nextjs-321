@@ -26,21 +26,13 @@ const Game = () => {
     currentPlayer: 1,
     currentDart: 0,
     newCurrentScore: "",
-    isDisabled: false,
+    isDisabled: true,
     isWinner: {},
     isNotValidScore: false
   });
 
   const router = useRouter();
-  // const [players, setPlayers] = useState([]);
-  // const [currentPlayer, setCurrentPlayer] = useState(1);
-  // const [currentDart, setCurrentDart] = useState(0);
-  // const [newCurrentScore, setNewCurrentScore] = useState("");
-  // const [isDisabled, setIsDisabled] = useState(false);
   const inputRef = useRef();
-  // const [isWinner, setIsWinner] = useState({});
-  // const [isNotValidScore, SetIsNotValidScore] = useState(false);
-  // const playerIndex = currentPlayer - 1;
   const { getSelectedGameDetails, selectedGame } = useGames();
   const selectedGameDetails = getSelectedGameDetails();
 
@@ -73,7 +65,7 @@ const Game = () => {
   // }, []);
   const handleInputChange = useCallback((e) => {
     // if (e.target.value === "") {
-      if (e === "") {
+      if (e === "" || e === null || e === undefined) {
       setNewCurrentScore("");
       setIsDisabled(true);
       SetIsNotValidScore(false);
