@@ -52,28 +52,17 @@ const Game = () => {
       setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer"), 10));
     }
   }, []);
-  // const handleScoreCalculation = useCallback((score) => {
-  //   if (isNaN(score) || score < 0 || score > 60) {
-  //     setNewCurrentScore(score);
-  //     setIsDisabled(true);
-  //     SetIsNotValidScore(true);
-  //   } else {
-  //     setNewCurrentScore(score);
-  //     setIsDisabled(false);
-  //     SetIsNotValidScore(false);
-  //   }
-  // }, []);
+  
   const handleInputChange = useCallback((e) => {
-    // if (e.target.value === "") {
+    
       if (e === "" || e === null || e === undefined) {
       setNewCurrentScore("");
       setIsDisabled(true);
       SetIsNotValidScore(false);
     } else {
-      // const score = parseInt(e.target.value, 10);
+      
       const score = parseInt(e, 10);
       if (isNaN(score) || score < 0 || score > 60) {
-        // setNewCurrentScore(e.target.value);
         setNewCurrentScore(e);
         setIsDisabled(true);
         SetIsNotValidScore(true);
@@ -86,7 +75,6 @@ const Game = () => {
   }, []);
 
   const handleNewScore = useCallback(() => {
-    // if (isNotValidScore) return;
     const updatedPlayers = [...players];
     const player = updatedPlayers[playerIndex];
     // Check that player is defined
@@ -111,7 +99,6 @@ const Game = () => {
       setCurrentDart(3);
     } else {
       handleNextDart(currentDart);
-      //   setCurrentDart(currentDart + 1);
     }
     setPlayers(updatedPlayers);
     setNewCurrentScore("");

@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import ScoreInput from "./ScoreInput";
 import styles from "../styles.scss";
 import Image from "next/image";
-// import useGameLogic from "./useGameLogic";
 
 const CurrentPlayerDashboard = ({
   currentPlayer,
@@ -14,9 +13,9 @@ const CurrentPlayerDashboard = ({
   handleNextPlayer,
   isDisabled,
   isTurnOver,
-  newCurrentScore, setNewCurrentScore,
+  newCurrentScore,
+  setNewCurrentScore,
   // handleScoreCalculation,
-
 }) => {
   if (!players || players.length === 0) {
     // Change this to your desired loading state
@@ -33,6 +32,8 @@ const CurrentPlayerDashboard = ({
       </div>
     );
   }
+  const [displayPlayerInfo, setDisplayPlayerInfo] = useState(false);
+
   const player = players[currentPlayer - 1] || {};
   function getBackgroundColor(diff) {
     // Si la différence est nulle, la couleur sera rouge.
@@ -49,23 +50,33 @@ const CurrentPlayerDashboard = ({
       return `rgb(${redAmount}, 0, 0, ${100 - greenAmount}%)`;
     }
   }
+  const toggleDisplayPlayerInfo = () => {
+    setDisplayPlayerInfo(!displayPlayerInfo);
+  };
   return (
     <div className="active">
       <p className="code">
         Player {currentPlayer} - tour{" "}
         {currentDart + 1 === 4 ? "terminé" : currentDart + 1}
       </p>
-      <h1>{player.name}</h1>
-      <h2 className="score">{player.score || 0}</h2>
-      <h3 className="code">
-        Fléchettes lancées : {player.darts ? player.darts.length : 0}
-      </h3>
-      <p className="code">
-        Moyenne / fléchette :{" "}
-        {player.darts && player.darts.length > 0
-          ? (player.score / player.darts.length).toFixed(2)
-          : 0}
-      </p>
+      <h1 >
+        {player.name}
+      </h1>
+      <h2 className="score">{player.score || 0} points</h2>
+      <span onClick={toggleDisplayPlayerInfo} className="info-button">afficher {displayPlayerInfo ? "moins ˄" : "plus ˅"}</span>
+      {displayPlayerInfo && (
+        <>
+          <h3 className="code">
+            Fléchettes lancées : {player.darts ? player.darts.length : 0}
+          </h3>
+          <p className="code">
+            Moyenne / fléchette :{" "}
+            {player.darts && player.darts.length > 0
+              ? (player.score / player.darts.length).toFixed(2)
+              : 0}
+          </p>
+        </>
+      )}
       <div className="grid">
         <div className="card dashboard">
           <h2>Reste pour gagner :</h2>
@@ -78,7 +89,7 @@ const CurrentPlayerDashboard = ({
         <div className="grid">
           {players
             .filter((p) => p.id !== player.id && p.score > player.score)
-            .sort((a, b) => (a.score - player.score) - (b.score - player.score)) // Ici, nous ajoutons un tri par ordre décroissant.
+            .sort((a, b) => a.score - player.score - (b.score - player.score)) // Ici, nous ajoutons un tri par ordre décroissant.
             .map((p) => {
               return (
                 <div
@@ -88,9 +99,7 @@ const CurrentPlayerDashboard = ({
                     backgroundColor: getBackgroundColor(p.score - player.score),
                   }}
                 >
-                  <h2>
-                    {p.name}
-                  </h2>
+                  <h2>{p.name}</h2>
                   {parseInt(p.score, 10) - (player.score || 0) >= 0 ? (
                     <p>
                       {parseInt(p.score, 10) - (player.score || 0)} pour reset{" "}
@@ -115,8 +124,6 @@ const CurrentPlayerDashboard = ({
         isDisabled={isDisabled}
         setNewCurrentScore={setNewCurrentScore}
         // handleScoreCalculation={handleScoreCalculation}
-
-        
       />
     </div>
   );
