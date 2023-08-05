@@ -60,16 +60,29 @@ const Game = () => {
       setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer"), 10));
     }
   }, []);
-
+  // const handleScoreCalculation = useCallback((score) => {
+  //   if (isNaN(score) || score < 0 || score > 60) {
+  //     setNewCurrentScore(score);
+  //     setIsDisabled(true);
+  //     SetIsNotValidScore(true);
+  //   } else {
+  //     setNewCurrentScore(score);
+  //     setIsDisabled(false);
+  //     SetIsNotValidScore(false);
+  //   }
+  // }, []);
   const handleInputChange = useCallback((e) => {
-    if (e.target.value === "") {
+    // if (e.target.value === "") {
+      if (e === "") {
       setNewCurrentScore("");
       setIsDisabled(true);
       SetIsNotValidScore(false);
     } else {
-      const score = parseInt(e.target.value, 10);
+      // const score = parseInt(e.target.value, 10);
+      const score = parseInt(e, 10);
       if (isNaN(score) || score < 0 || score > 60) {
-        setNewCurrentScore(e.target.value);
+        // setNewCurrentScore(e.target.value);
+        setNewCurrentScore(e);
         setIsDisabled(true);
         SetIsNotValidScore(true);
       } else {
@@ -175,10 +188,12 @@ const Game = () => {
         currentDart={currentDart}
         newCurrentScore={newCurrentScore}
         handleInputChange={handleInputChange}
+        // handleScoreCalculation={handleScoreCalculation}
         handleNewScore={handleNewScore}
         isNotValidScore={isNotValidScore}
         handleNextPlayer={handleNextPlayer}
         isDisabled={isDisabled}
+        setNewCurrentScore={setNewCurrentScore}
       />
       <PlayerList players={players} currentPlayer={currentPlayer} />
 

@@ -5,7 +5,7 @@ const useGameLogic = (initialState) => {
   const [currentPlayer, setCurrentPlayer] = useState(initialState.currentPlayer || 1);
   const [currentDart, setCurrentDart] = useState(initialState.currentDart || 0);
   const [newCurrentScore, setNewCurrentScore] = useState(initialState.newCurrentScore || "");
-  const [isDisabled, setIsDisabled] = useState(initialState.isDisabled || false);
+  const [isDisabled, setIsDisabled] = useState(initialState.isDisabled || true);
   const [isWinner, setIsWinner] = useState(initialState.isWinner || {});
   const [isNotValidScore, SetIsNotValidScore] = useState(initialState.isNotValidScore || false);
   const playerIndex = currentPlayer - 1;

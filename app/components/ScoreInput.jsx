@@ -1,22 +1,36 @@
-import React from "react";
+'use client'
+import React, {useState} from "react";
+import VirtualKeyboard from "./VirtualDartScoreKeyboard";
+import useGameLogic from "@/app/components/useGameLogic";
+
 const ScoreInput = ({
   newCurrentScore,
   handleInputChange,
   handleNewScore,
-  isNotValidScore,
   currentDart,
   handleNextPlayer,
-  isDisabled,
   isTurnOver,
+  // handleScoreCalculation,
 }) => {
+  const { isDisabled, isNotValidScore, setIsDisabled, SetIsNotValidScore } = useGameLogic({
+    isDisabled: true,
+    isNotValidScore: false,
+  });
+  const [isKeyboardVisible,setIsKeyboardVisible] = useState(false)
   const handleSubmit = (e) => {
     e.preventDefault(); // This is important to prevent form's default submission behaviour
     if (!isDisabled) {
       
       handleNewScore();
-    
+      
     }
   };
+  const handleShowKeyboard = () => {
+    setIsKeyboardVisible(true)
+  }
+  const handleHideKeyboard = () => {
+    setIsKeyboardVisible(false)
+  }
   return (!isTurnOver && currentDart < 3) ? (
     <form onSubmit={handleSubmit} className="addScore">
      
@@ -28,13 +42,14 @@ const ScoreInput = ({
         value={newCurrentScore}
         className="select"
         inputMode="numeric"
+        readOnly
+        onFocus={handleShowKeyboard}
       />
+     {isKeyboardVisible && <VirtualKeyboard handleInputChange={handleInputChange} handleHideKeyboard={handleHideKeyboard}/>}
       {isNotValidScore && isDisabled && (
         <p className="error">Entrez un nombre entre 0 et 60</p>
       )}
-      {isDisabled ? (
-        true
-      ) : (
+      {isDisabled && (
         <button
           className="btn bottom"
           value={newCurrentScore}

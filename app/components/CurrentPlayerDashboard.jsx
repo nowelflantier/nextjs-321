@@ -7,13 +7,15 @@ const CurrentPlayerDashboard = ({
   currentPlayer,
   players,
   currentDart,
-  newCurrentScore,
   handleInputChange,
   handleNewScore,
   isNotValidScore,
   handleNextPlayer,
   isDisabled,
   isTurnOver,
+  newCurrentScore, setNewCurrentScore,
+  // handleScoreCalculation,
+
 }) => {
   if (!players || players.length === 0) {
     // Change this to your desired loading state
@@ -109,6 +111,10 @@ const CurrentPlayerDashboard = ({
         currentDart={currentDart}
         handleNextPlayer={handleNextPlayer}
         isDisabled={isDisabled}
+        setNewCurrentScore={setNewCurrentScore}
+        // handleScoreCalculation={handleScoreCalculation}
+
+        
       />
     </div>
   );

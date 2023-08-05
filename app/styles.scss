@@ -40,38 +40,38 @@
     --card-border-rgb: 131, 134, 135;
   }
   
-  //  @media (prefers-color-scheme: dark) {
-  //   :root {
-  //     --foreground-rgb: 255, 255, 255;
-  //     --background-start-rgb: 0, 0, 0;
-  //     --background-end-rgb: 0, 0, 0;
+   @media (prefers-color-scheme: dark) {
+    :root {
+      --foreground-rgb: 255, 255, 255;
+      --background-start-rgb: 0, 0, 0;
+      --background-end-rgb: 0, 0, 0;
   
-  //     --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-  //     --secondary-glow: linear-gradient(
-  //       to bottom right,
-  //       rgba(1, 65, 255, 0),
-  //       rgba(1, 65, 255, 0),
-  //       rgba(1, 65, 255, 0.3)
-  //     );
+      --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
+      --secondary-glow: linear-gradient(
+        to bottom right,
+        rgba(1, 65, 255, 0),
+        rgba(1, 65, 255, 0),
+        rgba(1, 65, 255, 0.3)
+      );
   
-  //     --tile-start-rgb: 2, 13, 46;
-  //     --tile-end-rgb: 2, 5, 19;
-  //     --tile-border: conic-gradient(
-  //       #ffffff80,
-  //       #ffffff40,
-  //       #ffffff30,
-  //       #ffffff20,
-  //       #ffffff10,
-  //       #ffffff10,
-  //       #ffffff80
-  //     );
+      --tile-start-rgb: 2, 13, 46;
+      --tile-end-rgb: 2, 5, 19;
+      --tile-border: conic-gradient(
+        #ffffff80,
+        #ffffff40,
+        #ffffff30,
+        #ffffff20,
+        #ffffff10,
+        #ffffff10,
+        #ffffff80
+      );
   
-  //     --callout-rgb: 20, 20, 20;
-  //     --callout-border-rgb: 108, 108, 108;
-  //     --card-rgb: 100, 100, 100;
-  //     --card-border-rgb: 200, 200, 200;
-  //   }
-  // } 
+      --callout-rgb: 20, 20, 20;
+      --callout-border-rgb: 108, 108, 108;
+      --card-rgb: 100, 100, 100;
+      --card-border-rgb: 200, 200, 200;
+    }
+  } 
   
   * {
     box-sizing: border-box;
@@ -100,11 +100,11 @@
     text-decoration: none;
   }
   
-  //  @media (prefers-color-scheme: dark) {
-  //   html {
-  //     color-scheme: dark;
-  //   }
-  // } 
+   @media (prefers-color-scheme: dark) {
+    html {
+      color-scheme: dark;
+    }
+  } 
 
   .main {
     display: flex;
@@ -335,7 +335,96 @@
     position: relative;
     margin-top:10px;
   }
+
+  .keyboard {
+    position: fixed;
+    // display: flex;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 0;
+    background: #383938cb; // modifiez cette ligne par une couleur sans transparence
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    user-select: none;
+    transition: bottom 0.4s;
+    
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; // ajouté pour rendre le clavier au-dessus de tous les autres éléments
+  }
+  .keys {
+    text-align: center;
+  }
+  .key {
+    height: 6vh;
+    width: 13vw;
+    margin: 3px;
+    border-radius: 4px;
+    border: none;
+    background: rgb(255, 255, 255);
+    color: #000000;
+    font-size: 1.05rem;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+  
+  .key:active {
+    background: rgba(255, 255, 255, 0.12);
+  }
+  
+  .key--wide {
+    width: 12%;
+  }
+  
+  .key--extra-wide {
+    width: 36%;
+    max-width: 500px;
+  }
+  
+  .key--activatable::after {
+    content: '';
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+  }
+  
+  .key--active::after {
+    background: #08ff00;
+  }
+  
+  .key--dark {
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  .keyboard .score {
+    background-color: rgb(0 0 0 / 66%);
+    color: #ffffff;
+    padding: 18px 0;
+    margin: 20px auto;
+    width: 70vw;
+    border-radius: 10px;
+    box-shadow: 0px 0px 50px rgba(255,255,255,0.5);
+  }
+  
+  @media (max-width: 720px) {
+    .key {
+      width: 26vw;
+  
+    }
+  }
   /* Enable hover only on non-touch devices */
+
   @media (hover: hover) and (pointer: fine) {
     .card:hover {
       background: rgba(var(--card-rgb), 0.1);
