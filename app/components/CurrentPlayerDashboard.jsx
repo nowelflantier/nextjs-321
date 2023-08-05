@@ -78,6 +78,7 @@ const CurrentPlayerDashboard = ({
         <div className="grid">
           {players
             .filter((p) => p.id !== player.id && p.score > player.score)
+            .sort((a, b) => (a.score - player.score) - (b.score - player.score)) // Ici, nous ajoutons un tri par ordre décroissant.
             .map((p) => {
               return (
                 <div
@@ -88,7 +89,7 @@ const CurrentPlayerDashboard = ({
                   }}
                 >
                   <h2>
-                    {p.id}. {p.name}
+                    {p.name}
                   </h2>
                   {parseInt(p.score, 10) - (player.score || 0) >= 0 ? (
                     <p>
