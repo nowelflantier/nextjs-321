@@ -104,15 +104,16 @@ const useGameLogic = (initialState) => {
       setCurrentDart(0);
       setNewCurrentScore("");
     }
-    const updatedPlayers = [...players];
-    setIsPopupOpen(true);
-    setPopupTitle(`${updatedPlayers[currentPlayer].name} c'est ton tour !`);
-    setPopupMessage(
-      `Allez ${updatedPlayers[currentPlayer].name}, plus que ${
-        321 - players[currentPlayer].score
-      } points pour gagner !`
-    );
-    setPopupImage("/next.png");
+    // const updatedPlayers = [...players];
+    // const actualIndex = (currentPlayer === players.length ? (1) : (currentPlayer))
+    // setIsPopupOpen(true);
+    // setPopupTitle(`${updatedPlayers[actualIndex].name} c'est ton tour !`);
+    // setPopupMessage(
+    //   `Allez ${updatedPlayers[actualIndex].name}, plus que ${
+    //     321 - players[actualIndex].score
+    //   } points pour gagner !`
+    // );
+    // setPopupImage("/next.png");
   }, [currentPlayer, players]);
 
   return {
