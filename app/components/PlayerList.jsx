@@ -16,6 +16,12 @@ const PlayerList = ({ players, currentPlayer }) => {
           <p>Moyenne : {player.darts && player.darts.length > 0
           ? (player.score / player.darts.length).toFixed(2)
           : 0}</p>
+          <p>Reset faits : {player.darts && player.darts.length > 0
+          ? (player.resetAmount)
+          : 0}</p>
+          <p>Reset subis : {player.darts && player.darts.length > 0
+          ? (player.resetAmountDefense)
+          : 0}</p>
         </div>
       ))}
     </div>
