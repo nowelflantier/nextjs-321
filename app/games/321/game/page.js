@@ -12,13 +12,20 @@ import useGameLogic from "@/app/components/useGameLogic";
 
 const Game = () => {
   const {
-    players, setPlayers,
-    currentPlayer, setCurrentPlayer,
-    currentDart, setCurrentDart,
-    newCurrentScore, setNewCurrentScore,
-    isDisabled, setIsDisabled,
-    isWinner, setIsWinner,
-    isNotValidScore, SetIsNotValidScore,
+    players,
+    setPlayers,
+    currentPlayer,
+    setCurrentPlayer,
+    currentDart,
+    setCurrentDart,
+    newCurrentScore,
+    setNewCurrentScore,
+    isDisabled,
+    setIsDisabled,
+    isWinner,
+    setIsWinner,
+    isNotValidScore,
+    SetIsNotValidScore,
     playerIndex,
     // other functions as needed
   } = useGameLogic({
@@ -28,7 +35,7 @@ const Game = () => {
     newCurrentScore: "",
     isDisabled: true,
     isWinner: {},
-    isNotValidScore: false
+    isNotValidScore: false,
   });
 
   const router = useRouter();
@@ -52,15 +59,13 @@ const Game = () => {
       setCurrentPlayer(parseInt(localStorage.getItem("currentPlayer"), 10));
     }
   }, []);
-  
+
   const handleInputChange = useCallback((e) => {
-    
-      if (e === "" || e === null || e === undefined) {
+    if (e === "" || e === null || e === undefined) {
       setNewCurrentScore("");
       setIsDisabled(true);
       SetIsNotValidScore(false);
     } else {
-      
       const score = parseInt(e, 10);
       if (isNaN(score) || score < 0 || score > 60) {
         setNewCurrentScore(e);
@@ -86,6 +91,8 @@ const Game = () => {
     for (let i = 0; i < updatedPlayers.length; i++) {
       if (i !== playerIndex && updatedPlayers[i].score === potentialNewScore) {
         updatedPlayers[i].score = 0;
+        updatedPlayers[i].resetAmountDefense = updatedPlayers[i].resetAmountDefense + 1;
+        player.resetAmount = player.resetAmount + 1;
       }
     }
     player.darts.push(newCurrentScore);
@@ -153,14 +160,16 @@ const Game = () => {
 
   return (
     <main className="main">
-      { selectedGame && (<Header
-      title={selectedGameDetails?.title ?? 'Chargement..'}
-      description={selectedGameDetails?.description ?? 'Chargement..'}
-      src={selectedGameDetails?.icon ?? '/score-board.png'}
-      alt={selectedGameDetails?.title ?? 'Chargement..'}
-      width={selectedGameDetails?.width ?? 80}
-      height={selectedGameDetails?.height ?? 80}
-      />)}
+      {selectedGame && (
+        <Header
+          title={selectedGameDetails?.title ?? "Chargement.."}
+          description={selectedGameDetails?.description ?? "Chargement.."}
+          src={selectedGameDetails?.icon ?? "/score-board.png"}
+          alt={selectedGameDetails?.title ?? "Chargement.."}
+          width={selectedGameDetails?.width ?? 80}
+          height={selectedGameDetails?.height ?? 80}
+        />
+      )}
       <CurrentPlayerDashboard
         currentPlayer={currentPlayer}
         players={players}

@@ -70,11 +70,22 @@ const CurrentPlayerDashboard = ({
           <h3 className="code">
             Fléchettes lancées : {player.darts ? player.darts.length : 0}
           </h3>
-          <p className="code">
+          <div className="code"><p>
             Moyenne / fléchette :{" "}
             {player.darts && player.darts.length > 0
               ? (player.score / player.darts.length).toFixed(2)
-              : 0}
+              : 0}</p>
+              <p>Nombre de reset faits :{" "}
+            {player.darts && player.darts.length > 0
+              ? (player.resetAmount)
+              : 0}</p>
+               <p>Nombre de reset subis :{" "}
+            {player.darts && player.darts.length > 0
+              ? (player.resetAmountDefense)
+              : 0}</p>
+          </div>
+          <p className="code">
+            
           </p>
         </>
       )}

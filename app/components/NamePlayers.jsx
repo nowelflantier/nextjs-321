@@ -42,7 +42,8 @@ const NamePlayers = () => {
       id: currentPlayer,
       name: playerName,
       score: 0,
-      currentPlayerScore: 0,
+      resetAmount: 0,
+      resetAmountDefense: 0,
       darts: [],
     };
     if (playerIndex === -1) {
