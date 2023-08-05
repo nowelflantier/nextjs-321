@@ -15,9 +15,10 @@ const useGameLogic = (initialState) => {
     initialState.isNotValidScore || false
   );
   const playerIndex = currentPlayer - 1;
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
+  const [popupTitle, setPopupTitle] = useState("");
+  const [popupImage, setPopupImage] = useState("");
 
   // Place your logic here, like the 'handleInputChange' function, 'handleNewScore' function, etc.
   const handleInputChange = useCallback((e) => {
@@ -49,16 +50,22 @@ const useGameLogic = (initialState) => {
     }
     const potentialNewScore = player.score + newCurrentScore;
     for (let i = 0; i < updatedPlayers.length; i++) {
-      if (i !== playerIndex && updatedPlayers[i].score === potentialNewScore) {
+      if (
+        i !== playerIndex &&
+        updatedPlayers[i].score === potentialNewScore &&
+        potentialNewScore !== 0
+      ) {
         updatedPlayers[i].score = 0;
         updatedPlayers[i].resetAmountDefense =
           updatedPlayers[i].resetAmountDefense + 1;
         player.resetAmount = player.resetAmount + 1;
         // Ouvrez la popup et mettez à jour le message
         setIsPopupOpen(true);
-        setPopupMessage(
-          `${player.name} a reset ${updatedPlayers[i].name}`
+        setPopupTitle(
+          `${player.name} vient de reset ${updatedPlayers[i].name} !`
         );
+        setPopupMessage(`${updatedPlayers[i].name}, tu repars à 0...`);
+        setPopupImage("/reset.png");
       }
     }
     player.darts.push(newCurrentScore);
@@ -97,6 +104,15 @@ const useGameLogic = (initialState) => {
       setCurrentDart(0);
       setNewCurrentScore("");
     }
+    const updatedPlayers = [...players];
+    setIsPopupOpen(true);
+    setPopupTitle(`${updatedPlayers[currentPlayer].name} c'est ton tour !`);
+    setPopupMessage(
+      `Allez ${updatedPlayers[currentPlayer].name}, plus que ${
+        321 - players[currentPlayer].score
+      } points pour gagner !`
+    );
+    setPopupImage("/next.png");
   }, [currentPlayer, players]);
 
   return {
@@ -108,6 +124,8 @@ const useGameLogic = (initialState) => {
     setIsPopupOpen,
     popupMessage,
     setPopupMessage,
+    popupTitle,
+    popupImage,
     players,
     setPlayers,
     currentPlayer,

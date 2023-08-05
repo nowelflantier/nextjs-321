@@ -130,7 +130,8 @@ a {
 }
 
 .popup-content {
-  width: 300px;
+  width: 80vw;
+  height: 80vh;
   padding: 20px;
   background-color: white;
   border-radius: 10px;
@@ -140,9 +141,19 @@ a {
 }
 
 .popup-content button {
-  margin-top: 20px;
+  margin: 20px;
+  width: 30vw;
 }
-
+.popup-message {
+  margin: auto;
+  text-align: center;
+  .logo {
+    margin:30px
+  }
+  h2 {
+    margin-bottom: 10px;
+  }
+}
 
 .description {
   display: inherit;
@@ -355,7 +366,7 @@ h1.code {
 
 .logo {
   position: relative;
-  margin-top: 10px;
+  margin: 10px;
 }
 .info-button {
   font-size: x-small;
@@ -469,9 +480,9 @@ h1.code {
     border: 1px solid rgba(var(--card-border-rgb), 0.15);
   }
 
-  .card:hover span {
-    transform: translateX(4px);
-  }
+  // .card:hover span {
+  //   transform: translateX(4px);
+  // }
 }
 
 @media (prefers-reduced-motion) {

@@ -24,6 +24,7 @@ const Game = () => {
     isDisabled,
     setIsDisabled,
     handleInputChange,
+    popupImage,
     handleNextPlayer,
     isWinner,
     setIsWinner,
@@ -34,7 +35,7 @@ const Game = () => {
     isPopupOpen,
     setIsPopupOpen,
     popupMessage,
-    setPopupMessage,
+    popupTitle,
     // other functions as needed
   } = useGameLogic({
     players: [],
@@ -111,7 +112,6 @@ const Game = () => {
         currentDart={currentDart}
         newCurrentScore={newCurrentScore}
         handleInputChange={handleInputChange}
-        // handleScoreCalculation={handleScoreCalculation}
         handleNewScore={handleNewScore}
         isNotValidScore={isNotValidScore}
         handleNextPlayer={handleNextPlayer}
@@ -122,9 +122,10 @@ const Game = () => {
       <Popup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}
+        title={popupTitle}
         message={popupMessage}
+        image={popupImage}
       />
-      <h1>{popupMessage}</h1>
       <Footer
         buttons={[
           {
