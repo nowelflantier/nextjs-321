@@ -17,6 +17,8 @@ const CurrentPlayerDashboard = ({
   setNewCurrentScore,
   // handleScoreCalculation,
 }) => {
+  const [displayPlayerInfo, setDisplayPlayerInfo] = useState(false);
+
   if (!players || players.length === 0) {
     // Change this to your desired loading state
     return (
@@ -32,7 +34,6 @@ const CurrentPlayerDashboard = ({
       </div>
     );
   }
-  const [displayPlayerInfo, setDisplayPlayerInfo] = useState(false);
 
   const player = players[currentPlayer - 1] || {};
   function getBackgroundColor(diff) {
