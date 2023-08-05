@@ -28,7 +28,6 @@ const ScoreInput = ({
   }
   const handleHideKeyboard = () => {
     setIsKeyboardVisible(false)
-    console.log(isDisabled)
   }
   return (!isTurnOver && currentDart < 3) ? (
     <form onSubmit={handleSubmit} className="addScore">
