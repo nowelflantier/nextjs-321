@@ -68,8 +68,8 @@ const VirtualKeyboard = ({
       }
       setFirstValue(parseInt(value));
       setStep(2);
-    } else if (step === 2) {
-      const score = firstValue * parseInt(value, 10);
+    } else if (step === 2 || value === 0) {
+      const score = (firstValue * parseInt(value, 10)|| 0);
       setDisplayedScore(score);
       setKeys(keysValidation);
       setStep(3);
@@ -103,7 +103,7 @@ const VirtualKeyboard = ({
   return (
     <>
       <div className="keyboard">
-        {displayedScore && (
+        {(displayedScore || displayedScore === 0) && (
           <div>
             <p className="code">Score actuel : </p>
             <div className="score center">
