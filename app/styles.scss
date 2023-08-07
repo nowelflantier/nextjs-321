@@ -199,6 +199,9 @@ h1.code {
   background-color: rgba(var(--callout-rgb), 0.5);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   border-radius: var(--border-radius);
+  cursor: pointer;
+
+  
 }
 
 .select {
@@ -408,6 +411,11 @@ h1.code {
 }
 .keys {
   text-align: center;
+  .validate {
+    width:67vw;
+    background-color: rgb(77, 172, 77);
+    color: white;
+  }
 }
 .key {
   height: 6vh;
@@ -427,6 +435,7 @@ h1.code {
   padding: 0;
   -webkit-tap-highlight-color: transparent;
   position: relative;
+
 }
 
 .key:active {

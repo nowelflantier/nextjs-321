@@ -36,8 +36,15 @@ const keysbull = [
   { label: "simple", value: 1 },
   { label: "double", value: 2 },
 ];
+const keysValidation = [{ label: "Ajouter le score", value: 1 }];
 
-const VirtualKeyboard = ({ handleHideKeyboard, handleInputChange }) => {
+const VirtualKeyboard = ({
+  newCurrentScore,
+  setNewCurrentScore,
+  handleHideKeyboard,
+  handleNewScore,
+  handleInputChange,
+}) => {
   const { setIsDisabled } = useGameLogic({
     // isDisabled: true,
     // isNotValidScore: false,
@@ -55,33 +62,41 @@ const VirtualKeyboard = ({ handleHideKeyboard, handleInputChange }) => {
     setDisplayedScore(value);
     if (step === 1 && value !== 0) {
       if (value === 25) {
-        setKeys(keysbull)
+        setKeys(keysbull);
       } else {
-        setKeys(keys2)
+        setKeys(keys2);
       }
       setFirstValue(parseInt(value));
       setStep(2);
+    } else if (step === 2) {
+      const score = firstValue * parseInt(value, 10);
+      setDisplayedScore(score);
+      setKeys(keysValidation);
+      setStep(3);
+
+      setNewCurrentScore(score);
     } else {
-      handleInputChange(firstValue * parseInt(value, 10));
+      handleNewScore(displayedScore);
+      console.log(newCurrentScore);
+
       setStep(1);
-      //   setDisplayedScore(null);
+
       setFirstValue(null);
       handleHideKeyboard();
       setIsDisabled(false);
-      //   SetIsNotValidScore(false);
     }
   };
   const handleReturn = () => {
     setStep(1);
-    setKeys(keys1)
+    setKeys(keys1);
   };
 
-  const handleValidationClick = () => {
-    if (step === 1 && firstValue !== null) {
-    } else {
-      handleInputChange(displayedScore);
-    }
-  };
+  //   const handleValidationClick = () => {
+  //     if (step === 1 && firstValue !== null) {
+  //     } else {
+  //       handleInputChange(displayedScore);
+  //     }
+  //   };
   // const handleDoneClick = () => {
   //   onDone();
   // };
@@ -99,7 +114,7 @@ const VirtualKeyboard = ({ handleHideKeyboard, handleInputChange }) => {
         <div className="keys">
           {keys.map((k) => (
             <button
-              className="key"
+              className={`key ${step === 3 ? "validate" : ""}`}
               key={k.label}
               onClick={() => handleKeyClick(k.value)}
             >
@@ -112,7 +127,7 @@ const VirtualKeyboard = ({ handleHideKeyboard, handleInputChange }) => {
                 Manqué
               </button>
             )}
-            {step === 2 && (
+            {step !== 1 && (
               <button className="key" onClick={handleReturn}>
                 Retour
               </button>

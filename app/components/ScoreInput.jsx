@@ -1,10 +1,11 @@
-'use client'
-import React, {useState} from "react";
+"use client";
+import React, { useState } from "react";
 import VirtualKeyboard from "./VirtualDartScoreKeyboard";
 import useGameLogic from "@/app/components/useGameLogic";
 
 const ScoreInput = ({
   newCurrentScore,
+  setNewCurrentScore,
   handleInputChange,
   handleNewScore,
   currentDart,
@@ -14,59 +15,76 @@ const ScoreInput = ({
   isNotValidScore,
   // handleScoreCalculation,
 }) => {
-  const [isKeyboardVisible,setIsKeyboardVisible] = useState(false)
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault(); // This is important to prevent form's default submission behaviour
     if (!isDisabled) {
-      
       handleNewScore();
-      
     }
   };
   const handleShowKeyboard = () => {
-    setIsKeyboardVisible(true)
-  }
+    setIsKeyboardVisible(true);
+  };
   const handleHideKeyboard = () => {
-    setIsKeyboardVisible(false)
-  }
-  return (!isTurnOver && currentDart < 3) ? (
-    <form onSubmit={handleSubmit} className="addScore">
-     
-      <input
-        type="number"
-        placeholder="0"
-        onChange={handleInputChange}
-        onKeyDown={handleInputChange}
-        value={newCurrentScore}
-        className={`select ${isKeyboardVisible ? 'blur' : ''}`}
-        inputMode="numeric"
-        readOnly
-        onFocus={handleShowKeyboard}
-        
-      />
-     {isKeyboardVisible && <VirtualKeyboard handleInputChange={handleInputChange} isDisabled={isDisabled} handleHideKeyboard={handleHideKeyboard}/>}
-      {isNotValidScore && isDisabled && (
-        <p className="error">Entrez un nombre entre 0 et 60</p>
+    setIsKeyboardVisible(false);
+  };
+  return (
+    <>
+      {!isTurnOver && currentDart < 3 ? (
+        <form onSubmit={handleSubmit} className="addScore">
+          <input
+            type="number"
+            placeholder="0"
+            onChange={handleInputChange}
+            onKeyDown={handleInputChange}
+            value={newCurrentScore}
+            className={`select ${isKeyboardVisible ? "blur" : ""}`}
+            inputMode="numeric"
+            readOnly
+            onFocus={handleShowKeyboard}
+          />
+          {isKeyboardVisible && (
+            <VirtualKeyboard
+              handleInputChange={handleInputChange}
+              isDisabled={isDisabled}
+              handleNewScore={handleNewScore}
+              handleHideKeyboard={handleHideKeyboard}
+              setNewCurrentScore={setNewCurrentScore}
+              newCurrentScore={newCurrentScore}
+            />
+          )}
+          {isNotValidScore && isDisabled && (
+            <p className="error">Entrez un nombre entre 0 et 60</p>
+          )}
+          {!isDisabled && (
+            <button
+              className="btn bottom"
+              value={newCurrentScore}
+              type="submit" // This is important for the enter key to trigger this button's action
+              onClick={handleNewScore}
+              display={!isNotValidScore ? "true" : undefined}
+            >
+              Ajouter le score - {newCurrentScore}
+            </button>
+          )}
+        </form>
+      ) : (
+        <div className="addScore">
+          <button className="btn bottom" onClick={handleNextPlayer}>
+            Joueur suivant
+          </button>
+        </div>
       )}
-      {!isDisabled && (
-        <button
+       {/* <button
           className="btn bottom"
-          value={newCurrentScore}
-          type="submit" // This is important for the enter key to trigger this button's action
-          onClick={handleNewScore}
-          display={!isNotValidScore ? "true" : undefined}
+          // value={newCurrentScore}
+          // This is important for the enter key to trigger this button's action
+          // onClick={handleNewScore}
+          // display={!isNotValidScore ? "true" : undefined}
         >
-           Ajouter le score - {newCurrentScore}
-        </button>
-      )}
-      
-      </form>
-  ) : (
-    <div className="addScore">
-      <button className="btn bottom" onClick={handleNextPlayer}>
-      Joueur suivant
-      </button>
-    </div>
+          Annuler dernier score
+        </button> */}
+    </>
   );
 };
 export default ScoreInput;
