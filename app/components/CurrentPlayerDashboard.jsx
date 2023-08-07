@@ -73,7 +73,7 @@ const CurrentPlayerDashboard = ({
           <div className="code"><p>
             Moyenne / fléchette :{" "}
             {player.darts && player.darts.length > 0
-              ? (player.score / player.darts.length).toFixed(2)
+              ? (player.average).toFixed(2)
               : 0}</p>
               <p>Nombre de reset faits :{" "}
             {player.darts && player.darts.length > 0

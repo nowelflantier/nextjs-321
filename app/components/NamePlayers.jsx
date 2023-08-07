@@ -45,6 +45,7 @@ const NamePlayers = () => {
       resetAmount: 0,
       resetAmountDefense: 0,
       darts: [],
+      // average: // insérer logique de calcul de moyenne ici
     };
     if (playerIndex === -1) {
       storedPlayers.push(playerData);

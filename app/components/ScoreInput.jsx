@@ -38,10 +38,11 @@ const ScoreInput = ({
         onChange={handleInputChange}
         onKeyDown={handleInputChange}
         value={newCurrentScore}
-        className="select"
+        className={`select ${isKeyboardVisible ? 'blur' : ''}`}
         inputMode="numeric"
         readOnly
         onFocus={handleShowKeyboard}
+        
       />
      {isKeyboardVisible && <VirtualKeyboard handleInputChange={handleInputChange} isDisabled={isDisabled} handleHideKeyboard={handleHideKeyboard}/>}
       {isNotValidScore && isDisabled && (

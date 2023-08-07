@@ -69,6 +69,12 @@ const useGameLogic = (initialState) => {
       }
     }
     player.darts.push(newCurrentScore);
+    // Calculate average and update player's average property
+  let average = 0;
+  if (player.darts.length > 0) {
+    average = player.darts.reduce((a, b) => a + b, 0) / player.darts.length;
+  }
+  player.average = average;
     player.score = potentialNewScore;
     if (player.score === 321) {
       setIsWinner({ player: players[currentPlayer - 1].id, defined: true });
