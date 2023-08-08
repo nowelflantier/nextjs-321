@@ -453,7 +453,7 @@ h1.code {
 .key {
   height: 6vh;
   width: 13vw;
-  margin: 3px;
+  margin: 10px;
   border-radius: 4px;
   border: none;
   background: rgb(255, 255, 255);
@@ -468,6 +468,7 @@ h1.code {
   padding: 0;
   -webkit-tap-highlight-color: transparent;
   position: relative;
+  box-shadow: 3px 2px 7px 2px black;
 
 }
 
