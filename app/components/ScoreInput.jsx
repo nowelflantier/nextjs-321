@@ -12,10 +12,13 @@ const ScoreInput = ({
   handleNextPlayer,
   isTurnOver,
   isDisabled,
+  handleUndo,
   isNotValidScore,
-  // handleScoreCalculation,
+  players,
+  currentPlayer,
 }) => {
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const currentPlayerAverage = players[currentPlayer].average;
   const handleSubmit = (e) => {
     e.preventDefault(); // This is important to prevent form's default submission behaviour
     if (!isDisabled) {
@@ -75,15 +78,10 @@ const ScoreInput = ({
           </button>
         </div>
       )}
-       {/* <button
-          className="btn bottom"
-          // value={newCurrentScore}
-          // This is important for the enter key to trigger this button's action
-          // onClick={handleNewScore}
-          // display={!isNotValidScore ? "true" : undefined}
-        >
-          Annuler dernier score
-        </button> */}
+     <div className="addScore">
+      <button className="btn cancel bottom" onClick={handleUndo}>
+        Annuler dernier score
+      </button></div>
     </>
   );
 };

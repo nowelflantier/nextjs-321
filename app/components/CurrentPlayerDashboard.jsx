@@ -15,6 +15,7 @@ const CurrentPlayerDashboard = ({
   isTurnOver,
   newCurrentScore,
   setNewCurrentScore,
+  handleUndo,
   // handleScoreCalculation,
 }) => {
   const [displayPlayerInfo, setDisplayPlayerInfo] = useState(false);
@@ -60,35 +61,48 @@ const CurrentPlayerDashboard = ({
         Player {currentPlayer} - tour{" "}
         {currentDart + 1 === 4 ? "terminé" : currentDart + 1}
       </p>
-      <h1 >
-        {player.name}
-      </h1>
+      <h1>{player.name}</h1>
       <h2 className="score">{player.score || 0} points</h2>
-      <span onClick={toggleDisplayPlayerInfo} className="info-button">afficher {displayPlayerInfo ? "moins ˄" : "plus ˅"}</span>
+      <span onClick={toggleDisplayPlayerInfo} className="info-button">
+        afficher {displayPlayerInfo ? "moins ˄" : "plus ˅"}
+      </span>
       {displayPlayerInfo && (
         <>
-          <h3 className="code">
-            Fléchettes lancées : {player.darts ? player.darts.length : 0}
-          </h3>
-          <div className="code"><p>
-            Moyenne / fléchette :{" "}
-            {player.darts && player.darts.length > 0
-              ? (player.average).toFixed(2)
-              : 0}</p>
-              <p>Nombre de reset faits :{" "}
-            {player.darts && player.darts.length > 0
-              ? (player.resetAmount)
-              : 0}</p>
-               <p>Nombre de reset subis :{" "}
-            {player.darts && player.darts.length > 0
-              ? (player.resetAmountDefense)
-              : 0}</p>
+          <div className="code stats-table">
+            <div className="stats-row">
+              <p className="stats-item">
+                Fléchettes lancées : {player.darts ? player.darts.length : 0}
+              </p>
+            </div>
+            {/* <div className="code stats-table"> */}
+            <div className="stats-row">
+              <p className="stats-item">
+                Moyenne :{" "}
+                {player.darts && player.darts.length > 0
+                  ? player.average.toFixed(2)
+                  : 0}
+              </p>
+            </div>
+            <div className="stats-row">
+              <p className="stats-item">
+                Reset faits :{" "}
+                {player.darts && player.darts.length > 0
+                  ? player.resetAmount
+                  : 0}
+              </p>
+            </div>
+            <div className="stats-row">
+              <p className="stats-item">
+                Reset subis :{" "}
+                {player.darts && player.darts.length > 0
+                  ? player.resetAmountDefense
+                  : 0}
+              </p>
+            </div>
           </div>
-          <p className="code">
-            
-          </p>
         </>
       )}
+
       <div className="grid">
         <div className="card dashboard">
           <h2>Reste pour gagner :</h2>
@@ -135,7 +149,9 @@ const CurrentPlayerDashboard = ({
         handleNextPlayer={handleNextPlayer}
         isDisabled={isDisabled}
         setNewCurrentScore={setNewCurrentScore}
-        // handleScoreCalculation={handleScoreCalculation}
+        handleUndo={handleUndo}
+        players={players}
+        currentPlayer={currentPlayer}
       />
     </div>
   );

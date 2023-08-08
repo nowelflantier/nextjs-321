@@ -21,7 +21,7 @@ const PlayerList = ({ players, currentPlayer }) => {
         <span  className="info-button">afficher {displayPlayerInfo[player.id] ? "moins ˄" : "plus ˅"}</span>
         {displayPlayerInfo[player.id] && (
           <>
-            <p>Darts : {player.darts.length}</p>
+            <p>Lancés : {player.darts.length}</p>
             <p>Moyenne : {player.darts && player.darts.length > 0
               ? (player.average).toFixed(2)
               : 0}</p>

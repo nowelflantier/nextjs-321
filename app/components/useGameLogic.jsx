@@ -70,11 +70,11 @@ const useGameLogic = (initialState) => {
     }
     player.darts.push(newCurrentScore);
     // Calculate average and update player's average property
-  let average = 0;
-  if (player.darts.length > 0) {
-    average = player.darts.reduce((a, b) => a + b, 0) / player.darts.length;
-  }
-  player.average = average;
+    let average = 0;
+    if (player.darts.length > 0) {
+      average = player.darts.reduce((a, b) => a + b, 0) / player.darts.length;
+    }
+    player.average = average;
     player.score = potentialNewScore;
     if (player.score === 321) {
       setIsWinner({ player: players[currentPlayer - 1].id, defined: true });
@@ -122,6 +122,20 @@ const useGameLogic = (initialState) => {
     // setPopupImage("/next.png");
   }, [currentPlayer, players]);
 
+  const handleUndo = () => {
+    const updatedPlayers = [...players];
+    const undoPlayer =
+      currentDart !== 0
+        ? currentPlayer
+        : currentPlayer === 1
+        ? players.length
+        : currentPlayer - 1;
+    setCurrentDart(currentDart !== 0 ? currentDart - 1 : 2);
+    setCurrentPlayer(undoPlayer);
+    const player = updatedPlayers.find(p => p.id === undoPlayer);
+    const removedScore = player.darts.pop()
+    player.score -= removedScore
+  };
   return {
     handleInputChange,
     handleNewScore,
@@ -148,6 +162,7 @@ const useGameLogic = (initialState) => {
     isNotValidScore,
     SetIsNotValidScore,
     playerIndex,
+    handleUndo,
     // export other functions as needed
   };
 };

@@ -14,7 +14,7 @@ export function GamesProvider({ children }) {
       category: "darts",
       icon: "/dart-aim.svg",
       title: "let's play darts !",
-      description: "321 Zap - Darts scorer - v1.0",
+      description: "321 Zap - Darts scorer - v1.1",
       emoji: "🎯",
       width: "80",
     },

@@ -36,6 +36,7 @@ const Game = () => {
     setIsPopupOpen,
     popupMessage,
     popupTitle,
+    handleUndo,
     // other functions as needed
   } = useGameLogic({
     players: [],
@@ -117,6 +118,7 @@ const Game = () => {
         handleNextPlayer={handleNextPlayer}
         isDisabled={isDisabled}
         setNewCurrentScore={setNewCurrentScore}
+        handleUndo={handleUndo}
       />
       <PlayerList players={players} currentPlayer={currentPlayer} />
       <Popup

@@ -201,7 +201,11 @@ h1.code {
   border-radius: var(--border-radius);
   cursor: pointer;
 
-  
+
+}
+.cancel {
+  background-color: rgb(207 135 135);
+  margin-top: 0px!important;
 }
 
 .select {
@@ -232,7 +236,7 @@ h1.code {
 .addScore {
   display: flex;
   flex-direction: column;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 .container {
   display: flex;
@@ -247,6 +251,7 @@ h1.code {
 
 .bottom {
   margin-top: 20px;
+  // width:max-content;
 }
 .grid {
   display: flex;
@@ -293,6 +298,30 @@ h1.code {
   border-radius: var(--border-radius);
   background-color: rgb(212, 149, 149);
 }
+
+.stats-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px; /* adjust this as needed */
+  margin: auto;
+  border: 1px solid #ccc; /* adjust this as needed */
+}
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px solid #ccc; /* adjust this as needed */
+}
+
+.stats-item {
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
 
 // .grid {
 //   display: grid;
@@ -405,7 +434,7 @@ h1.code {
   margin: 15px auto;
   .key {
     width: 33vw;
-    background-color: rgb(186, 51, 51);
+    background-color: rgb(207 135 135);
     color: white;
   }
 }
