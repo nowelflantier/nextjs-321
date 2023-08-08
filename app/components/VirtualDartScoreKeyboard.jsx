@@ -73,14 +73,10 @@ const VirtualKeyboard = ({
       setDisplayedScore(score);
       setKeys(keysValidation);
       setStep(3);
-
       setNewCurrentScore(score);
     } else {
       handleNewScore(displayedScore);
-      console.log(newCurrentScore);
-
       setStep(1);
-
       setFirstValue(null);
       handleHideKeyboard();
       setIsDisabled(false);

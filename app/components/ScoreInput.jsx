@@ -18,7 +18,7 @@ const ScoreInput = ({
   currentPlayer,
 }) => {
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
-  const currentPlayerAverage = players[currentPlayer].average;
+  // const currentPlayerAverage = players[currentPlayer].average;
   const handleSubmit = (e) => {
     e.preventDefault(); // This is important to prevent form's default submission behaviour
     if (!isDisabled) {
@@ -73,7 +73,7 @@ const ScoreInput = ({
         </form>
       ) : (
         <div className="addScore">
-          <button className="btn bottom" onClick={handleNextPlayer}>
+          <button className="btn bottom validate" onClick={handleNextPlayer}>
             Joueur suivant
           </button>
         </div>

@@ -59,6 +59,7 @@ const useGameLogic = (initialState) => {
         updatedPlayers[i].resetAmountDefense =
           updatedPlayers[i].resetAmountDefense + 1;
         player.resetAmount = player.resetAmount + 1;
+        playSound(); // This will play the sound
         // Ouvrez la popup et mettez à jour le message
         setIsPopupOpen(true);
         setPopupTitle(
@@ -135,6 +136,11 @@ const useGameLogic = (initialState) => {
     const player = updatedPlayers.find(p => p.id === undoPlayer);
     const removedScore = player.darts.pop()
     player.score -= removedScore
+  };
+
+  const playSound = () => {
+    const audio = new Audio("/loose.wav"); // Change this to the path of your sound file
+    audio.play();
   };
   return {
     handleInputChange,
